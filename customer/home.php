@@ -12,7 +12,7 @@
 		echo "This page for User only!";
 		exit();
 	}	
-
+ 
 	$strSQL = "SELECT * FROM customer WHERE cust_id = '".$_SESSION['id']."' ";
     echo "<script>console.log( '" . $strSQL . "')</script>";
 
