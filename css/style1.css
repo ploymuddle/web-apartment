@@ -1,0 +1,326 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: arial;
+}
+
+* a {
+	text-decoration: none; /**ลบเส้นใต้**/
+	color: #151515;  /**กำหนดสี**/
+}
+
+* li {
+	list-style: none;  /**ลบจุดด้านหน้า**/
+}
+
+ /**กำหนดรายละเอียด Body**/
+
+body{	
+	background-image: url('https://images.unsplash.com/photo-1574643156929-51fa098b0394?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80');
+	background-position: center center;
+  	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover;		
+}
+
+/**กำหนดรายละเอียด Body**/
+
+/**ส่วนหัวเว็บ**/
+
+header{
+	background-color: #FFFFFF;
+	padding: 10px 0;
+	border-bottom: solid 1px lightgray;
+	
+}
+
+.container{
+	position: relative;
+	width: 90%;
+	margin: 0 auto;	
+}
+
+.navbar{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.logo a{
+	font-size: 1.875rem;
+	font-weight: 600;
+	letter-spacing: 2px;
+}
+
+nav ul{
+	display: flex;
+}
+
+nav ul li{
+	margin-right: 7px;
+	
+}
+
+
+.btn-home{
+	color:#000000;
+	background:#FFFFFF;
+	padding: 7px 25px ;
+	border-radius: 5px;
+	transition: .2s ease;
+}
+
+.btn-signup{
+	color:#000000;
+	background:#FFFFFF;
+	padding: 7px 20px ;
+	border-radius: 5px;
+	transition: .2s ease;
+}
+
+.btn-login{
+	color:#FBF7F7;
+	background:linear-gradient(45deg, #3498bd, #8e44ad);
+	padding: 7px 25px ;
+	border-radius: 5px;
+	transition: .3s ease;
+	
+}
+
+.btn-home:hover{
+	color:#fff;
+	background:linear-gradient(45deg, #BEBEBE, #778899);
+}
+
+.btn-signup:hover{
+	color:#fff;
+	background:linear-gradient(45deg, #BEBEBE, #778899);
+}
+
+.btn-login:hover{
+	color:#000000;
+	background:linear-gradient(45deg, #20B2AA, #556B2F);
+}
+
+.bar{
+	display: none;
+}
+
+
+@media screen and (max-width : 670px ){
+	.bar{
+		display: block;
+	}
+	
+	nav{
+		position: absolute;
+		width: 100%;
+		background-color: #FFFFFF;
+		margin-top: 200px;
+		border-radius: 10px;
+		border:solid 1px lightgray;
+		overflow: hidden;
+		display: none;
+		
+	}
+	
+	nav ul{
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		
+	}
+	
+	nav ul li{
+		padding: 1px 20px;
+		margin: 0;
+		display: flex;
+		border-bottom: 2px solid #F0FFFF;
+		justify-content: center;
+	}
+	
+	.btn-home{
+		color:#000000;
+		background:linear-gradient(45deg, #E0FFFF, #778899);
+		padding: 7px 100% ;
+		transition: .2s ease;
+	}
+	
+	.btn-signup{
+		color:#000000;
+		background:linear-gradient(45deg, #F0F8FF, #696969);
+		padding: 7px 100% ;
+		transition: .2s ease;
+	}
+
+	.btn-login{
+		color:#000000;
+		background:linear-gradient(45deg, #E0FFFF, #778899);
+		padding: 7px 90% ;
+		border-radius: 5px;
+		transition: .3s ease;	
+	}
+	
+	
+	.btn-home:hover{
+		color:#fff;
+		background:linear-gradient(45deg, #33CC99, #3399FF);
+	}
+
+	.btn-signup:hover{
+		color:#fff;
+		background:linear-gradient(45deg, #33CC99, #3399FF);
+	}
+
+
+	.btn-login:hover{
+		color:#FFFFFF;
+		background:linear-gradient(45deg, #3498bd, #8e44ad);
+	}
+	
+	.show{
+		display: flex;
+	}
+}
+
+/**ส่วนหัวเว็บ**/
+
+
+/**ส่วนแสดงเนื้อหากลางเว็บ**/
+
+.content{
+	width: 85%;
+	margin: 0 auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+}
+
+.content .header, .grid-card{
+	width: 50%;
+	position: relative;
+}
+
+.content .header{
+	color: #FFFFFF;
+	padding: 20px;
+}
+
+.content .header h3{
+	font-size: 2.5rem;
+	letter-spacing: 2px;
+}
+
+.content .header h3 i{
+	color: orange
+}
+
+.content .header h1{
+	font-size: 4rem;
+}
+
+.content .header p{
+	opacity: .6;
+}
+
+.grid-card{
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-gap: 25px;
+}
+
+.grid-card .box{
+	width: 100%;
+	height: 230px;
+	background-position: center;
+	background-size: cover;
+	border-radius: 25px;
+	transition:  .4s;
+	position: relative;
+}
+
+.bg1{
+	
+	background-image: url(https://images.unsplash.com/photo-1586310520462-658e93388399?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80);
+}
+
+.bg2{
+	background-image: url(https://images.unsplash.com/photo-1595161695996-f746349f4945?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1014&q=80);
+}
+
+.bg3{
+	background-image: url(https://images.unsplash.com/flagged/photo-1556438758-8d49568ce18e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1053&q=80);
+}
+
+.bg4{
+	background-image: url(https://images.unsplash.com/photo-1631048501851-4aa85ffc3be8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);
+}
+
+.content .box h2{
+	position: absolute;
+	bottom: 7px;
+	left: 15px;
+	color: #FEFDFD;
+}
+
+.content .box:hover{
+	transform:translateY(-15px);
+}
+
+
+@media screen and (max-width : 670px ){
+	.content{
+		width: 85%;
+		margin: 0 auto;
+		position: absolute;
+		top: 860px;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: block;
+		bottom: 10;		
+	}
+	
+	.content .header{
+		width: 100% ;
+		display: block;			
+	}
+
+	.grid-card{
+		display: grid;
+		grid-template-columns: none ;
+		grid-gap: 25px;
+	}
+	
+	.grid-card .box{
+		width: 450px;
+		height: 230px;
+		background-position: center;
+		background-size: cover;
+		border-radius: 25px;
+		transition:  .4s;
+	}	
+}
+
+/**ส่วนแสดงเนื้อหากลางเว็บ**/
+
+
+
+/**ส่วนท้ายเว็บ**/
+
+footer {
+	width: 100%;
+	position: fixed;
+	left: 0;
+    bottom: 0;
+	background: #fff;
+	padding: 20px;
+	text-align: center;
+	color: #333;
+	font-weight: 600;
+	
+}
+
+/**ส่วนท้ายเว็บ**/

@@ -1,0 +1,158 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: arial;
+}
+
+* a {
+	text-decoration: none; /**ลบเส้นใต้**/
+	color: #151515;  /**กำหนดสี**/
+}
+
+* li {
+	list-style: none;  /**ลบจุดด้านหน้า**/
+}
+
+/**กำหนดรายละเอียด Body**/
+body {
+	background-color: #FFFFFF;
+}
+/**กำหนดรายละเอียด Body**/
+
+
+/**ส่วนเมนู**/
+
+/**กำหนดรายละเอียดแถบบาร์เล็ก ใช้จริง**/
+.out {
+    position: absolute;
+    top: 0px;
+    left: 248px;
+    height: 100%;
+    width: 45px;
+    background-color: #003333;
+    text-align: center;
+    border-radius: 6px;
+}
+
+/**กำหนดรายละเอียดicon ในแถบบาร์เล็ก ใช้จริง**/
+.out i {
+    color: #FFFFFF;
+    font-size: 25px;
+    line-height: 60px;
+	padding: 0px 0px ;
+	transition: .3s ease;
+	cursor: pointer;
+}
+
+/**กำหนดรายละเอียดicon เวลาชี้เมาส์ ในแถบบาร์เล็ก ใช้จริง**/
+.out i:hover{
+    color: #F5F5F5;
+    font-size: 32px;
+}
+
+/**กำหนดรายละเอียดแถบเมนูบาร์ใหญ่ ใช้จริง**/
+.menubar {
+    position: fixed;
+    width: 240px;
+    height: 100%;
+    background-color: #003333;
+	border-radius: 4px;
+}
+
+/**กำหนดรายละเอียดส่วนหัว (โปรไฟล์)  ใช้จริง**/
+.header {
+	margin: 2rem 0;
+    line-height: 33px;
+    text-align: center;
+}
+
+/**กำหนดรายละเอียด logo ส่วนหัว (โปรไฟล์)  ใช้จริง**/
+#logo{
+	font-size: 5rem;
+	color: #FFFFFF;
+	margin-bottom: 20px;
+}
+
+/**กำหนดรายละเอียดรูปภาพ (โปรไฟล์)  ใช้จริง**/
+/**.header .header-img img{
+    border-radius: 25%;
+} **/
+
+/**กำหนดรายละเอียดส่วนชื่อ  ใช้จริง**/
+.header .header-name h2 {
+    color: #FFFFFF;
+    font-weight: 500px;
+	font-size: 20px;
+}
+
+/**กำหนดรายละเอียดส่วนตำแหน่ง ใช้จริง**/
+.header .header-name h3 {
+    color: #F5F5F5;
+    font-weight: 10px;
+	font-size: 18px;
+}
+
+/**กำหนดรายละเอียดส่วนตำแหน่ง ใช้จริง**/
+.header .header-name h5 {
+    color: #778899;
+	font-size: 15px;
+}
+
+/**กำหนดกรอบอักษร (แถบเมนู) ใช้จริง**/
+nav ul {
+    background-color: #5F9EA0;
+    width: 100%;
+    list-style: none;
+}
+
+/**กำหนดความห่าง (แถบเมนู) ใช้จริง**/
+nav ul li {
+    line-height: 50px;
+}
+
+/**กำหนดรายละอักษร (แถบเมนู) ใช้จริง**/
+nav ul li a {
+    position: relative;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 15px;
+    padding-left: 40px;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    border-left: 3px solid transparent;
+	transition: .6s ease;	
+}
+
+/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนู) ใช้จริง**/
+nav ul li:hover a{
+    color: #778899;
+	background-color: #FFFFFF;
+	font-size: 17px;
+}
+
+/**กำหนดรายละแถบเมนูเวลาคลิกเมาส์ (แถบเมนู) ใช้จริง**/
+nav ul li.active a {
+    color: #FFFFFF;
+    background-color: #2F4F4F;
+    border-left-color: #FFFFFF;
+}
+
+/**ส่วนเมนู**/
+
+/**ส่วนเนื่อหา**/
+
+.job {
+    position: absolute;
+    top: 0px;
+    left: 305px;
+    height: 100%;
+    width: 80%;
+    background-color: #F8F8FF;
+    text-align: center;
+    border-radius: 6px;
+}
+
+
+/**ส่วนเนื่อหา**/

@@ -1,0 +1,392 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: arial;
+}
+
+* a {
+	text-decoration: none; /**ลบเส้นใต้**/
+	color: #151515;  /**กำหนดสี**/
+}
+
+* li {
+	list-style: none;  /**ลบจุดด้านหน้า**/
+}
+
+/**กำหนดรายละเอียด Body**/
+body {
+	background-color: #FFFFFF;
+}
+/**กำหนดรายละเอียด Body**/
+
+
+/**ส่วนเมนู**/
+
+/**กำหนดรายละเอียดแถบบาร์เล็ก ใช้จริง**/
+.out {
+    position: absolute;
+    top: 0px;
+    left: 248px;
+    height: 100%;
+    width: 45px;
+    background-color: #24344B;
+    text-align: center;
+    border-radius: 6px;
+}
+
+/**กำหนดรายละเอียดicon ในแถบบาร์เล็ก ใช้จริง**/
+.out i {
+    color: #FFFFFF;
+    font-size: 25px;
+    line-height: 60px;
+	padding: 0px 0px ;
+	transition: .3s ease;
+	cursor: pointer;
+}
+
+/**กำหนดรายละเอียดicon เวลาชี้เมาส์ ในแถบบาร์เล็ก ใช้จริง**/
+.out i:hover{
+    color: #778899;
+    font-size: 32px;
+}
+
+/**กำหนดรายละเอียดแถบเมนูบาร์ใหญ่ ใช้จริง**/
+.menubar {
+    position: fixed;
+    width: 240px;
+    height: 100%;
+    background-color: #24344B;
+	border-radius: 4px;
+}
+
+/**กำหนดรายละเอียดส่วนหัว (โปรไฟล์)  ใช้จริง**/
+.header {
+	margin: 2rem 0;
+    line-height: 30px;
+    text-align: center;
+}
+
+/**กำหนดรายละเอียด logo ส่วนหัว (โปรไฟล์)  ใช้จริง**/
+#logo{
+	font-size: 5rem;
+	color: #FFFFFF;
+	margin-bottom: 20px;
+}
+
+/**กำหนดรายละเอียดรูปภาพ (โปรไฟล์)  ใช้จริง**/
+/**.header .header-img img{
+    border-radius: 25%;
+} **/
+
+/**กำหนดรายละเอียดส่วนชื่อ  ใช้จริง**/
+.header .header-name h2 {
+    color: #FFFFFF;
+    font-weight: 500px;
+	font-size: 20px;
+}
+
+/**กำหนดกรอบอักษร (แถบเมนู) ใช้จริง**/
+nav ul {
+    background-color: #2B3C58;
+    width: 100%;
+    list-style: none;
+}
+
+/**กำหนดความห่าง (แถบเมนู) ใช้จริง**/
+nav ul li {
+    line-height: 50px;
+}
+
+/**กำหนดรายละอักษร (แถบเมนู) ใช้จริง**/
+nav ul li a {
+    position: relative;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 15px;
+    padding-left: 40px;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    border-left: 3px solid transparent;
+	transition: .6s ease;	
+}
+
+/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนู) ใช้จริง**/
+nav ul li:hover a{
+    color: #2B3C58;
+	background-color: #FFFFFF;
+	font-size: 17px;
+}
+
+/**กำหนดรายละแถบเมนูเวลาคลิกเมาส์ (แถบเมนู) ใช้จริง**/
+nav ul li.active a {
+    color: #FFFFFF;
+    background-color: #11101D;
+    border-left-color: #FFFFFF;
+}
+
+/**คำสั่งซ่อนเมนู เพิ่มสัญญาลูกค้า/แก้ไขข้อมูลลูกค้า  ใช้จริง**/
+nav ul ul {
+    position: static;
+    display: none;
+}
+
+nav ul .feat-show.show {
+    display: block;
+}
+
+nav ul .serv-show.show {
+    display: block;
+}
+
+/**กำหนดรายละแถบเมนู serv-show (แถบเมนูในสามเหลี่ยม) ใช้จริง**/
+nav ul ul li a {
+    font-size: 16px;
+    color: #FFFFFF;
+    padding-left: 60px;
+}
+
+
+/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนูในสามเหลี่ยม) ใช้จริง**/
+nav ul li.active ul li a {
+    color: #FFFFFF;
+    background-color: #336699;
+    border-left-color: #FFFFFF;
+}
+
+/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนูในสามเหลี่ยม) ใช้จริง**/
+nav ul li ul li a:hover {
+    color: #2B3C58;
+    background-color: #FFFFFF;
+}
+
+/**กำหนดรายละแถบเมนูเวลาคลิกเมาส์ (แถบเมนูในสามเหลี่ยม) ใช้จริง**/
+nav ul li ul li.active a {
+    color: #FFFFFF;
+    background-color: #11101D;
+}
+
+/**กำหนดรายละปุ่มสามเหลี่ยม ใช้จริง**/
+nav ul li a span {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 22px;
+    transition: transform .4s;
+} 
+
+nav ul li a span.rotate {
+    transform: translateY(-50%) rotate(-180deg);
+} 
+
+/**ส่วนเมนู**/
+
+/**ส่วนเนื่อหา**/
+
+.job {
+    position: fixed;
+    top: 0px;
+    left: 305px;
+    height: 100%;
+    width: 80%;
+    
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.box{
+	position: absolute;
+	width: 98%;
+	height: 710px;
+	left: 10px;
+	top: 5px;
+	background: #FFFFFF;
+	mix-blend-mode: lighten;
+}
+
+a1{
+	position: absolute;
+	width: 184px;
+	height: 34px;
+	left: 25px;
+	top: 35px;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 30px;
+	line-height: 35px;
+	color: #000000;
+}
+
+.groub .box-room1{
+	position: absolute;
+	width: 95%;
+	height: 85px;
+	left: 20px;
+	margin-top: 110px;
+	border: 3px solid #DCDCDC;
+	box-sizing: border-box;
+	border-radius: 10px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.groub .box-room2{
+	position: absolute;
+	width: 95%;
+	height: 85px;
+	left: 20px;
+	margin-top: 210px;
+	border: 3px solid #DCDCDC;
+	box-sizing: border-box;
+	border-radius: 10px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.groub .box-room3{
+	position: absolute;
+	width: 95%;
+	height: 85px;
+	left: 20px;
+	margin-top: 310px;
+	border: 3px solid #DCDCDC;
+	box-sizing: border-box;
+	border-radius: 10px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.groub .box-room4{
+	position: absolute;
+	width: 95%;
+	height: 85px;
+	left: 20px;
+	margin-top: 410px;
+	border: 3px solid #DCDCDC;
+	box-sizing: border-box;
+	border-radius: 10px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.room1-icon{
+	width: 90px;
+	height: 60px;
+	position: relative;
+	border-radius: 10px;
+	background-image: url(https://images.unsplash.com/photo-1586310520462-658e93388399?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80);
+	left: 20px;
+	top: 9px;
+	background-position: center;
+	background-size: cover;
+}
+
+.room2-icon{
+	width: 90px;
+	height: 60px;
+	position: relative;
+	border-radius: 10px;
+	background-image: url(https://images.unsplash.com/photo-1595161695996-f746349f4945?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1014&q=80);
+	left: 20px;
+	top: 9px;
+	background-position: center;
+	background-size: cover;
+}
+
+.room3-icon{
+	width: 90px;
+	height: 60px;
+	position: relative;
+	border-radius: 10px;
+	background-image: url(https://images.unsplash.com/flagged/photo-1556438758-8d49568ce18e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1053&q=80);
+	left: 20px;
+	top: 9px;
+	background-position: center;
+	background-size: cover;
+}
+
+.room4-icon{
+	width: 90px;
+	height: 60px;
+	position: relative;
+	border-radius: 10px;
+	background-image: url(https://images.unsplash.com/photo-1631048501851-4aa85ffc3be8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);
+	left: 20px;
+	top: 9px;
+	background-position: center;
+	background-size: cover;
+}
+
+.text1{
+	position: absolute;
+	font-size: 20px;
+	left: 160px;
+	top: 25px;
+}
+
+.text2{
+	position: absolute;
+	font-size: 20px;
+	left: 380px;
+	top: 25px;
+}
+
+.text3{
+	position: absolute;
+	font-size: 20px;
+	left: 650px;
+	top: 25px;
+}
+
+
+.groub ul{
+	display: flex;
+}
+
+.btn-show{
+	display: flex;
+	justify-content: center;
+	font-size: 18px;
+	margin-top: 25px;
+	margin-right: 10px;
+	background:#F5F5F5;
+	width: 110px;
+	height: 35px;
+	transition: .3s ease;
+	border: 3px solid #BEBEBE;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.btn-update{
+	display: flex;
+	justify-content: center;
+	font-size: 18px;
+	margin-top: 25px;
+	margin-right: 15px;
+	color: #FFFFFF;
+	background:#24344B;
+	width: 180px;
+	height: 35px;
+	transition: .6s ease;
+	border: 3px solid #24344B;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.btn-update:hover {
+	background:#2B3C58;
+	color: #FFFFFF;
+	font-size: 19px;
+	border: 3px solid #FFFFFF;
+}
+
+.btn-show:hover {
+	font-size: 20px;
+	background:#DCDCDC;
+	border: 3px solid #24344B;
+}
+
+/**ส่วนเนื่อหา**/
