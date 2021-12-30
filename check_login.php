@@ -18,7 +18,7 @@ $objQuery = mysqli_query($conn, $strSQL);
 $objResult = mysqli_fetch_array($objQuery);
 
 if (!$objResult) {
-    echo "Username and Password Incorrect!";
+    echo "Username and Password ไม่ถูกต้อง!";
 } else {
 
     if ($status == "admin") {

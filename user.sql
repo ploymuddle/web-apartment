@@ -9,20 +9,20 @@ CREATE TABLE user (
 
 CREATE TABLE customer (
     cust_id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    cust_name VARCHAR(50) NOT NULL,
-    cust_surname VARCHAR(50) NOT NULL,
+    cust_name VARCHAR(50),
+    cust_surname VARCHAR(50),
     cust_idcard VARCHAR(20),
     cust_tel VARCHAR(20),
     cust_email VARCHAR(50),
-    cust_username VARCHAR(50) NOT NULL,
-    cust_password VARCHAR(20) NOT NULL,
+    cust_username VARCHAR(50),
+    cust_password VARCHAR(20),
     cust_status VARCHAR(20)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE employee (
     emp_id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    emp_name VARCHAR(50) NOT NULL,
-    emp_username VARCHAR(50) NOT NULL,
-    emp_password VARCHAR(20) NOT NULL
+    emp_name VARCHAR(50),
+    emp_username VARCHAR(50),
+    emp_password VARCHAR(20)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

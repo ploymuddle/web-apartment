@@ -274,6 +274,7 @@ form .input-box span.details{
 form input[type="radio"]{
    	display: none;
  }
+
 form .button{
    	height: 45px;
 	margin: 35px 0;
@@ -297,6 +298,31 @@ form .button input:hover{
 	background-image: linear-gradient(120deg,#99CCFF,#CCFFCC);
 	
   }
+  form .message {
+	/* background: linear-gradient(135deg, #71b7e6, #9b59b6); */
+	font-size: 12px;
+   	font-weight: 200;
+}
+
+.required {
+	/* background: url("https://img.icons8.com/color/50/000000/box-important--v1.png"); */
+	/* background: url("https://img.icons8.com/windows/32/000000/box-important--v1.png"); */
+	background: url("https://img.icons8.com/fluency/50/000000/box-important.png");
+        background-size: 20px;
+        background-repeat: no-repeat;
+        background-position: right;   
+		/* background-color: #ffd7f6;  */
+		background-color: #fff6e6; 
+}
+
+.pass {
+	background: url("https://img.icons8.com/fluency/48/000000/ok.png");
+        background-size: 20px;
+        background-repeat: no-repeat;
+        background-position: right;   
+		/* background-color: #ffd7f6;  */
+		background-color: #e2ffe2;
+}
 
 @media(max-width: 670px){
  	.con{
