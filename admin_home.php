@@ -1,19 +1,30 @@
 <?php
 session_start();
-require_once "../connection.php";
+
+//set menu admin page
+$page = 'หน้าแรก';
+$_GET['menu'] = $page;
+
+//เชื่อมต่อฐานข้อมูล
+// require_once "../connection.php";
+require_once "connection.php";
+
+//ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
 if ($_SESSION['id'] == "") {
-	echo "Please Login!";
-	exit();
+    header("location:login.php");
 }
 
+//ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
 if ($_SESSION['status'] != "admin") {
 	echo "This page for Admin only!";
 	exit();
 }
 
+//คำสั่ง sql ในการดึงข้อมูล
 $strSQL = "SELECT * FROM employee WHERE emp_id = '" . $_SESSION['id'] . "' ";
 $objQuery = mysqli_query($conn, $strSQL);
 $objResult = mysqli_fetch_array($objQuery);
+
 ?>
 
 <!doctype html>
@@ -23,7 +34,7 @@ $objResult = mysqli_fetch_array($objQuery);
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
 	<meta http-equiv="X-Compatible" content="ie=edge">
-	<title>AP Management....</title>
+	<title><?php echo $page; ?></title>
 
 	<link rel="stylesheet" href="css/style-admin-home.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -35,7 +46,8 @@ $objResult = mysqli_fetch_array($objQuery);
 
 <body>
 
-	<?php include('layout.php'); ?>
+	<!-- import menu page -->
+	<?php include('admin_menu.php'); ?>
 
 	<div class="job">
 		<div class="box">
@@ -78,26 +90,11 @@ $objResult = mysqli_fetch_array($objQuery);
 			</div>
 
 		</div>
-
-
 	</div>
 
+	<script src="js/script-dropdown.js"></script>
+	<script src="js/script.js"></script>
 
-
-
-
-	<script>
-		// คำสั่งสำหลับ show เมนูในปุ่มสามเหลี่ยม
-		$('.serv-btn').click(function() {
-			$('nav ul .serv-show').toggleClass('show')
-			$('nav ul .second').toggleClass('rotate')
-		})
-
-		// คำสั่งสำหลับแสดงสถานะ ในแถบเมนูที่ใช้งานอยู่
-		$('nav ul li').click(function() {
-			$(this).addClass('active').siblings().removeClass('active')
-		})
-	</script>
 </body>
 
 </html>

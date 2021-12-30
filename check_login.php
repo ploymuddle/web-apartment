@@ -25,12 +25,12 @@ if (!$objResult) {
         $_SESSION["id"] = $objResult["emp_id"];
         $_SESSION["status"] = $status;
         session_write_close();
-        header("location:admin/home.php");
+        header("location:admin_home.php");
     } else {
         $_SESSION["id"] = $objResult["cust_id"];
         $_SESSION["status"] = $status;
         session_write_close();
-        header("location:customer/home.php");
+        header("location:user_profile.php");
         // header("location:test/user_page.php");
     }
 }

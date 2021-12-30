@@ -147,7 +147,6 @@ nav ul ul li a {
     padding-left: 60px;
 }
 
-
 /**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนูในสามเหลี่ยม) ใช้จริง**/
 nav ul li.active ul li a {
     color: #FFFFFF;

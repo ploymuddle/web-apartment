@@ -2,7 +2,7 @@
 session_start();
 
 //set menu admin page
-$page = 'เพิ่มสัญญาลูกค้า';
+$page = 'รายงานการชำระ';
 $_GET['menu'] = $page;
 
 //เชื่อมต่อฐานข้อมูล
