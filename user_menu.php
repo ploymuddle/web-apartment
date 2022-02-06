@@ -1,35 +1,63 @@
-<div class="out">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, inital-scale=1.0">
+	<meta http-equiv="X-Compatible" content="ie=edge">
+	<title> <?php //echo $page; ?> </title>
 
-<a href="logout.php"><i class="fas fa-sign-out-alt"></i></a>
+	<link rel="stylesheet" href="css/style-customer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/1c68c00305.js" crossorigin="anonymous"></script>
 
-</div>
 
-<nav class="menubar">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+	<!--< คำสั่งชื่อมต่อ สำหลับใช้งานการปิด/เปิด ต่างๆ ในแถบเมนู >-->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<nav class="menu">
     <div class="header">
 
-        <i id="logo" class="fas fa-users"></i> <!-- -->
-        <!-- Logo -->
-        <!--    <div class="header-img">
-                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=80&q=80" alt="">
-            </div> -->
+        <i id="logo" class="fas fa-users"></i>
 
         <div class="header-name">
-            <?php echo $objResult["cust_username"]; ?>
-            <h2><?php echo $objResult["cust_name"]; ?> <?php echo $objResult["cust_surname"]; ?></h2> <!-- ต้องดึงมาจาก ฐานข้อมูล -->
+            <?php //echo $objResult["cust_username"]; 
+            ?>
+            <h2><?php //echo $objResult["cust_name"]; 
+                ?> <?php //echo $objResult["cust_surname"]; 
+                                                            ?></h2> <!-- ต้องดึงมาจาก ฐานข้อมูล -->
             <h3>Room</h3>
             <h5>A009</h5> <!-- ต้องดึงมาจาก ฐานข้อมูล -->
         </div>
     </div>
 
     <ul>
-        <li <?php if ($_GET['menu'] == "ข้อมูลส่วนตัว") { echo "class=\"active\""; } ?> ><a href="user_profile.php">ข้อมูลส่วนตัว</a></li>
+        <li <?php if ($_GET['menu'] == "ข้อมูลส่วนตัว") {
+                echo "class=\"active\"";
+            } ?>><a href="user_profile.php" class="user_profile"></a></li>
 
-        <li <?php if ($_GET['menu'] == "สัญญาเช่า") { echo "class=\"active\""; } ?> ><a href="user_contract.php">สัญญาเช่า</a></li>
+        <li <?php if ($_GET['menu'] == "สัญญาเช่า") {
+                echo "class=\"active\"";
+            } ?>><a href="user_contract.php" class="user_contract"></a></li>
 
-        <li <?php if ($_GET['menu'] == "ชำระค่าเช่า") { echo "class=\"active\""; } ?> ><a href="user_bill.php">ชำระค่าเช่า </a></li>
+        <li <?php if ($_GET['menu'] == "ชำระค่าเช่า") {
+                echo "class=\"active\"";
+            } ?>><a href="user_bill.php" class="user_bill"></a></li>
 
-        <li <?php if ($_GET['menu'] == "User messages") { echo "class=\"active\""; } ?> ><a href="user_messages.php">Messages</a></li>
+        <li <?php if ($_GET['menu'] == "User messages") {
+                echo "class=\"active\"";
+            } ?>><a href="user_messages.php" class="user_messages"></a></li>
 
-        <li <?php if ($_GET['menu'] == "แจ้งขอย้าย") { echo "class=\"active\""; } ?>><a href="request_to_move.php">แจ้งขอย้ายห้อง/ย้ายออก</a></li>
+        <li <?php if ($_GET['menu'] == "แจ้งขอย้าย") {
+                echo "class=\"active\"";
+            } ?>><a href="request_to_move.php" class="request_to_move"></a></li>
     </ul>
+
+    <div class="out">
+        <a href="logout.php"><i class="fas fa-sign-out-alt"></i></a>
+    </div>
 </nav>

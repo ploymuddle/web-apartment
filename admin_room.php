@@ -4,109 +4,174 @@ session_start();
 //set menu admin page
 $page = 'จัดการห้องพัก';
 $_GET['menu'] = $page;
-
-//เชื่อมต่อฐานข้อมูล
-// require_once "../connection.php";
+// ----
+// //เชื่อมต่อฐานข้อมูล
+// // require_once "../connection.php";
 require_once "connection.php";
 
-//ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
-if ($_SESSION['id'] == "") {
-    header("location:login.php");
-}
+// //ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
+// if ($_SESSION['id'] == "") {
+//     header("location:login.php");
+// }
 
-//ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
-if ($_SESSION['status'] != "admin") {
-	echo "This page for Admin only!";
-	exit();
-}
+// //ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
+// if ($_SESSION['status'] != "admin") {
+// 	echo "This page for Admin only!";
+// 	exit();
+// }
 
-//คำสั่ง sql ในการดึงข้อมูล
-$strSQL = "SELECT * FROM employee WHERE emp_id = '" . $_SESSION['id'] . "' ";
-$objQuery = mysqli_query($conn, $strSQL);
-$objResult = mysqli_fetch_array($objQuery);
+// //คำสั่ง sql ในการดึงข้อมูล
+// $strSQL = "SELECT * FROM employee WHERE emp_id = '" . $_SESSION['id'] . "' ";
+// $objQuery = mysqli_query($conn, $strSQL);
+// $objResult = mysqli_fetch_array($objQuery);
+
+
+$roomTypeSQL = "SELECT * FROM room_type ";
+$roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
+
+
+
 ?>
 
 
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, inital-scale=1.0">
-<meta http-equiv="X-Compatible" content="ie=edge">
-<title><?php echo $page; ?></title>
-
-<link rel="stylesheet" href="css/style-admin-room.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	
-<!--< คำสั่งชื่อมต่อ สำหลับใช้งานการปิด/เปิด ต่างๆ ในแถบเมนู >-->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	
-</head>
+<!-- <link rel="stylesheet" href="css/style-admin-room.css"> -->
+<!-- import menu page -->
+<?php include('admin_menu.php'); ?>
 
 <body>
 
-	<!-- import menu page -->
-	<?php include('admin_menu.php'); ?>
-	
 	<div class="job">
+		<h1 class="title">จัดการห้องพัก</h1>
 		<div class="box">
-		
-			<a1>จัดการห้องพัก</a1>
-			
-				<div class="groub">
-          				<div class="box-room1">
-							<div class="room1-icon"></div>
-							<p class="text1">Room1</p> 
-							<p class="text2">รายการห้องว่าง</p> 
-							<p class="text3"><a>3</a>&nbsp;<y>/</y>&nbsp;<a>10</a></p>
-							
-							<ul>
-								<li><a href="#" class="btn-show">แสดง</a></li>
-								<li><a href="#" class="btn-update">แก้ไขข้อมูลห้องพัก</a></li>
-							</ul>  	
-          				</div>
-					    <div class="box-room2">
-							<div class="room2-icon"></div>
-							<p class="text1">Room2</p> 
-							<p class="text2">รายการห้องว่าง</p> 
-							<p class="text3"><a>6</a>&nbsp;<y>/</y>&nbsp;<a>10</a></p>
-							
-							<ul>
-								<li><a href="#" class="btn-show">แสดง</a></li>
-								<li><a href="#" class="btn-update">แก้ไขข้อมูลห้องพัก</a></li>
-							</ul> 	
-          				</div>
-						<div class="box-room3">
-							<div class="room3-icon"></div>
-							<p class="text1">Room3</p> 
-							<p class="text2">รายการห้องว่าง</p> 
-							<p class="text3"><a>2</a>&nbsp;<y>/</y>&nbsp;<a>5</a></p>
-							
-							<ul>
-								<li><a href="#" class="btn-show">แสดง</a></li>
-								<li><a href="#" class="btn-update">แก้ไขข้อมูลห้องพัก</a></li>
-							</ul>  	
-          				</div>
-						<div class="box-room4">
-							<div class="room4-icon"></div>
-							<p class="text1">Room4</p> 
-							<p class="text2">รายการห้องว่าง</p> 
-							<p class="text3"><a>5</a>&nbsp;<y>/</y>&nbsp;<a>5</a></p>
-							
-							<ul>
-								<li><a href="#" class="btn-show">แสดง</a></li>
-								<li><a href="#" class="btn-update">แก้ไขข้อมูลห้องพัก</a></li>
-							</ul>  	
-          				</div>
-					
-        		</div>
-		
+			<!-- <div class="groub"> -->
+			<?php while ($roomType = mysqli_fetch_array($roomTypeQuery)) {
+				$countSQL = "SELECT ";
+				$countSQL = $countSQL . "(SELECT COUNT(*) FROM room WHERE type_room = '" . $roomType['type_room'] . "') AS countTotal ";
+				$countSQL = $countSQL . ", (SELECT COUNT(*) FROM room WHERE type_room = '" . $roomType['type_room'] . "' AND room_status = 'N') AS countN";
+				$countQuery = mysqli_query($conn, $countSQL);
+				$count = mysqli_fetch_array($countQuery);
+			?>
+
+				<div class="show-box grid-6">
+					<img src="<?php echo $roomType["type_picture"]; ?>" alt="room">
+					<p class="text1"><?php echo $roomType["type_room"]; ?></p>
+					<p class="text2">รายการห้องว่าง</p>
+					<p class="text3"><a><?php echo $count["countN"]; ?></a>&nbsp;<y>/</y>&nbsp;<a><?php echo $count["countTotal"]; ?></a></p>
+
+					<button href="#" class="btn-show" onclick="showData('<?php echo $roomType['type_room']; ?>')">แสดง</button>
+					<button href="#" class="btn-update">แก้ไขข้อมูลห้องพัก</button>
+
+				</div>
+
+			<?php } ?>
+			<!-- </div> -->
 		</div>
 	</div>
-	
+
+
+	<!-- The Modal Data -->
+	<div id="modalData" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content show-box">
+
+			<h3>แสดงข้อมูลห้องพัก</h3>
+
+			<hr>
+
+			<div class="content-space-around">
+				<p>ประเภท : <a id="type"> - </a></p>
+				<p>ราคา : <a id="rental"> - </a></p>
+			</div>
+
+			<hr>
+
+			<table class="table" id="table">
+				<thead>
+					<tr>
+						<th>ลำดับ</th>
+						<th>เลขที่ห้อง</th>
+						<th>รายละเอียด</th>
+						<th>สถานะ</th>
+						<th>แก้ไข</th>
+					</tr>
+				</thead>
+				<tbody id="divResult">
+				</tbody>
+			</table>
+			<div class="content-center">
+				<button type="submit" onclick="document.location.href='admin_addroom.php'">เพิ่มห้องพัก</button>
+			</div>
+
+		</div>
+
+	</div>
+	<!-- End The Modal Data  -->
+
 	<script src="js/script-dropdown.js"></script>
 	<script src="js/script.js"></script>
+	<script>
+		let data;
+		var modalData = document.getElementById("modalData");
+		modalData.style.display = "none";
+
+		function showData(type) {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+
+				if (this.readyState == 4 && this.status == 200) {
+					var response = this.response;
+					var data = JSON.parse(response);
+					console.log(data);
+
+					document.getElementById("type").innerText = data[0].type_room;
+					document.getElementById("rental").innerText = data[0].type_rental;
+
+					modalData.style.display = "block";
+
+					var table = '';
+					for (var i = 0; i < data.length; i++) {
+						table += '<tr><td>' + (i + 1) + '</td>';
+						table += '<td>' + data[i].room_id + '</td>';
+						table += '<td><textarea type="text" id="roomDetail" name="roomDetail" disabled>' + data[i].room_data + '</textarea></td>';
+						table += '<td style=' + (data[i].room_status == 'N' ? '"color:green;"> ว่าง' : '"color:#888888;"> ไม่ว่าง'); + '</td></tr>';
+						table += '<td><a href="#" class="button" onclick="edit(this)"> <i class="fas fa-edit"  id="icon" style="font-size:20px;"></i></a>&nbsp;<a id="btnSave"></a></td>';
+					}
+
+				}
+				$('#divResult').html(table);
+			}
+			xmlhttp.open("GET", "getRoomType.php?q=" + type, true);
+			xmlhttp.send();
+
+		}
+
+		function edit(x) {
+			var data = document.getElementById("roomDetail").innerHTML;
+			if (document.getElementById("roomDetail").disabled == true) {
+				document.getElementById("roomDetail").disabled = false;
+				var btn = document.getElementById('btnSave');
+				var a = document.createElement('a');
+				a.innerHTML = '<i class="fas fa-save" style="font-size:20px;"></i>';
+  				a.href = "#";
+				a.onclick = 'save('+document.getElementById("roomDetail").value+')';
+				btn.appendChild(a);
+				
+				document.getElementById("roomDetail").disabled = false;
+				x.querySelector('i').classList.remove('fa-edit');
+				x.querySelector('i').classList.add('fa-window-close');
+			} else {
+				document.getElementById("roomDetail").value = data;
+				document.getElementById("roomDetail").disabled = true;
+				x.querySelector('i').classList.remove('fa-window-close');
+				x.querySelector('i').classList.add('fa-edit');
+				x.querySelector('i').classList.remove('fa-save');
+			}
+
+		}
+	</script>
 </body>
-	
-</html>	
-	
+
+</html>

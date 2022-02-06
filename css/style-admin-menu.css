@@ -1,0 +1,314 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: arial;
+}
+
+* a {
+    text-decoration: none;
+    /**ลบเส้นใต้**/
+    color: #151515;
+    /**กำหนดสี**/
+}
+
+* li {
+    list-style: none;
+    /**ลบจุดด้านหน้า**/
+}
+
+
+/**กำหนดรายละเอียด Body**/
+
+body {
+    background-color: #FFFFFF;
+}
+
+
+/**ส่วนเมนู**/
+
+
+/**กำหนดรายละเอียดแถบบาร์เล็ก ใช้จริง**/
+
+.out {
+    position: absolute;
+    top: 0px;
+    left: 248px;
+    height: 100%;
+    width: 45px;
+    background-color: #24344B;
+    text-align: center;
+    border-radius: 6px;
+}
+
+
+/**กำหนดรายละเอียดicon ในแถบบาร์เล็ก ใช้จริง**/
+
+.out i {
+    color: #FFFFFF;
+    font-size: 25px;
+    line-height: 60px;
+    padding: 0px 0px;
+    transition: .3s ease;
+    cursor: pointer;
+}
+
+
+/**กำหนดรายละเอียดicon เวลาชี้เมาส์ ในแถบบาร์เล็ก ใช้จริง**/
+
+.out i:hover {
+    color: #778899;
+    font-size: 32px;
+}
+
+
+/**กำหนดรายละเอียดแถบเมนูบาร์ใหญ่ ใช้จริง**/
+
+.menubar {
+    position: fixed;
+    width: 240px;
+    height: 100%;
+    background-color: #24344B;
+    border-radius: 4px;
+}
+
+
+/**กำหนดรายละเอียดส่วนหัว (โปรไฟล์)  ใช้จริง**/
+
+.header {
+    margin: 2rem 0;
+    line-height: 30px;
+    text-align: center;
+}
+
+
+/**กำหนดรายละเอียด logo ส่วนหัว (โปรไฟล์)  ใช้จริง**/
+
+#logo {
+    font-size: 5rem;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+
+/**กำหนดรายละเอียดรูปภาพ (โปรไฟล์)  ใช้จริง**/
+
+
+/**.header .header-img img{
+    border-radius: 25%;
+} **/
+
+
+/**กำหนดรายละเอียดส่วนชื่อ  ใช้จริง**/
+
+.header .header-name h2 {
+    color: #FFFFFF;
+    font-weight: 500px;
+    font-size: 20px;
+}
+
+
+/**กำหนดกรอบอักษร (แถบเมนู) ใช้จริง**/
+
+nav ul {
+    background-color: #2B3C58;
+    width: 100%;
+    list-style: none;
+}
+
+
+/**กำหนดความห่าง (แถบเมนู) ใช้จริง**/
+
+nav ul li {
+    line-height: 50px;
+}
+
+
+/**กำหนดรายละอักษร (แถบเมนู) ใช้จริง**/
+
+nav ul li a {
+    position: relative;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 15px;
+    padding-left: 40px;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    border-left: 3px solid transparent;
+    transition: .6s ease;
+}
+
+
+/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนู) ใช้จริง**/
+
+nav ul li:hover a {
+    color: #2B3C58;
+    background-color: #FFFFFF;
+    font-size: 17px;
+}
+
+
+/**กำหนดรายละแถบเมนูเวลาคลิกเมาส์ (แถบเมนู) ใช้จริง**/
+
+nav ul li.active a {
+    color: #FFFFFF;
+    background-color: #11101D;
+    border-left-color: #FFFFFF;
+}
+
+
+/**คำสั่งซ่อนเมนู เพิ่มสัญญาลูกค้า/แก้ไขข้อมูลลูกค้า  ใช้จริง**/
+
+nav ul ul {
+    position: static;
+    display: none;
+}
+
+nav ul .feat-show.show {
+    display: block;
+}
+
+nav ul .serv-show.show {
+    display: block;
+}
+
+
+/**กำหนดรายละแถบเมนู serv-show (แถบเมนูในสามเหลี่ยม) ใช้จริง**/
+
+nav ul ul li a {
+    font-size: 16px;
+    color: #FFFFFF;
+    padding-left: 60px;
+}
+
+
+/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนูในสามเหลี่ยม) ใช้จริง**/
+
+nav ul li.active ul li a {
+    color: #FFFFFF;
+    background-color: #336699;
+    border-left-color: #FFFFFF;
+}
+
+
+/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนูในสามเหลี่ยม) ใช้จริง**/
+
+nav ul li ul li a:hover {
+    color: #2B3C58;
+    background-color: #FFFFFF;
+}
+
+
+/**กำหนดรายละแถบเมนูเวลาคลิกเมาส์ (แถบเมนูในสามเหลี่ยม) ใช้จริง**/
+
+nav ul li ul li.active a {
+    color: #FFFFFF;
+    background-color: #11101D;
+}
+
+
+/**กำหนดรายละปุ่มสามเหลี่ยม ใช้จริง**/
+
+nav ul li a span {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 22px;
+    transition: transform .4s;
+}
+
+nav ul li a span.rotate {
+    transform: translateY(-50%) rotate(-180deg);
+}
+
+
+/* CSS layout */
+
+.p-10 {
+    padding: 10px;
+}
+
+.p-20 {
+    padding: 20px;
+}
+
+.p-30 {
+    padding: 30px;
+}
+
+.py-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.px-10 {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.my-10 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mx-10 {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+/**ส่วนเนื้อหา**/
+
+.job {
+    position: fixed;
+    top: 30px;
+    left: 310px;
+    width: 80%;
+    bottom: 20px;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    background-color: #DCDCDC;
+    padding: 20px;
+    margin: 20px;
+    border: #DCDCDC;
+    border-style: solid;
+    height: 90%;
+    width: 100%;
+}
+
+a1 {
+    font-size: 30px;
+    /* line-height: 50px; */
+    color: #000000;
+    margin: 20px;
+}
+
+a2 {
+    /* position: absolute; */
+    font-size: 36px;
+    color: #000000;
+    margin: 20px;
+}
+
+.text-blue {
+    color: #336699;
+}
+
+
+/* .card-box {
+    background-color: #c3d3e2;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 28px rgba(0, 0, 0, .08);
+    box-shadow: 0 0 28px rgba(0, 0, 0, .08);
+    padding: 20px;
+    margin: 20px;
+} */
+
+@media screen and (max-width: 1680px) {
+    .job {}
+}

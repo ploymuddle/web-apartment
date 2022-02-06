@@ -2,8 +2,8 @@
 session_start();
 
 //set menu admin page
-$page = 'เพิ่มสัญญาลูกค้า';
-$_GET['menu'] = $page;
+$page = 'เพิ่มห้องพัก';
+$_GET['menu'] = 'จัดการห้องพัก';
 
 // ----
 // //เชื่อมต่อฐานข้อมูล
@@ -38,20 +38,11 @@ require_once "connection.php";
 <body>
 
     <div class="job">
-        <h1 class="title">เพิ่มสัญญาใหม่</h1>
+        <h1 class="title"><?php echo $page;?></h1>
 
         <div class="box bg-white">
 
             <form method="POST" class="" action="insertC.php" enctype="multipart/form-data">
-
-                <div class="grid-4 content-center">
-                    <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า">
-                    <input type="text" id="surname" name="surname" placeholder="นามสกุล">
-                    <input type="text" id="tel" name="tel" placeholder="เบอร์โทร">
-                    <input type="text" id="email" name="email" placeholder="Email">
-                </div>
-
-                <hr>
 
                 <div class="grid-col">
                     <div class="grid-row">
@@ -85,30 +76,9 @@ require_once "connection.php";
 
                     <div class="grid-row">
                         <div class="grid col-30">
-                            <label for="contractDate">วันที่ทำสัญญา:</label>
-                            <input type="date" id="contractDate" name="contractDate">
-                            <!-- <input type="text" id="contract" name="contract" placeholder="หมายเลขสัญญา"> -->
-                        </div>
-                        <!-- <div class="grid col-20">
-                            <label for="contractDay">วันที่ทำสัญญา:</label>
-                            <select id="contractDay" name="contractDay">
-                                <option value="1">วันที่ 1</option>
-                            </select>
-                            <input type="text" id="contract" name="contract" placeholder="รหัสสมาชิก">
-                        </div> -->
-
-                        <div class="grid col-30">
-                            <label for="contract">ค่ามัดจำ:</label>
-                            <input type="text" id="contract" name="contract">
-                        </div>
-
-                        <div class="grid col-30">
                             <label for="file">เอกสารยืนยัน:</label>
                             <input type="file" id="file" name="file">
                         </div>
-                        <!-- <div class="content-center">
-                            <button type="button">เพิ่มไฟล์เอกสาร</button>
-                        </div> -->
                         <div class=""></div>
                     </div>
                 </div>
@@ -116,7 +86,7 @@ require_once "connection.php";
                 <hr>
 
                 <div class="content-center">
-                    <button type="button" id="close" onclick="window.location='admin_contract.php';">ยกเลิก</button>
+                    <button type="button" id="close" onclick="window.location='admin_room.php';">กลับหน้าจัดการห้องพัก</button>
                     <button type="submit">บันทึกรายการ</button>
                 </div>
 

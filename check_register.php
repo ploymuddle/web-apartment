@@ -29,7 +29,6 @@ $query = "INSERT INTO customer (cust_name, cust_surname, cust_tel, cust_email, c
                 header("Location: index.php");
             }
 
-// echo $name;
 exit();
 
 ?>

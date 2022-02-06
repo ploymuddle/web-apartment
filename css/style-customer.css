@@ -1,0 +1,570 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Mitr', sans-serif;
+}
+
+* a {
+    text-decoration: none;
+    /**ลบเส้นใต้**/
+    color: #151515;
+    /**กำหนดสี**/
+}
+
+* li {
+    list-style: none;
+    /**ลบจุดด้านหน้า**/
+}
+
+/**กำหนดรายละเอียด Body**/
+body {
+    background-color: #FFFFFF;
+}
+
+/**กำหนดรายละเอียด Body**/
+
+
+/**ส่วนเมนู**/
+
+/**กำหนดรายละเอียดแถบบาร์เล็ก ใช้จริง**/
+.out {
+    border-radius: 30px;
+    padding: 10px;
+    background-color: white;
+    bottom: 30px;
+    position: fixed;
+    margin-left: 3%;
+}
+
+div.out a::before {
+    padding: 20px;
+    content: "ออกจากระบบ ";
+}
+
+div.out a:hover {
+    color: #003333;
+}
+
+/**กำหนดรายละเอียดแถบเมนูบาร์ใหญ่ ใช้จริง**/
+.menu {
+    padding: 20px;
+    float: left;
+    width: 20%;
+    background-color: #003333;
+    border-radius: 4px;
+    height: 100vh;
+}
+
+/**กำหนดรายละเอียดส่วนหัว (โปรไฟล์)  ใช้จริง**/
+.header {
+    margin: 2rem 0;
+    line-height: 33px;
+    text-align: center;
+}
+
+/**กำหนดรายละเอียด logo ส่วนหัว (โปรไฟล์)  ใช้จริง**/
+#logo {
+    font-size: 5rem;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+/**กำหนดรายละเอียดรูปภาพ (โปรไฟล์)  ใช้จริง**/
+/**.header .header-img img{
+    border-radius: 25%;
+} **/
+
+/**กำหนดรายละเอียดส่วนชื่อ  ใช้จริง**/
+.header .header-name h2 {
+    color: #FFFFFF;
+    font-weight: 500px;
+    font-size: 20px;
+}
+
+/**กำหนดรายละเอียดส่วนตำแหน่ง ใช้จริง**/
+.header .header-name h3 {
+    color: #F5F5F5;
+    font-weight: 10px;
+    font-size: 18px;
+}
+
+/**กำหนดรายละเอียดส่วนตำแหน่ง ใช้จริง**/
+.header .header-name h5 {
+    color: #778899;
+    font-size: 15px;
+}
+
+/**กำหนดกรอบอักษร (แถบเมนู) ใช้จริง**/
+nav ul {
+    background-color: #5F9EA0;
+    width: 100%;
+    list-style: none;
+}
+
+/**กำหนดความห่าง (แถบเมนู) ใช้จริง**/
+nav ul li {
+    line-height: 50px;
+}
+
+/**กำหนดรายละอักษร (แถบเมนู) ใช้จริง**/
+nav ul li a {
+    position: relative;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 15px;
+    padding-left: 40px;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    border-left: 3px solid transparent;
+    transition: .6s ease;
+}
+
+/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนู) ใช้จริง**/
+nav ul li:hover a {
+    color: #778899;
+    background-color: #FFFFFF;
+    font-size: 17px;
+}
+
+/**กำหนดรายละแถบเมนูเวลาคลิกเมาส์ (แถบเมนู) ใช้จริง**/
+nav ul li.active a {
+    color: #FFFFFF;
+    background-color: #2F4F4F;
+    border-left-color: #FFFFFF;
+}
+
+
+nav ul li a.user_profile::before {
+    content: "ข้อมูลส่วนตัว";
+}
+
+nav ul li a.user_contract::before {
+    content: "สัญญาเช่า";
+}
+
+nav ul li a.user_bill::before {
+    content: "ชำระค่าเช่า";
+}
+
+nav ul li a.user_messages::before {
+    content: "Messages";
+}
+
+nav ul li a.request_to_move::before {
+    content: "แจ้งขอย้าย";
+}
+
+
+/**ส่วนเมนู**/
+
+/**ส่วนเนื่อหา**/
+h1.title {
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.job {
+    background-color: #ffffff;
+    padding: 20px;
+    float: left;
+    width: 80%;
+    /* The width is 60%, by default */
+}
+
+.box {
+    background-color: #f1f1f1;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.show-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 28px rgba(0, 0, 0, .08);
+    box-shadow: 0 0 28px rgba(0, 0, 0, .08);
+    padding: 20px;
+    margin: 20px;
+    align-items: center;
+}
+
+.card-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 28px rgba(0, 0, 0, .08);
+    box-shadow: 0 0 28px rgba(0, 0, 0, .08);
+    padding: 20px;
+
+    /* top-left-bottom-r */
+    margin: 20px auto 10px auto;
+    width: 350px;
+    transition: 0.3s;
+}
+
+.card-box:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    max-width: 100%;
+}
+
+.full {
+    display: contents;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-column-gap: 10px;
+}
+
+.grid-5 {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+}
+
+.grid-6 {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+}
+
+.grid-col {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 10%;
+    grid-row-gap: 20px;
+}
+
+.grid-col-3 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 5%;
+    grid-row-gap: 20px;
+}
+
+.grid-row {
+    display: grid;
+    /* grid-template-columns: auto;
+    grid-column-gap: 10%; */
+    grid-row-gap: 20px;
+    text-align: right;
+}
+
+.grid-center {
+    align-content: center;
+}
+
+.grid-start {
+    align-content: start;
+}
+
+.grid-end {
+    align-content: end;
+}
+
+/* .grid-end {
+    justify-content: end;
+}
+
+.grid-start {
+    justify-content: start;
+} */
+
+.grid-bill {
+    /* display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 5px;
+    grid-row-gap: 10px;
+    
+    margin: 10px; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.grid-search {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    margin: 20px;
+    text-align: left;
+}
+
+.grid-table {
+    display: grid;
+    grid-template-columns: auto 10% 20%;
+    grid-column-gap: 10px;
+}
+
+.grid-table label {
+    text-align: right;
+}
+
+.grid-header {
+    display: grid;
+    grid-template-columns: auto 20% 5% 5%;
+    grid-column-gap: 10px;
+}
+
+.grid-header label {
+    text-align: right;
+}
+
+.grid-header input {
+    text-align: center;
+    padding: 0;
+}
+
+.col-auto {
+    grid-template-columns: auto auto;
+}
+
+.col-10 {
+    grid-template-columns: 10% auto;
+}
+
+.col-20 {
+    grid-template-columns: 20% auto;
+}
+
+.col-30 {
+    grid-template-columns: 30% auto;
+}
+
+.col-40 {
+    grid-template-columns: 40% auto;
+}
+
+.col-end-20 {
+    grid-template-columns: auto 20%;
+}
+
+.col-end-30 {
+    grid-template-columns: auto 30%;
+}
+
+.col-end-10 {
+    grid-template-columns: auto 10%;
+}
+
+.col-end-40 {
+    grid-template-columns: auto 40%;
+}
+
+.col-3-20 {
+    grid-template-columns: 20% auto auto;
+}
+
+.col-3-20 {
+    grid-template-columns: 20% auto auto;
+}
+
+.col-20-30 {
+    grid-template-columns: 20% 30% auto;
+}
+
+.content-center {
+    display: flex;
+    justify-content: center;
+}
+
+.content-right {
+    display: flex;
+    justify-content: right;
+}
+
+.py-20 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.px-20 {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.mx-20 {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.m-0 {
+    margin: 0px;
+}
+
+button {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 180px;
+    height: 100px;
+    object-fit: cover;
+}
+
+input, textarea {
+    padding-left: 10px;
+}
+
+.text1 {}
+
+.text2 {}
+
+.show-box i {
+    font-size: 30px;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+}
+
+/* .table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6; } */
+
+/* .table tbody + tbody {
+    border-top: 2px solid #dee2e6; } */
+
+.table-sm td, .table-sm th {
+    padding: .3rem;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 2px;
+}
+
+.table-borderless tbody+tbody, .table-borderless td, .table-borderless th, .table-borderless thead th {
+    border: 0;
+}
+
+.status-bill {
+    /* padding: 10px; */
+    background-color: red;
+    color: white;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+
+/**ส่วนเนื่อหา**/
+
+
+/* Use a media query to add a break point at 800px: */
+@media screen and (max-width: 1440px) {
+    iframe {
+        height: 420px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .menu {
+        width: 20%;
+    }
+
+    iframe {
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 1152px) {
+    .menu {
+        width: 10%;
+    }
+
+    iframe {
+        height: 400px;
+    }
+
+    .job {
+        width: 90%;
+    }
+
+    nav ul li a.user_profile::before {
+        font-family: "FontAwesome";
+        content: "\f015";
+    }
+
+    nav ul li a.user_contract::before {
+        font-family: "FontAwesome";
+        content: "\f573";
+    }
+
+    nav ul li a.user_bill::before {
+        font-family: "FontAwesome";
+        content: "\f571";
+    }
+
+    nav ul li a.user_messages::before {
+        font-family: "FontAwesome";
+        content: "\f01c";
+    }
+
+    nav ul li a.request_to_move::before {
+        font-family: "FontAwesome";
+        content: "\f5c1";
+    }
+
+    nav ul li a {
+        padding-left: 25px;
+        font-size: 15px;
+    }
+
+    #logo {
+        font-size: 2rem;
+    }
+
+    div.out a::before {
+        padding-left: 0px;
+        content: "";
+    }
+
+    .grid-col {
+        grid-template-columns: auto;
+    }
+}

@@ -4,8 +4,8 @@ require_once "connection.php";
 $username = $_POST['txtUsername'];
 $password = $_POST['txtPassword'];
 $status = $_POST['txtStatus'];
-// $mysql = mysqli_connect("localhost","root","","myapartment");
-// echo "<script>console.log( '" . $status . "')</script>";
+$mysql = mysqli_connect("localhost","root","","myapartment");
+echo "<script>console.log( '" . $status . "')</script>";
 
 if ($status === "admin") {
     $strSQL = "SELECT * FROM employee WHERE emp_username = '" . $username . "' and emp_password = '" . $password . "';";
@@ -13,7 +13,7 @@ if ($status === "admin") {
     $strSQL = "SELECT * FROM customer WHERE cust_username = '" . $username . "' and cust_password = '" . $password . "';";
 }
 
-// echo "<script>console.log( '" . $strSQL . "')</script>";
+echo "<script>console.log( '" . $strSQL . "')</script>";
 $objQuery = mysqli_query($conn, $strSQL);
 $objResult = mysqli_fetch_array($objQuery);
 
