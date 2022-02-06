@@ -189,7 +189,7 @@ nav ul li a.admin_contract::before {
 }
 
 nav ul li a.admin_customer::before {
-    content: "แก้ไขข้อมูลลูกค้า";
+    content: "จัดการลูกค้า";
 }
 
 nav ul li a.admin_create_bill::before {

@@ -35,23 +35,14 @@
         <li <?php if ($_GET['menu'] == "หน้าแรก") {
                 echo "class=\"active\"";
             } ?>><a href="admin_home.php" class="admin_home"></a></li>
-
+            
         <li <?php if ($_GET['menu'] == "จัดการห้องพัก") {
                 echo "class=\"active\"";
             } ?>><a href="admin_room.php" class="admin_room"></a></li>
-
-        <li><a class="serv-btn"><span class="fas fa-caret-down second"></span></a>
-            <ul class="serv-show <?php if ($_GET['menu'] == "เพิ่มสัญญาลูกค้า" || $_GET['menu'] == "แก้ไขข้อมูลลูกค้า") {
-                                        echo "show";
-                                    } ?>">
-                <li <?php if ($_GET['menu'] == "เพิ่มสัญญาลูกค้า") {
-                        echo "class=\"active\"";
-                    } ?>><a href="admin_contract.php" class="admin_contract"></a></li>
-                <li <?php if ($_GET['menu'] == "แก้ไขข้อมูลลูกค้า") {
-                        echo "class=\"active\"";
-                    } ?>><a href="admin_customer.php" class="admin_customer"></a></li>
-            </ul>
-        </li>
+        
+        <li <?php if (($_GET['menu'] == "เพิ่มสัญญาลูกค้า") || ($_GET['menu'] == "แก้ไขข้อมูลลูกค้า")) {
+                echo "class=\"active\"";
+            }?>><a href="admin_customer.php" class="admin_customer"></a></li>
 
         <li <?php if ($_GET['menu'] == "จดมิเตอร์") {
                 echo "class=\"active\"";
