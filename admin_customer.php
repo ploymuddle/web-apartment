@@ -32,7 +32,7 @@ $i = 0;
 //sql query customer data
 $keyName = null;
 $keyRoom = null;
-$keyStatus = null;
+$keyStatus = 'live';
 
 if (isset($_POST["txtName"])) {
   $keyName = $_POST["txtName"];
@@ -165,8 +165,8 @@ $custQuery = mysqli_query($conn, $strSQL);
                 <td><?php echo $custList["cust_tel"]; ?></td>
                 <td><?php echo $custList["cust_email"]; ?></td>
                 <td><?php echo $custList["cust_username"]; ?></td>
-                <td><a href="#" class="button" onclick="showData(<?php echo $custList['cust_id']; ?>)"><i class="fas fa-eye" style="font-size:20px;"></i></a></td>
-                <td><a href="#" class="button" onclick="showBill(<?php echo $custList['cust_id']; ?>)"><i class="fas fa-file-invoice" style="font-size:22px;"></i></a></td>
+                <td><a class="button" onclick="showData(<?php echo $custList['cust_id']; ?>)"><i class="fas fa-eye" style="font-size:20px;"></i></a></td>
+                <td><a class="button" onclick="showBill(<?php echo $custList['cust_id']; ?>)"><i class="fas fa-file-invoice" style="font-size:22px;"></i></a></td>
               </tr>
             <?php } ?>
           </tbody>
@@ -200,76 +200,80 @@ $custQuery = mysqli_query($conn, $strSQL);
 
       <hr>
 
-      <form method="POST">
-
-        <div class="grid-col">
+      <div class="grid-col">
+        <form method="POST" action="updateCustomer.php">
           <div class="">
+            <div class="d-flex content-center">
+              <button type="submit" class="btn-save my-20" id="btnSave"> บันทึก</button>
+            </div>
+            <input type="text" id="cust_id" name="cust_id" hidden>
             <div class="grid form-label">
               <label>ชื่อลูกค้า : </label>
-              <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า">
+              <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" disabled>
             </div>
             <div class="grid form-label">
               <label>นามสกุล : </label>
-              <input type="text" id="surname" name="surname" placeholder="นามสกุล">
+              <input type="text" id="surname" name="surname" placeholder="นามสกุล" disabled>
             </div>
             <div class="grid form-label">
               <label>เบอร์โทร : </label>
-              <input type="text" id="tel" name="tel" placeholder="เบอร์โทร">
+              <input type="text" id="tel" name="tel" placeholder="เบอร์โทร" disabled>
             </div>
             <div class="grid form-label">
               <label>Email : </label>
-              <input type="text" id="email" name="email" placeholder="Email">
+              <input type="text" id="email" name="email" placeholder="Email" disabled>
             </div>
             <div class="d-flex content-space-around content-align-center text-detail my-20 ">
               <p>Username : <a id="username"> - </a></p>
               <p>Password : <a id="password"> - </a></p>
-              <button class="btn-edit">แก้ไขข้อมูลลูกค้า</button>
+              <button type="button" id="btn" class="btn-edit" onclick="edit()"><a class="text-white" id="textEdit"></a></button>
+            </div>
+          </div>
+        </form>
+
+        <div class="">
+          <div class="grid">
+            <div class="form-label">
+              <label>เลขที่ห้องพัก : </label>
+              <input type="text" id="roomId" name="roomId" placeholder="เลขที่ห้องพัก" disabled>
+            </div>
+            <div class="form-label">
+              <label>ประเภทห้องพัก : </label>
+              <input type="text" id="roomType" name="roomType" placeholder="ประเภทห้องพัก" disabled>
+            </div>
+          </div>
+          <div class="grid form-label">
+            <label>ข้อมูลห้องพัก : </label>
+            <textarea type="text" id="roomDetail" name="roomDetail" placeholder="ข้อมูลห้องพัก" disabled></textarea>
+          </div>
+          <div class="grid">
+            <div class="form-label">
+              <label>ราคาค่าเช่า : </label>
+              <input type="text" id="roomRent" name="roomRent" placeholder="0.00" disabled>
+            </div>
+            <div class="form-label">
+              <label>ราคาค่ามัดจำ : </label>
+              <input type="text" id="roomDeposit" name="roomDeposit" placeholder="0.00" disabled>
             </div>
           </div>
 
-          <div class="">
-            <div class="grid">
-              <div class="form-label">
-                <label>เลขที่ห้องพัก : </label>
-                <input type="text" id="roomId" name="roomId" placeholder="เลขที่ห้องพัก" disabled>
-              </div>
-              <div class="form-label">
-                <label>ประเภทห้องพัก : </label>
-                <input type="text" id="roomType" name="roomType" placeholder="ประเภทห้องพัก" disabled>
-              </div>
-            </div>
-            <div class="grid form-label">
-              <label>ข้อมูลห้องพัก : </label>
-              <textarea type="text" id="roomDetail" name="roomDetail" placeholder="ข้อมูลห้องพัก" disabled></textarea>
-            </div>
-            <div class="grid">
-              <div class="form-label">
-                <label>ราคาค่าเช่า : </label>
-                <input type="text" id="roomRent" name="roomRent" placeholder="0.00" disabled>
-              </div>
-              <div class="form-label">
-                <label>ราคาค่ามัดจำ : </label>
-                <input type="text" id="roomDeposit" name="roomDeposit" placeholder="0.00" disabled>
-              </div>
-            </div>
-
-            <div class="d-flex content-center my-20">
-              <button type="button" class="btn-download">ไฟล์เอกสาร</button>
-              <button type="button" class="btn-download">ไฟล์สัญญา</button>
-              <button type="button" class="btn-delete">ยกเลิกสัญญา</button>
-            </div>
-
+          <div class="d-flex content-center my-20">
+            <button type="button" class="btn-download" id="dd"></button>
+            <button type="button" class="btn-download" id="dc">ไฟล์สัญญา</button>
+            <form method="POST" action="updateContract.php" id="cancelCon">
+              <input type="text" id="con" name="con" hidden>
+            </form>
+            <button type="submit" class="btn-delete" form="cancelCon" value="submit">ยกเลิกสัญญา</button>
           </div>
+
         </div>
+      </div>
 
-        <hr>
+      <hr>
 
-        <div class="d-flex content-center">
-          <button type="button" id="close" onclick="window.location='admin_customer.php';">ยกเลิก</button>
-          <button type="submit">บันทึกรายการ</button>
-        </div>
-
-      </form>
+      <div class="d-flex content-center">
+        <button type="button" id="close" onclick="window.location='admin_customer.php';">ยกเลิก</button>
+      </div>
     </div>
 
   </div>
@@ -338,7 +342,6 @@ $custQuery = mysqli_query($conn, $strSQL);
 
         <div class="d-flex content-center">
           <button type="button" id="close" onclick="window.location='admin_customer.php';">ยกเลิก</button>
-          <button type="submit">บันทึกรายการ</button>
         </div>
 
       </form>
@@ -351,10 +354,17 @@ $custQuery = mysqli_query($conn, $strSQL);
   <script src="js/script.js"></script>
   <script src="js/script-pagination.js"></script>
   <script>
+    var data;
     var modalData = document.getElementById("modalData");
     modalData.style.display = "none";
     var modalBill = document.getElementById("modalBill");
     modalBill.style.display = "none";
+
+    var btn = document.getElementById('btn');
+    var btnSave = document.getElementById('btnSave');
+    var textEdit = document.getElementById("textEdit");
+    textEdit.innerText = "แก้ไขข้อมูลลูกค้า";
+    document.getElementById("btnSave").style.display = 'none';
 
     function showData(id) {
 
@@ -363,17 +373,19 @@ $custQuery = mysqli_query($conn, $strSQL);
 
         if (this.readyState == 4 && this.status == 200) {
           var response = this.response;
-          var data = JSON.parse(response);
+          data = JSON.parse(response);
           console.log(data[0]);
           document.getElementById("id").innerText = data[0].cust_id;
           document.getElementById("date").innerText = data[0].con_checkin;
           document.getElementById("cust_status").innerText = (data[0].cust_status === 'live') ? 'อาศัยอยู่' : 'ย้ายออก';
 
+          document.getElementById("cust_id").value = data[0].cust_id;
           document.getElementById("name").value = data[0].cust_name;
           document.getElementById("surname").value = data[0].cust_surname;
           document.getElementById("tel").value = data[0].cust_tel;
           document.getElementById("email").value = data[0].cust_email;
 
+          document.getElementById("con").value = data[0].con_id;
           document.getElementById("roomId").value = data[0].room_id;
           document.getElementById("roomType").value = data[0].type_room;
           document.getElementById("roomDetail").value = data[0].room_data;
@@ -384,6 +396,15 @@ $custQuery = mysqli_query($conn, $strSQL);
           document.getElementById("password").innerText = data[0].cust_password;
 
           modalData.style.display = "block";
+
+          var btnDD = document.getElementById('dd');
+          var aDD = document.createElement('a');
+          aDD.innerHTML = 'ไฟล์เอกสาร';
+          aDD.setAttribute('href', 'file/dev.pdf');
+          aDD.setAttribute('class', 'text-white');
+          aDD.setAttribute('download', 'dev.pdf');
+          btnDD.appendChild(aDD);
+
         }
       }
       xmlhttp.open("GET", "getCustomerDetail.php?q=" + id, true);
@@ -397,13 +418,13 @@ $custQuery = mysqli_query($conn, $strSQL);
 
         if (this.readyState == 4 && this.status == 200) {
           var response = this.response;
-          var data = JSON.parse(response);
-          console.log(data);
-          document.getElementById("id").value = data.cust_id;
-          document.getElementById("name").value = data.cust_name;
-          document.getElementById("surname").value = data.cust_surname;
-          document.getElementById("tel").value = data.cust_tel;
-          document.getElementById("email").value = data.cust_email;
+          var dataBill = JSON.parse(response);
+          console.log(dataBill);
+          document.getElementById("id").value = dataBill.cust_id;
+          document.getElementById("name").value = dataBill.cust_name;
+          document.getElementById("surname").value = dataBill.cust_surname;
+          document.getElementById("tel").value = dataBill.cust_tel;
+          document.getElementById("email").value = dataBill.cust_email;
           modalBill.style.display = "block";
         }
       }
@@ -411,6 +432,43 @@ $custQuery = mysqli_query($conn, $strSQL);
       xmlhttp.send();
 
     }
+
+    function edit() {
+
+      if (textEdit.innerText === "แก้ไขข้อมูลลูกค้า") {
+
+        document.getElementById("name").disabled = false;
+        document.getElementById("surname").disabled = false;
+        document.getElementById("tel").disabled = false;
+        document.getElementById("email").disabled = false;
+
+        document.getElementById("btnSave").style.display = 'flex';
+
+        textEdit.innerText = "ยกเลิก";
+        btn.classList.remove('btn-edit');
+        btn.classList.add('btn-cancel');
+
+      } else {
+
+        document.getElementById("name").disabled = true;
+        document.getElementById("surname").disabled = true;
+        document.getElementById("tel").disabled = true;
+        document.getElementById("email").disabled = true;
+
+        document.getElementById("name").value = data[0].cust_name;
+        document.getElementById("surname").value = data[0].cust_surname;
+        document.getElementById("tel").value = data[0].cust_tel;
+        document.getElementById("email").value = data[0].cust_email;
+
+        document.getElementById("btnSave").style.display = 'none';
+
+        textEdit.innerText = "แก้ไขข้อมูลลูกค้า";
+        btn.classList.remove('btn-cancel');
+        btn.classList.add('btn-edit');
+      }
+    }
+
+    function save() {}
   </script>
 
 </body>

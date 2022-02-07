@@ -24,6 +24,9 @@
     font-weight: 100;
 }
 
+.text-white {
+    color: white;
+}
 
 /**กำหนดรายละเอียด Body**/
 
@@ -677,6 +680,46 @@ button {
 .btn-edit::before {
     font-family: "FontAwesome";
     content: "\f304";
+    font-size: 20px;
+    padding-right: 5px;
+}
+
+.btn-cancel {
+    border: 1px solid #dfd43f;
+    background-color: #eedf0b;
+    padding: 7px 25px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-cancel:hover {
+    border: 1px solid #dfd43f;
+    background-color: #dfd43f;
+}
+
+.btn-cancel::before {
+    font-family: "FontAwesome";
+    content: "\f410";
+    font-size: 20px;
+    padding-right: 5px;
+}
+
+.btn-save {
+    border: 1px solid #167e16;
+    background-color: #1caf1c;
+    padding: 7px 25px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-save:hover {
+    border: 1px solid #167e16;
+    background-color: #167e16;
+}
+
+.btn-save::before {
+    font-family: "FontAwesome";
+    content: "\f0c7";
     font-size: 20px;
     padding-right: 5px;
 }
