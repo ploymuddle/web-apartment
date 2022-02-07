@@ -38,7 +38,7 @@ require_once "connection.php";
 <body>
 
     <div class="job">
-        <h1 class="title">เพิ่มสัญญาใหม่</h1>
+        <h1 class="title d-flex content-center">เพิ่มสัญญาใหม่</h1>
 
         <div class="box bg-white">
 
@@ -106,7 +106,7 @@ require_once "connection.php";
                             <label for="file">เอกสารยืนยัน:</label>
                             <input type="file" id="file" name="file">
                         </div>
-                        <!-- <div class="content-center">
+                        <!-- <div class="d-flex content-center">
                             <button type="button">เพิ่มไฟล์เอกสาร</button>
                         </div> -->
                         <div class=""></div>
@@ -115,9 +115,9 @@ require_once "connection.php";
 
                 <hr>
 
-                <div class="content-center">
-                    <button type="button" id="close" onclick="window.location='admin_contract.php';">ยกเลิก</button>
-                    <button type="submit">บันทึกรายการ</button>
+                <div class="d-flex content-center">
+                    <button type="button" class="btn-back" onclick="window.location='admin_customer.php';">กลับหน้าจัดการข้อมูล</button>
+                    <button type="submit" >บันทึกรายการ</button>
                 </div>
 
             </form>

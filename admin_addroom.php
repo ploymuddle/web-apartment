@@ -85,7 +85,7 @@ require_once "connection.php";
 
                 <hr>
 
-                <div class="content-center">
+                <div class="d-flex content-center">
                     <button type="button" id="close" onclick="window.location='admin_room.php';">กลับหน้าจัดการห้องพัก</button>
                     <button type="submit">บันทึกรายการ</button>
                 </div>

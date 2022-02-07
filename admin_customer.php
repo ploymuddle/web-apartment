@@ -71,6 +71,7 @@ if ($keyStatus == 'live') {
     $strSQL = $strSQL . "AND ( cust_name LIKE '%" . $keyName . "%' OR cust_surname LIKE '%" . $keyName . "%' ) ";
     $strSQL = $strSQL . "AND cust_username = '" . $keyRoom . "' ";
   }
+  $strSQL = $strSQL . " ORDER BY cust_id DESC";
 } else {
   if ($keyName != "") {
     $strSQL = $strSQL . " WHERE ( cust_name LIKE '%" . $keyName . "%' OR cust_surname LIKE '%" . $keyName . "%' ) ";
@@ -80,6 +81,7 @@ if ($keyStatus == 'live') {
     $strSQL = $strSQL . " WHERE ( cust_name LIKE '%" . $keyName . "%' OR cust_surname LIKE '%" . $keyName . "%' ) ";
     $strSQL = $strSQL . "AND cust_username = '" . $keyRoom . "' ";
   }
+  $strSQL = $strSQL . " ORDER BY cust_id DESC";
 }
 // echo '' . $strSQL . '';
 // echo '' . $keyStatus . '';
@@ -100,8 +102,8 @@ $custQuery = mysqli_query($conn, $strSQL);
 
     <div class="box">
 
-      <div class="content-right">
-    <button class="btn-add" type="submit" onclick="document.location.href='admin_contract.php'">เพิ่มสัญญาลูกค้า</button>
+      <div class="d-flex content-right">
+        <button class="btn-add" type="submit" onclick="document.location.href='admin_contract.php'"><i class="fas fa-plus-circle"></i> เพิ่มสัญญาลูกค้า</button>
       </div>
 
       <div class="show-box">
@@ -131,7 +133,7 @@ $custQuery = mysqli_query($conn, $strSQL);
               </select>
             </div>
           </div>
-          <div class="content-center">
+          <div class="d-flex content-center">
             <button type="submit" class="btn-search">ค้นหา</button>
             <button type="submit" class="btn-clear" name="clear" value="clear">ล้างค่า</button>
           </div>
@@ -163,7 +165,7 @@ $custQuery = mysqli_query($conn, $strSQL);
                 <td><?php echo $custList["cust_tel"]; ?></td>
                 <td><?php echo $custList["cust_email"]; ?></td>
                 <td><?php echo $custList["cust_username"]; ?></td>
-                <td><a href="#" class="button" onclick="showData(<?php echo $custList['cust_id']; ?>)"><i class="fas fa-edit" style="font-size:20px;"></i></a></td>
+                <td><a href="#" class="button" onclick="showData(<?php echo $custList['cust_id']; ?>)"><i class="fas fa-eye" style="font-size:20px;"></i></a></td>
                 <td><a href="#" class="button" onclick="showBill(<?php echo $custList['cust_id']; ?>)"><i class="fas fa-file-invoice" style="font-size:22px;"></i></a></td>
               </tr>
             <?php } ?>
@@ -190,9 +192,10 @@ $custQuery = mysqli_query($conn, $strSQL);
 
       <hr>
 
-      <div class="content-space-around">
+      <div class="d-flex content-space-around">
         <p>รหัสลูกค้า : <a id="id"> - </a></p>
-        <p>วันที่ทำสัญญา : </p>
+        <p>วันที่ทำสัญญา : <a id="date"> - </a></p>
+        <p>สถานะ : <a id="cust_status"> - </a></p>
       </div>
 
       <hr>
@@ -217,31 +220,51 @@ $custQuery = mysqli_query($conn, $strSQL);
               <label>Email : </label>
               <input type="text" id="email" name="email" placeholder="Email">
             </div>
+            <div class="d-flex content-space-around content-align-center text-detail my-20 ">
+              <p>Username : <a id="username"> - </a></p>
+              <p>Password : <a id="password"> - </a></p>
+              <button class="btn-edit">แก้ไขข้อมูลลูกค้า</button>
+            </div>
           </div>
 
           <div class="">
-            <div class="grid form-label">
-              <label>เลขที่ห้องพัก : </label>
-              <input type="text" id="roomId" name="roomId" placeholder="เลขที่ห้องพัก">
-            </div>
-            <div class="grid form-label">
-              <label>ประเภทห้องพัก : </label>
-              <input type="text" id="roomType" name="roomType" placeholder="ประเภทห้องพัก" disabled>
+            <div class="grid">
+              <div class="form-label">
+                <label>เลขที่ห้องพัก : </label>
+                <input type="text" id="roomId" name="roomId" placeholder="เลขที่ห้องพัก" disabled>
+              </div>
+              <div class="form-label">
+                <label>ประเภทห้องพัก : </label>
+                <input type="text" id="roomType" name="roomType" placeholder="ประเภทห้องพัก" disabled>
+              </div>
             </div>
             <div class="grid form-label">
               <label>ข้อมูลห้องพัก : </label>
               <textarea type="text" id="roomDetail" name="roomDetail" placeholder="ข้อมูลห้องพัก" disabled></textarea>
             </div>
-            <div class="grid form-label">
-              <label>ราคาค่าเช่า : </label>
-              <input type="text" id="roomRent" name="roomRent" placeholder="0.00" disabled>
+            <div class="grid">
+              <div class="form-label">
+                <label>ราคาค่าเช่า : </label>
+                <input type="text" id="roomRent" name="roomRent" placeholder="0.00" disabled>
+              </div>
+              <div class="form-label">
+                <label>ราคาค่ามัดจำ : </label>
+                <input type="text" id="roomDeposit" name="roomDeposit" placeholder="0.00" disabled>
+              </div>
             </div>
+
+            <div class="d-flex content-center my-20">
+              <button type="button" class="btn-download">ไฟล์เอกสาร</button>
+              <button type="button" class="btn-download">ไฟล์สัญญา</button>
+              <button type="button" class="btn-delete">ยกเลิกสัญญา</button>
+            </div>
+
           </div>
         </div>
 
         <hr>
 
-        <div class="content-center">
+        <div class="d-flex content-center">
           <button type="button" id="close" onclick="window.location='admin_customer.php';">ยกเลิก</button>
           <button type="submit">บันทึกรายการ</button>
         </div>
@@ -261,7 +284,7 @@ $custQuery = mysqli_query($conn, $strSQL);
 
       <hr>
 
-      <div class="content-space-around">
+      <div class="d-flex content-space-around">
         <p>รหัสลูกค้า : <a id="id"> - </a></p>
         <p>ชื่อลูกค้า : </p>
         <p>ห้องพัก : </p>
@@ -294,7 +317,7 @@ $custQuery = mysqli_query($conn, $strSQL);
           <div class="">
             <div class="grid form-label">
               <label>เลขที่ห้องพัก : </label>
-              <input type="text" id="roomId" name="roomId" placeholder="เลขที่ห้องพัก" value="">
+              <input type="text" id="roomId" name="roomId" placeholder="เลขที่ห้องพัก" value="" disabled>
             </div>
             <div class="grid form-label">
               <label>ประเภทห้องพัก : </label>
@@ -313,7 +336,7 @@ $custQuery = mysqli_query($conn, $strSQL);
 
         <hr>
 
-        <div class="content-center">
+        <div class="d-flex content-center">
           <button type="button" id="close" onclick="window.location='admin_customer.php';">ยกเลิก</button>
           <button type="submit">บันทึกรายการ</button>
         </div>
@@ -341,18 +364,30 @@ $custQuery = mysqli_query($conn, $strSQL);
         if (this.readyState == 4 && this.status == 200) {
           var response = this.response;
           var data = JSON.parse(response);
-          console.log(data);
-          document.getElementById("id").innerText = data.cust_id;
-          document.getElementById("name").value = data.cust_name;
-          document.getElementById("surname").value = data.cust_surname;
-          document.getElementById("tel").value = data.cust_tel;
-          document.getElementById("email").value = data.cust_email;
+          console.log(data[0]);
+          document.getElementById("id").innerText = data[0].cust_id;
+          document.getElementById("date").innerText = data[0].con_checkin;
+          document.getElementById("cust_status").innerText = (data[0].cust_status === 'live') ? 'อาศัยอยู่' : 'ย้ายออก';
+
+          document.getElementById("name").value = data[0].cust_name;
+          document.getElementById("surname").value = data[0].cust_surname;
+          document.getElementById("tel").value = data[0].cust_tel;
+          document.getElementById("email").value = data[0].cust_email;
+
+          document.getElementById("roomId").value = data[0].room_id;
+          document.getElementById("roomType").value = data[0].type_room;
+          document.getElementById("roomDetail").value = data[0].room_data;
+          document.getElementById("roomRent").value = data[0].type_rental;
+          document.getElementById("roomDeposit").value = data[0].con_deposit;
+
+          document.getElementById("username").innerText = data[0].cust_username;
+          document.getElementById("password").innerText = data[0].cust_password;
+
           modalData.style.display = "block";
         }
       }
-      xmlhttp.open("GET", "getCustomer.php?q=" + id, true);
+      xmlhttp.open("GET", "getCustomerDetail.php?q=" + id, true);
       xmlhttp.send();
-
     }
 
     function showBill(id) {
@@ -376,7 +411,6 @@ $custQuery = mysqli_query($conn, $strSQL);
       xmlhttp.send();
 
     }
-
   </script>
 
 </body>

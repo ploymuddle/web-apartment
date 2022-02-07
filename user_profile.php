@@ -69,7 +69,7 @@ $_GET['menu'] = $page;
 					</div>
 
 
-					<!-- <div class="content-right"> -->
+					<!-- <div class="d-flex content-right"> -->
 						<div class="grid-row grid-start">
 							<div class="grid col-end-30">
 								<label for="roomId">ชื่อผู้ใช้:</label>

@@ -72,7 +72,7 @@ $_GET['menu'] = $page;
           </div>
           <div></div>
         </div>
-        <div class="content-center">
+        <div class="d-flex content-center">
            <button type="submit" class="px-20">ค้นหา</button>
         </div>
       </div>
@@ -146,7 +146,7 @@ $_GET['menu'] = $page;
 
           <div class="grid-row">
             <img src="https://www.kasikornbank.com/SiteCollectionDocuments/personal/digital-banking/kplus/functions/verified-slip/img/img-03.png" style="width:300px;height:100%;">
-            <p class="content-center">หลักฐานการชำระเงิน</p>
+            <p class="d-flex content-center">หลักฐานการชำระเงิน</p>
           </div>
 
           <div class="grid-row">
@@ -174,7 +174,7 @@ $_GET['menu'] = $page;
 
         <hr>
 
-        <div class="content-center">
+        <div class="d-flex content-center">
           <button type="cancel" id="close">ยกเลิก</button>
           <button type="submit">บันทึกรายการ</button>
         </div>

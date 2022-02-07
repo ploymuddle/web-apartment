@@ -13,6 +13,7 @@ while($row = mysqli_fetch_array($result)) {
         "cust_surname"=> $row['cust_surname'],
         "cust_tel"=> $row['cust_tel'],
         "cust_email"=> $row['cust_email'],
+        "cust_username"=> $row['cust_username'],
         "cust_id"=> $row['cust_id']
     );
 

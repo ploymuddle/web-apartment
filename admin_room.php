@@ -81,7 +81,7 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 
 			<hr>
 
-			<div class="content-space-around">
+			<div class="d-flex content-space-around">
 				<p>ประเภท : <a id="type"> - </a></p>
 				<p>ราคา : <a id="rental"> - </a></p>
 			</div>
@@ -101,8 +101,8 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 				<tbody id="divResult">
 				</tbody>
 			</table>
-			<div class="content-center">
-				<button type="submit" onclick="document.location.href='admin_addroom.php'">เพิ่มห้องพัก</button>
+			<div class="d-flex content-center">
+				<button type="submit" onclick="document.location.href='admin_room.php'">ปิด</button>
 			</div>
 
 		</div>

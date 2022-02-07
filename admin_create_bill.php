@@ -96,7 +96,7 @@ $_GET['menu'] = $page;
 
           <hr>
 
-          <div class="content-center">
+          <div class="d-flex content-center">
             <button type="cancel">ยกเลิก</button>
             <button type="submit">บันทึกรายการ</button>
           </div>

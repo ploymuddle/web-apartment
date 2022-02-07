@@ -43,7 +43,7 @@ $custListQuery = mysqli_query($conn, $strSQL);
                 <input type="text" id="txtSurname" name="txtSurname" placeholder="นามสกุล" disabled value="<?php echo $custList["cust_surname"]; ?>">
                 <input type="text" id="txtId" name="q" value="<?php echo $custList["cust_id"]; ?>">
             </div>
-            <p class="mx-20 content-center">รอดำเนินการ</p>
+            <p class="mx-20 d-flex content-center">รอดำเนินการ</p>
 
             <button type="submit" id="myBtn" onclick="showUser(<?php echo $custList['cust_id']; ?>)">ดำเนินการ <i class="fas fa-arrow-alt-circle-right" style="font-size:12px;"></i></button>
     </div>
@@ -117,7 +117,7 @@ $custListQuery = mysqli_query($conn, $strSQL);
                             </select>
                             <input type="text" id="txtRoomId" name="txtRoomId" placeholder="รหัสสมาชิก">
                         </div>
-                        <div class="content-center">
+                        <div class="d-flex content-center">
                             <button type="button">เพิ่มไฟล์เอกสาร</button>
                         </div>
                         <div class=""></div>
@@ -126,7 +126,7 @@ $custListQuery = mysqli_query($conn, $strSQL);
 
                 <hr>
 
-                <div class="content-center">
+                <div class="d-flex content-center">
                     <button type="button" id="close" onclick="window.location='show.php';">ยกเลิก</button>
                     <button type="submit">บันทึกรายการ</button>
                 </div>
