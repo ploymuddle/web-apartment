@@ -28,6 +28,10 @@
     color: white;
 }
 
+.text-white {
+    color: white;
+}
+
 /**กำหนดรายละเอียด Body**/
 
 body {
@@ -301,6 +305,17 @@ div.out a:hover {
     align-items: center;
 }
 
+.grid-upload {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+    max-width: 100%;
+    align-items: center;
+    justify-items: end;
+    justify-content: space-evenly;
+}
+
 .grid-3 {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -395,8 +410,8 @@ div.out a:hover {
     grid-template-columns: 20% auto auto;
 }
 
-.col-3-20 {
-    grid-template-columns: 20% auto auto;
+.col-3-30 {
+    grid-template-columns: 30% auto auto;
 }
 
 .col-20-30 {
@@ -429,6 +444,10 @@ div.out a:hover {
 
 .content-align-center {
     align-items: center;
+}
+
+.f-column {
+    flex-direction: column;
 }
 
 .py-20 {
@@ -465,8 +484,17 @@ img {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 180px;
-    height: 100px;
+    width: 220px;
+    height: 120px;
+    object-fit: cover;
+}
+
+img#pic {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 440px;
+    height: 240px;
     object-fit: cover;
 }
 
@@ -597,11 +625,20 @@ button {
     border: 1px solid #c88820;
     background-color: #e2a747;
     padding: 7px 25px;
+    display: flex;
+    align-items: center;
 }
 
 .btn-add:hover {
     border: 1px solid #c88820;
     background-color: #c88820;
+}
+
+.btn-add::before {
+    font-family: "FontAwesome";
+    content: "\f055";
+    font-size: 20px;
+    padding-right: 5px;
 }
 
 .btn-back {
@@ -783,6 +820,12 @@ form {
     height: 50px;
 }
 
+.card {
+    display: block;
+    width: 400px;
+    height: 400px;
+    background-color: #11101D;
+}
 select {
     background-color: #eee;
     border: none;

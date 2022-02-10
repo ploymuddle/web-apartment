@@ -11,8 +11,8 @@ while($row = mysqli_fetch_array($result)) {
     $hint = array(
             "room_id"=> $row['room_id'],
             "room_status"=> $row['room_status'],
-            "room_data"=> $row['room_data'],
             "type_room"=> $row['type_room'],
+            "type_data"=> $row['type_data'],
             "type_rental"=> $row['type_rental']
     );
     array_push($data, $hint);

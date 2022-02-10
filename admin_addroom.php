@@ -38,14 +38,16 @@ require_once "connection.php";
 <body>
 
     <div class="job">
-        <h1 class="title"><?php echo $page;?></h1>
+        <h1 class="title  d-flex content-center"><?php echo $page; ?></h1>
 
         <div class="box bg-white">
-
-            <form method="POST" class="" action="insertC.php" enctype="multipart/form-data">
-
-                <div class="grid-col">
+            <form method="POST" class="" action="insertRoom.php">
+            <hr>
                     <div class="grid-row">
+                        <div class="grid col-20">
+                            <label for="roomId">เลขที่ห้องพัก:</label>
+                            <input type="text" id="roomId" name="roomId" placeholder="X000">
+                        </div>
                         <div class="grid col-20">
                             <label for="roomType">ประเภทห้องพัก:</label>
                             <select id="roomType" name="roomType" onchange="selectType()">
@@ -60,12 +62,7 @@ require_once "connection.php";
                             </select>
                         </div>
                         <div class="grid col-20">
-                            <label for="roomId">เลือกห้องพัก:</label>
-                            <select id="roomId" name="roomId" disabled onchange="showDataRoom(this.value)">
-                            </select>
-                        </div>
-                        <div class="grid col-20">
-                            <label for=""></label>
+                            <label for="roomData"></label>
                             <textarea id="roomData" name="roomData" rows="4" cols="50" placeholder="ข้อมูลห้องพัก" disabled></textarea>
                         </div>
                         <div class="grid col-20">
@@ -73,15 +70,6 @@ require_once "connection.php";
                             <input type="text" id="roomRental" name="roomRental" placeholder="0.00" disabled>
                         </div>
                     </div>
-
-                    <div class="grid-row">
-                        <div class="grid col-30">
-                            <label for="file">เอกสารยืนยัน:</label>
-                            <input type="file" id="file" name="file">
-                        </div>
-                        <div class=""></div>
-                    </div>
-                </div>
 
                 <hr>
 
@@ -98,38 +86,14 @@ require_once "connection.php";
 
 
     <script>
-        function ddRoomList(id) {
-
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-
-                if (this.readyState == 4 && this.status == 200) {
-                    var response = this.response;
-                    var data = JSON.parse(response);
-                    console.log(data);
-
-                    var option = '<option value="">เลือกรายการ</option>';
-                    for (var i = 0; i < data.length; i++) {
-                        option += '<option value="' + data[i].room_id + '">' + data[i].room_id + '</option>';
-                    }
-                }
-                $('#roomId').html(option);
-
-            }
-            xmlhttp.open("GET", "getRoomList.php?q=" + id, true);
-            xmlhttp.send();
-
-        }
 
         function selectType() {
             var type = document.getElementById("roomType").value;
             console.log(type);
-            document.getElementById("roomId").disabled = false;
-            ddRoomList(type);
+            showDataType(type);
         }
 
-        function showDataRoom(id) {
-
+        function showDataType(id) {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
 
@@ -137,13 +101,12 @@ require_once "connection.php";
                     var response = this.response;
                     var data = JSON.parse(response);
                     console.log(data);
-                    document.getElementById("roomData").value = data[0].room_data;
+                    document.getElementById("roomData").value = data[0].type_data;
                     document.getElementById("roomRental").value = data[0].type_rental;
                 }
             }
-            xmlhttp.open("GET", "getRoom.php?q=" + id, true);
+            xmlhttp.open("GET", "getDataType.php?q=" + id, true);
             xmlhttp.send();
-
         }
     </script>
 

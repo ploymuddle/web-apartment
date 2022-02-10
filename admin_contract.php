@@ -41,8 +41,8 @@ require_once "connection.php";
         <h1 class="title d-flex content-center">เพิ่มสัญญาใหม่</h1>
 
         <div class="box bg-white">
+        <form method="POST" action="insertContract.php" enctype="multipart/form-data">
 
-            <form method="POST" class="" action="insertC.php" enctype="multipart/form-data">
 
                 <div class="grid-4 content-center">
                     <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า">
@@ -70,7 +70,7 @@ require_once "connection.php";
                         </div>
                         <div class="grid col-20">
                             <label for="roomId">เลือกห้องพัก:</label>
-                            <select id="roomId" name="roomId" disabled onchange="showDataRoom(this.value)">
+                            <select id="roomId" name="roomId" disabled>
                             </select>
                         </div>
                         <div class="grid col-20">
@@ -106,20 +106,15 @@ require_once "connection.php";
                             <label for="file">เอกสารยืนยัน:</label>
                             <input type="file" id="file" name="file">
                         </div>
-                        <!-- <div class="d-flex content-center">
-                            <button type="button">เพิ่มไฟล์เอกสาร</button>
-                        </div> -->
-                        <div class=""></div>
+                  
                     </div>
                 </div>
-
                 <hr>
 
                 <div class="d-flex content-center">
                     <button type="button" class="btn-back" onclick="window.location='admin_customer.php';">กลับหน้าจัดการข้อมูล</button>
-                    <button type="submit" >บันทึกรายการ</button>
+                    <button type="submit">บันทึกรายการ</button>
                 </div>
-
             </form>
         </div>
     </div>
@@ -128,6 +123,14 @@ require_once "connection.php";
 
 
     <script>
+        function selectType() {
+            var type = document.getElementById("roomType").value;
+            console.log(type);
+            document.getElementById("roomId").disabled = false;
+            ddRoomList(type);
+            showDataType(type);
+        }
+
         function ddRoomList(id) {
 
             var xmlhttp = new XMLHttpRequest();
@@ -151,14 +154,7 @@ require_once "connection.php";
 
         }
 
-        function selectType() {
-            var type = document.getElementById("roomType").value;
-            console.log(type);
-            document.getElementById("roomId").disabled = false;
-            ddRoomList(type);
-        }
-
-        function showDataRoom(id) {
+        function showDataType(id) {
 
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
@@ -167,11 +163,11 @@ require_once "connection.php";
                     var response = this.response;
                     var data = JSON.parse(response);
                     console.log(data);
-                    document.getElementById("roomData").value = data[0].room_data;
+                    document.getElementById("roomData").value = data[0].type_data;
                     document.getElementById("roomRental").value = data[0].type_rental;
                 }
             }
-            xmlhttp.open("GET", "getRoom.php?q=" + id, true);
+            xmlhttp.open("GET", "getDataType.php?q=" + id, true);
             xmlhttp.send();
 
         }

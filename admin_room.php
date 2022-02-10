@@ -45,6 +45,10 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 	<div class="job">
 		<h1 class="title">จัดการห้องพัก</h1>
 		<div class="box">
+			<div class="d-flex content-right">
+				<button class="btn-add" type="submit" onclick="document.location.href='admin_addroom.php'"> เพิ่มห้องพัก</button>
+			</div>
+
 			<!-- <div class="groub"> -->
 			<?php while ($roomType = mysqli_fetch_array($roomTypeQuery)) {
 				$countSQL = "SELECT ";
@@ -61,7 +65,7 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 					<p class="text3"><a><?php echo $count["countN"]; ?></a>&nbsp;<y>/</y>&nbsp;<a><?php echo $count["countTotal"]; ?></a></p>
 
 					<button href="#" class="btn-show" onclick="showData('<?php echo $roomType['type_room']; ?>')">แสดง</button>
-					<button href="#" class="btn-update">แก้ไขข้อมูลห้องพัก</button>
+					<button href="#" class="btn-update" onclick="editData('<?php echo $roomType['type_room']; ?>')">แก้ไขข้อมูล</button>
 
 				</div>
 
@@ -86,6 +90,10 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 				<p>ราคา : <a id="rental"> - </a></p>
 			</div>
 
+			<div class="d-flex content-space-around">
+				<p class="text-detail">รายละเอียด : <a id="data"> - </a></p>
+			</div>
+
 			<hr>
 
 			<table class="table" id="table">
@@ -93,9 +101,8 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 					<tr>
 						<th>ลำดับ</th>
 						<th>เลขที่ห้อง</th>
-						<th>รายละเอียด</th>
 						<th>สถานะ</th>
-						<th>แก้ไข</th>
+						<th>ปรับปรุง</th>
 					</tr>
 				</thead>
 				<tbody id="divResult">
@@ -110,12 +117,62 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 	</div>
 	<!-- End The Modal Data  -->
 
+
+	<!-- The Modal Edit -->
+	<div id="modalEdit" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content show-box">
+
+			<h3>แก้ไขข้อมูลประเภทห้องพัก</h3>
+			<br>
+			<form method="POST" action="updateDataType.php" enctype="multipart/form-data">
+			<div class="grid-col">
+				
+				<div class="">
+					<div class="grid col-30">
+						<label for="roomType">ประเภทห้องพัก :</label>
+						<input id="roomType" name="roomType" placeholder="ประเภทห้องพัก" readonly="readonly">
+					</div>
+					<div class="grid col-30">
+						<label for="roomData"></label>
+						<textarea id="roomData" name="roomData" rows="4" cols="50" placeholder="ข้อมูลห้องพัก" ></textarea>
+					</div>
+					<div class="grid col-30">
+						<label for="roomRental">ราคาค่าเช่า :</label>
+						<input type="text" id="roomRental" name="roomRental" placeholder="0.00" >
+					</div>
+				</div>
+				<div class="d-flex content-center f-column">
+					<div class="grid">
+					<img id="pic" alt="room">
+					</div>
+					<div class="grid col-20">
+						<label for="pic">รูปภาพ :</label>
+						<input type="file" id="pic" name="pic" class="bg-white">
+					</div>
+				</div>
+			</div>
+
+			<div class="d-flex content-center my-20">
+				<button type="button" onclick="document.location.href='admin_room.php'">ยกเลิก</button>
+				<button type="submit" onclick="document.location.href='admin_room.php'">บันทึก</button>
+			</div>
+
+			</form>
+		</div>
+
+	</div>
+	<!-- End The Modal Edit  -->
+
 	<script src="js/script-dropdown.js"></script>
 	<script src="js/script.js"></script>
 	<script>
 		let data;
 		var modalData = document.getElementById("modalData");
 		modalData.style.display = "none";
+		var modalEdit = document.getElementById("modalEdit");
+		modalEdit.style.display = "none";
 
 		function showData(type) {
 			var xmlhttp = new XMLHttpRequest();
@@ -128,16 +185,17 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 
 					document.getElementById("type").innerText = data[0].type_room;
 					document.getElementById("rental").innerText = data[0].type_rental;
+					document.getElementById("data").innerText = data[0].type_data;
+
 
 					modalData.style.display = "block";
 
 					var table = '';
 					for (var i = 0; i < data.length; i++) {
 						table += '<tr><td>' + (i + 1) + '</td>';
-						table += '<td>' + data[i].room_id + '</td>';
-						table += '<td><textarea type="text" id="roomDetail" name="roomDetail" disabled>' + data[i].room_data + '</textarea></td>';
-						table += '<td style=' + (data[i].room_status == 'N' ? '"color:green;"> ว่าง' : '"color:#888888;"> ไม่ว่าง'); + '</td></tr>';
-						table += '<td><a href="#" class="button" onclick="edit(this)"> <i class="fas fa-edit"  id="icon" style="font-size:20px;"></i></a>&nbsp;<a id="btnSave"></a></td>';
+						table += '<td type="text" id="roomId" name="roomId">' + data[i].room_id + '</td>';
+						table += '<td style=' + (data[i].room_status == 'C' ? '"color:red;" > ปิดปรับปรุง' : (data[i].room_status == 'N' ? '"color:green;" > ว่าง' : '"color:#888888;"> ไม่ว่าง')); + '</td></tr>';
+						table += '<td><a href="#" class="button" onclick="editRoom(\'' + data[i].room_id + '\',\'' + data[i].type_room + '\')"><i class="fas fa-power-off"  id="icon" style="font-size:20px;"></i></a>&nbsp;<a id="btnSave"></a></td>';
 					}
 
 				}
@@ -148,27 +206,47 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 
 		}
 
-		function edit(x) {
-			var data = document.getElementById("roomDetail").innerHTML;
-			if (document.getElementById("roomDetail").disabled == true) {
-				document.getElementById("roomDetail").disabled = false;
-				var btn = document.getElementById('btnSave');
-				var a = document.createElement('a');
-				a.innerHTML = '<i class="fas fa-save" style="font-size:20px;"></i>';
-  				a.href = "#";
-				a.onclick = 'save('+document.getElementById("roomDetail").value+')';
-				btn.appendChild(a);
-				
-				document.getElementById("roomDetail").disabled = false;
-				x.querySelector('i').classList.remove('fa-edit');
-				x.querySelector('i').classList.add('fa-window-close');
-			} else {
-				document.getElementById("roomDetail").value = data;
-				document.getElementById("roomDetail").disabled = true;
-				x.querySelector('i').classList.remove('fa-window-close');
-				x.querySelector('i').classList.add('fa-edit');
-				x.querySelector('i').classList.remove('fa-save');
+		function editRoom(id, type) {
+			updateStatus(id, type)
+		}
+
+		function updateStatus(id, type) {
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+
+				if (this.readyState == 4 && this.status == 200) {
+					var response = this.responseText;
+					console.log(response);
+					showData(type);
+				}
 			}
+			xmlhttp.open("GET", "updateRoomStatus.php?q=" + id, true);
+			xmlhttp.send();
+
+
+		}
+
+		function editData(type) {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+
+				if (this.readyState == 4 && this.status == 200) {
+					var response = this.response;
+					var data = JSON.parse(response);
+					console.log(data);
+
+					document.getElementById("roomType").value = data[0].type_room;
+					document.getElementById("roomRental").value = data[0].type_rental;
+					document.getElementById("roomData").value = data[0].type_data;
+					document.getElementById("pic").src = data[0].type_picture;
+
+					modalEdit.style.display = "block";
+
+				}
+			}
+			xmlhttp.open("GET", "getDataType.php?q=" + type, true);
+			xmlhttp.send();
 
 		}
 	</script>

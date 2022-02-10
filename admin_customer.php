@@ -103,7 +103,7 @@ $custQuery = mysqli_query($conn, $strSQL);
     <div class="box">
 
       <div class="d-flex content-right">
-        <button class="btn-add" type="submit" onclick="document.location.href='admin_contract.php'"><i class="fas fa-plus-circle"></i> เพิ่มสัญญาลูกค้า</button>
+        <button class="btn-add" type="submit" onclick="document.location.href='admin_contract.php'"> เพิ่มสัญญาลูกค้า</button>
       </div>
 
       <div class="show-box">
@@ -259,7 +259,7 @@ $custQuery = mysqli_query($conn, $strSQL);
 
           <div class="d-flex content-center my-20">
             <button type="button" class="btn-download" id="dd"></button>
-            <button type="button" class="btn-download" id="dc">ไฟล์สัญญา</button>
+            <button type="button" class="btn-download" id="dc"></button>
             <form method="POST" action="updateContract.php" id="cancelCon">
               <input type="text" id="con" name="con" hidden>
             </form>
@@ -388,7 +388,7 @@ $custQuery = mysqli_query($conn, $strSQL);
           document.getElementById("con").value = data[0].con_id;
           document.getElementById("roomId").value = data[0].room_id;
           document.getElementById("roomType").value = data[0].type_room;
-          document.getElementById("roomDetail").value = data[0].room_data;
+          document.getElementById("roomDetail").value = data[0].type_data;
           document.getElementById("roomRent").value = data[0].type_rental;
           document.getElementById("roomDeposit").value = data[0].con_deposit;
 
@@ -400,10 +400,18 @@ $custQuery = mysqli_query($conn, $strSQL);
           var btnDD = document.getElementById('dd');
           var aDD = document.createElement('a');
           aDD.innerHTML = 'ไฟล์เอกสาร';
-          aDD.setAttribute('href', 'file/dev.pdf');
+          aDD.setAttribute('href', data[0].img_document);
           aDD.setAttribute('class', 'text-white');
-          aDD.setAttribute('download', 'dev.pdf');
+          aDD.setAttribute('download', 'เอกสารยืนยัน_'+ data[0].con_id +'.pdf');
           btnDD.appendChild(aDD);
+
+          var btnDC = document.getElementById('dc');
+          var aDC = document.createElement('a');
+          aDC.innerHTML = 'ไฟล์สัญญา';
+          aDC.setAttribute('href', data[0].img_contract);
+          aDC.setAttribute('class', 'text-white');
+          aDC.setAttribute('download', 'เอกสารสัญญา_'+ data[0].con_id +'.pdf');
+          btnDC.appendChild(aDC);
 
         }
       }

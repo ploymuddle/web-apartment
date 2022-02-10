@@ -30,7 +30,7 @@ $resultInsertCust = mysqli_query($conn, $queryInsertCust);
 
 //query cust_id
 $resultId = mysqli_insert_id($conn);
-echo "<script>console.log( 'status: " . $resultId . "')</script>";
+echo "<script>console.log( 'resultId: " . $resultId . "')</script>";
 
 //update room
 $sqlUpdateRoom = "UPDATE room SET room_status = 'O' WHERE room_id = '$roomId'";
@@ -38,19 +38,20 @@ $result = mysqli_query($conn, $sqlUpdateRoom);
 
 //add contract
 $sql = "INSERT INTO contract (con_checkin, room_id, con_deposit, cust_id, img_document, img_contract, con_status)
-                        VALUE ('$date', '$roomId', '$deposit', '$resultId' , '$img_document' , 'www', 'O')";
+                        VALUE ('$date', '$roomId', '$deposit', '$resultId' , '$file' , 'www', 'O')";
 
 $result = mysqli_query($conn, $sql);
 
+$resultCon = mysqli_insert_id($conn);
+echo "<script>console.log( 'resultCon: " . $resultCon . "')</script>";
+
             if ($result) {
                 $_SESSION['success'] = "Insert user successfully";
-                header("Location: admin_contract.php");
+                header('Location: uploadContract.php?id='.$resultCon);
             } else {
                 $_SESSION['error'] = "Something went wrong";
                 header("Location: admin_contract.php");
             }
-
-
 
 exit();
 
