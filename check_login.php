@@ -7,22 +7,21 @@ $status = $_POST['txtStatus'];
 $mysql = mysqli_connect("localhost","root","","myapartment");
 echo "<script>console.log( '" . $status . "')</script>";
 
-if ($status === "admin") {
-    $strSQL = "SELECT * FROM employee WHERE emp_username = '" . $username . "' and emp_password = '" . $password . "';";
+if ($status == "admin" && $username == 'admin' && $password == '1234' ) {
+    $objResult = 'true';
 } else {
     $strSQL = "SELECT * FROM customer WHERE cust_username = '" . $username . "' and cust_password = '" . $password . "';";
+    $objQuery = mysqli_query($conn, $strSQL);
+    $objResult = mysqli_fetch_array($objQuery);
 }
 
-echo "<script>console.log( '" . $strSQL . "')</script>";
-$objQuery = mysqli_query($conn, $strSQL);
-$objResult = mysqli_fetch_array($objQuery);
 
 if (!$objResult) {
     echo "Username and Password ไม่ถูกต้อง!";
 } else {
 
     if ($status == "admin") {
-        $_SESSION["id"] = $objResult["emp_id"];
+        $_SESSION["id"] = 'admin';
         $_SESSION["status"] = $status;
         session_write_close();
         header("location:admin_home.php");

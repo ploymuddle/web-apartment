@@ -72,21 +72,11 @@ nav ul li{
 	transition: .2s ease;
 }
 
-.btn-signup{
-	color:#000000;
-	background:#FFFFFF;
-	padding: 7px 20px ;
-	border-radius: 5px;
-	transition: .2s ease;
-}
-
 .btn-login{
-	color:#FBF7F7;
-	background:linear-gradient(45deg, #3498bd, #8e44ad);
+	color:#000000;
 	padding: 7px 25px ;
 	border-radius: 5px;
 	transition: .3s ease;
-	
 }
 
 .btn-home:hover{
@@ -94,14 +84,19 @@ nav ul li{
 	background:linear-gradient(45deg, #BEBEBE, #778899);
 }
 
-.btn-signup:hover{
-	color:#fff;
+.btn-login:hover{
+	color:#000000;
 	background:linear-gradient(45deg, #BEBEBE, #778899);
 }
 
-.btn-login:hover{
-	color:#000000;
-	background:linear-gradient(45deg, #20B2AA, #556B2F);
+.btn-home.active{
+	color:#FBF7F7;
+	background:linear-gradient(45deg, #3498bd, #8e44ad);
+}
+
+.btn-login.active{
+	color:#FBF7F7;
+	background:linear-gradient(45deg, #3498bd, #8e44ad);
 }
 
 .bar{
@@ -139,45 +134,6 @@ nav ul li{
 		display: flex;
 		border-bottom: 2px solid #F0FFFF;
 		justify-content: center;
-	}
-	
-	.btn-home{
-		color:#000000;
-		background:linear-gradient(45deg, #E0FFFF, #778899);
-		padding: 7px 100% ;
-		transition: .2s ease;
-	}
-	
-	.btn-signup{
-		color:#000000;
-		background:linear-gradient(45deg, #F0F8FF, #696969);
-		padding: 7px 100% ;
-		transition: .2s ease;
-	}
-
-	.btn-login{
-		color:#000000;
-		background:linear-gradient(45deg, #E0FFFF, #778899);
-		padding: 7px 90% ;
-		border-radius: 5px;
-		transition: .3s ease;	
-	}
-	
-	
-	.btn-home:hover{
-		color:#fff;
-		background:linear-gradient(45deg, #33CC99, #3399FF);
-	}
-
-	.btn-signup:hover{
-		color:#fff;
-		background:linear-gradient(45deg, #33CC99, #3399FF);
-	}
-
-
-	.btn-login:hover{
-		color:#FFFFFF;
-		background:linear-gradient(45deg, #3498bd, #8e44ad);
 	}
 	
 	.show{
@@ -367,20 +323,6 @@ option{
 y{
 	margin-bottom: 5px;
 	margin-top: 15px;
-}
-
-a{
-	text-decoration: none;
-	color: #FFFFFF;
-	padding: 4px 16px ;
-	border-radius: 5px;
-	transition: .10s ease;
-	cursor: pointer;
-}
-
-a:hover{
-	color: #FFFFFF;
-	background-image: linear-gradient(120deg,#99CCFF,#CCFFCC);
 }
 
 .btn-submit{

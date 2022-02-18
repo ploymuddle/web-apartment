@@ -8,8 +8,6 @@
 
 
 <link rel="stylesheet" href="css/stylelogin.css">
-
-	
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	
 </head>
@@ -27,9 +25,9 @@
 					</a>
 				<nav>
 					<ul>
-						<li><a href="index.php" class="btn-home">Home</a></li>
-						<li><a href="register.php" class="btn-signup">Sign..UP</a></li>
-						<li><a href="login.php" class="btn-login">Log..IN</a></li>			
+						<li><a href="index.php" class="btn-home">HOME</a></li>
+						<!-- <li><a href="register.php" class="btn-signup">Sign..UP</a></li> -->
+						<li><a href="login.php" class="btn-login active">LOG IN</a></li>			
 					</ul>
 				</nav>
 			</div>
@@ -73,7 +71,7 @@
 				</select>
 			</div>
 		
-				<y>Don 't have account ?&nbsp; &nbsp;  <a href="register.php" >Sign UP</a></y>
+				<!-- <y>Don 't have account ?&nbsp; &nbsp;  <a href="register.php" >Sign UP</a></y> -->
 				<input type="submit" class="btn-submit" value="เข้าสู่ระบบ">
 		
 	</form>
