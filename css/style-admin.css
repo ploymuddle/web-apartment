@@ -406,6 +406,10 @@ div.out a:hover {
     grid-template-columns: 40% auto;
 }
 
+.col-60 {
+    grid-template-columns: 50% auto;
+}
+
 .col-3-20 {
     grid-template-columns: 20% auto auto;
 }
@@ -416,6 +420,10 @@ div.out a:hover {
 
 .col-20-30 {
     grid-template-columns: 20% 30% auto;
+}
+
+.col-4-20 {
+    grid-template-columns: 20% 30% 30%  auto;
 }
 
 .d-flex {
@@ -554,10 +562,22 @@ tr:hover {background-color: #dee2e6;}
     border: 0;
 }
 
-.status-bill {
+.bill-r {
     /* padding: 10px; */
     background-color: red;
     color: white;
+}
+
+.bill-g {
+    /* padding: 10px; */
+    background-color: green;
+    color: white;
+}
+
+.bill-y {
+    /* padding: 10px; */
+    background-color: yellow;
+    color: black;
 }
 
 /**ส่วนเนื่อหา**/

@@ -4,10 +4,9 @@ session_start();
 //set menu admin page
 $page = 'ระบบรับชำระ';
 $_GET['menu'] = $page;
-// ----
-// //เชื่อมต่อฐานข้อมูล
-// // require_once "../connection.php";
-// require_once "connection.php";
+
+//เชื่อมต่อฐานข้อมูล
+require_once "connection.php";
 
 // //ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
 // if ($_SESSION['id'] == "") {
@@ -49,6 +48,7 @@ $_GET['menu'] = $page;
         <table class="table">
           <thead>
             <tr>
+            <th>วันที่</th>
               <th>หมายเลขห้อง</th>
               <th>รหัสสมาชิก</th>
               <th>ชื่อลูกค้า</th>
@@ -59,17 +59,26 @@ $_GET['menu'] = $page;
             </tr>
           </thead>
           <tbody>
+          <?php
+                $billSQL = "SELECT * FROM invoice i,customer c WHERE  i.cust_id = c.cust_id ORDER BY inv_date DESC ";
+                $billQuery = mysqli_query($conn, $billSQL);
+                while ($bill = mysqli_fetch_array($billQuery)) {
+                ?>
             <tr>
-              <td>A105</td>
-              <td>AAA</td>
-              <td>AAA</td>
-              <td>AAA</td>
-              <td>2000</td>
+            <td><?php echo $bill['inv_date']; ?></td>
+              <td><?php echo $bill['room_id']; ?></td>
+              <td><?php echo $bill['cust_id']; ?></td>
+              <td><?php echo $bill['cust_name']; ?></td>
+              <td><?php echo $bill['cust_surname']; ?></td>
+              <td><?php echo $bill['inv_total']; ?></td>
               <td>
-                <div class="status-bill">ค้างชำระ</div>
+                <div 
+                <?php  $bill['inv_status'] == 'ยังไม่ได้จ่าย' ? print ' class="bill-r "' :  ( $bill['inv_status'] == 'จ่ายแล้ว' ? print ' class="bill-g "' : print ' class="bill-y "' ) ?> ><?php echo $bill['inv_status']; ?>
+                </div>
               </td>
-              <td><button class="button" id="myBtn">ดำเนินการ</button></td>
+              <td><button class="button" id="myBtn" onclick="showData('<?php echo $bill['inv_id']; ?>')">ดำเนินการ</button></td>
             </tr>
+            <?php } ?>
           </tbody>
         </table>
 
@@ -79,7 +88,7 @@ $_GET['menu'] = $page;
   </div>
 
   <!-- The Modal -->
-  <div id="myModal" class="modal">
+  <div id="modalData" class="modal">
 
     <!-- Modal content -->
     <div class="modal-content show-box">
@@ -90,16 +99,13 @@ $_GET['menu'] = $page;
 
         <div class="grid-col">
           <div class="grid col-40">
-            <label for="roomId">หมายเลขห้องพัก:</label>
-            <select id="roomId" name="roomId">
-              <option value="">เลือกรายการ</option>
-              <option value="101">101</option>
-            </select>
+            <label for="">ห้องพัก:</label>
+            <input type="text" id="roomId" name="roomId" readonly>
           </div>
           <div class="grid col-3-20">
-            <input type="text" id="txtId" name="txtId" placeholder="รหัสสมาชิก">
-            <input type="text" id="txtName" name="txtName" placeholder="ชื่อลูกค้า">
-            <input type="text" id="txtSurname" name="txtSurname" placeholder="นามสกุล">
+            <input type="text" id="id" name="id" placeholder="รหัสสมาชิก" readonly>
+            <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" readonly>
+            <input type="text" id="surname" name="surname" placeholder="นามสกุล" readonly>
           </div>
         </div>
 
@@ -114,23 +120,27 @@ $_GET['menu'] = $page;
 
           <div class="grid-row">
             <div class="">
-              <input type="text" id="txtRoomId" name="txtRoomId" placeholder="รหัสใบเสร็จ">
+              <input type="text" id="billId" name="billId" placeholder="รหัสใบเสร็จ" readonly>
             </div>
             <div class="grid col-3-20">
-              <label for="roomId">วันที่:</label>
-              <input type="date" id="txtRoomId" name="txtRoomId" placeholder="22/2/2021" disabled>
+              <label for="">วันที่สร้าง:</label>
+              <input type="date" id="billCreateDate" name="billCreateDate" placeholder="22/2/2021" readonly>
             </div>
             <div class="grid col-3-20">
-              <label for="roomId">จำนวนเงิน:</label>
-              <input type="text" id="txtRoomId" name="txtRoomId" placeholder="0.00" disabled>
+              <label for="">วันที่ชำระ:</label>
+              <input type="date" id="billDate" name="billDate" placeholder="22/2/2021" >
             </div>
             <div class="grid col-3-20">
-              <label for="roomId">ค้างชำระ:</label>
-              <input type="text" id="txtRoomId" name="txtRoomId" placeholder="0.00" disabled>
+              <label for="">จำนวนเงิน:</label>
+              <input type="text" id="amount" name="amount" placeholder="0.00" readonly>
             </div>
             <div class="grid col-3-20">
-              <label for="roomId">รับชำระ:</label>
-              <input type="text" id="txtRoomId" name="txtRoomId" placeholder="0.00">
+              <label for="">ค้างชำระ:</label>
+              <input type="text" id="overdue" name="overdue" placeholder="0.00">
+            </div>
+            <div class="grid col-3-20">
+              <label for="">รับชำระ:</label>
+              <input type="text" id="payment" name="payment" placeholder="0.00" >
             </div>
           </div>
         </div>
@@ -151,23 +161,37 @@ $_GET['menu'] = $page;
   <script src="js/script-dropdown.js"></script>
   <script src="js/script.js"></script>
   <script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
+    let data;
+		var modalData = document.getElementById("modalData");
+		modalData.style.display = "none";
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
+		function showData(id) {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
 
-    // When the user clicks on the button, open the modal
-    btn.onclick = function() {
-      modal.style.display = "block";
-    }
+				if (this.readyState == 4 && this.status == 200) {
+					var response = this.response;
+					var data = JSON.parse(response);
+					console.log(data);
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
+					document.getElementById("roomId").value = data[0].room_id;
+
+					document.getElementById("id").value = data[0].cust_id;
+					document.getElementById("name").value = data[0].cust_name;
+					document.getElementById("surname").value = data[0].cust_surname;
+
+          document.getElementById("billId").value = data[0].inv_id;
+					document.getElementById("billCreateDate").value = data[0].inv_date;
+					document.getElementById("amount").value = data[0].inv_total;
+
+					modalData.style.display = "block";
+
+				}
+			}
+			xmlhttp.open("GET", "getBillDetail.php?q=" + id, true);
+			xmlhttp.send();
+
+		}
   </script>
 </body>
 
