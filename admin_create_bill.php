@@ -65,10 +65,14 @@ require_once "connection.php";
 
           <hr>
 
-          <div class="grid-col col-60">
+          <div class="grid-col col-40">
             <div class="grid col-20">
-              <label for="date">วันที่:</label>
+              <label for="date">วันที่ทำรายการ:</label>
               <input type="date" id="date" name="date" placeholder="22/2/2021">
+            </div>
+            <div class="grid col-20">
+              <label for="deadtime">วันที่กำหนดจ่าย:</label>
+              <input type="date" id="deadtime" name="deadtime" placeholder="22/2/2021">
             </div>
             <!-- <div class="grid col-20"> -->
             <!-- <label for=""></label>
@@ -98,15 +102,15 @@ require_once "connection.php";
             <div class="grid col-3-20">
               <label for="total">ยอดชำระเงิน:</label>
               <input type="text" id="total" name="total" placeholder="0.00">
-              <button type="button" onclick="sumTotal()">คำนวณ</button>
+              <button class="btn" type="button" onclick="sumTotal()">คำนวณ</button>
             </div>
           </div>
 
           <hr>
 
           <div class="d-flex content-center">
-            <button type="cancel">ยกเลิก</button>
-            <button type="submit">บันทึกรายการ</button>
+            <button class="btn" type="cancel">ยกเลิก</button>
+            <button class="btn" type="submit">บันทึกรายการ</button>
           </div>
 
         </form>

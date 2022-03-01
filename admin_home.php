@@ -49,7 +49,7 @@ $_GET['menu'] = $page;
 					<p class="text2">
 						<y1>จำนวน</y1>&nbsp; &nbsp; <a>4</a>&nbsp; &nbsp;<y2>รายการ</y2>
 					</p>
-					<button><a href="#">ตรวจสอบ</a></button>
+					<button class="btn"><a href="#">ตรวจสอบ</a></button>
 				</div>
 				<div class="show-box grid-4">
 					<i class="far fa-comment-dots"></i>
@@ -58,7 +58,7 @@ $_GET['menu'] = $page;
 						<y1>จำนวน</y1><a>&nbsp; &nbsp; <a>1</a>&nbsp; &nbsp;</a>
 						<y2>รายการ</y2>
 					</p>
-					<button><a href="#">ตรวจสอบ</a></button>
+					<button class="btn"><a href="#">ตรวจสอบ</a></button>
 				</div>
 			<!-- </div> -->
 

@@ -29,7 +29,7 @@ CREATE TABLE room (
 
 CREATE TABLE contract (
     con_id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    con_checkin DATETIME,
+    con_checkin DATE,
     cust_id INT(10),
     room_id  VARCHAR(50),
     con_rental INT(10),
@@ -60,7 +60,7 @@ CREATE TABLE invoice (
 
 CREATE TABLE payment (
     pay_id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    pay_date DATETIME,
+    pay_date DATE,
     pay_amount INT(10),
     inv_id  INT(10),
     cust_id INT(10),
@@ -69,3 +69,8 @@ CREATE TABLE payment (
     FOREIGN KEY (inv_id) REFERENCES invoice(inv_id),
     FOREIGN KEY (cust_id) REFERENCES customer(cust_id)
 );
+
+INSERT INTO room_type VALUES ('A', 'ห้องไม่มีระเบียง', 1200, 'images/bgroom1.jpeg');
+INSERT INTO room_type VALUES ('B', 'ห้องมีระเบียง', 2400, 'images/bgroom2.jpeg');
+INSERT INTO room_type VALUES ('C', 'ห้องตรงกลางติดริมบันได', 3600, 'images/bgroom3.jpeg');
+INSERT INTO room_type VALUES ('D', 'ห้องริมตึก', 4800, 'images/bgroom4.jpeg');

@@ -39,7 +39,7 @@ require_once "connection.php";
 
         <div class="box bg-white">
 
-            <form method="POST" action="filepdf.php" enctype="multipart/form-data" target="_blank">
+            <form method="POST" action="contractFile.php" enctype="multipart/form-data" target="_blank">
 
                 <input type="text" id="id" name="id" value="<?php echo $_GET['id'] ?>" hidden>
 
@@ -49,7 +49,7 @@ require_once "connection.php";
 
                 <div class="d-flex content-center my-20">
 
-                    <button type="submit" class="btn-add">สร้างสัญญาใหม่ แล้วทำการบันทึกสัญญา</button>
+                    <button type="submit" class="btnbtn-add">สร้างสัญญาใหม่ แล้วทำการบันทึกสัญญา</button>
                 </div>
 
             </form>
@@ -63,7 +63,7 @@ require_once "connection.php";
                 <hr>
 
                 <div class="d-flex content-center">
-                    <button type="submit">บันทึกรายการ</button>
+                    <button class="btn" type="submit">บันทึกรายการ</button>
                 </div>
             </form>
         </div>

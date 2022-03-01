@@ -112,8 +112,8 @@ require_once "connection.php";
                 <hr>
 
                 <div class="d-flex content-center">
-                    <button type="button" class="btn-back" onclick="window.location='admin_customer.php';">กลับหน้าจัดการข้อมูล</button>
-                    <button type="submit">บันทึกรายการ</button>
+                    <button type="button" class="btn btn-back" onclick="window.location='admin_customer.php';">กลับหน้าจัดการข้อมูล</button>
+                    <button type="submit" class="btn">บันทึกรายการ</button>
                 </div>
             </form>
         </div>

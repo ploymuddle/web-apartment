@@ -2,11 +2,11 @@
 $q = $_GET['q'];
 
 $con = mysqli_connect('localhost','root','','myapartment');
-$sql="SELECT * FROM customer cu ,  room r , room_type rt , invoice i
- WHERE  cu.cust_id = i.cust_id 
- AND r.room_id = i.room_id 
- AND r.type_room = rt.type_room 
- AND i.inv_id = '".$q."' " ;
+$sql="SELECT * 
+FROM payment p 
+INNER JOIN invoice i ON p.inv_id = i.inv_id 
+INNER JOIN customer c ON i.cust_id = c.cust_id 
+WHERE i.inv_id = '".$q."' " ;
 // echo $sql;
 $query = mysqli_query($con,$sql);
 $json = array();

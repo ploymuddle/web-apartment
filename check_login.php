@@ -21,7 +21,7 @@ if (!$objResult) {
 } else {
 
     if ($status == "admin") {
-        $_SESSION["id"] = 'admin';
+        $_SESSION["id"] = 0;
         $_SESSION["status"] = $status;
         session_write_close();
         header("location:admin_home.php");
@@ -29,7 +29,7 @@ if (!$objResult) {
         $_SESSION["id"] = $objResult["cust_id"];
         $_SESSION["status"] = $status;
         session_write_close();
-        header("location:user_profile.php");
+        header("location:user_messages.php");
         // header("location:test/user_page.php");
     }
 }

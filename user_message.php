@@ -2,7 +2,7 @@
 session_start();
 
 //set menu admin page
-$page = 'Admin messages';
+$page = 'User messages';
 $_GET['menu'] = $page;
 // ----
 // //เชื่อมต่อฐานข้อมูล
@@ -35,7 +35,7 @@ $user = mysqli_fetch_assoc(($users));
 <!doctype html>
 <html>
 <!-- import menu page -->
-<?php include('admin_menu.php'); ?>
+<?php include('user_menu.php'); ?>
 <link rel="stylesheet" href="css/style-chat.css">
 
 <body>
@@ -44,95 +44,49 @@ $user = mysqli_fetch_assoc(($users));
       <div class="modal-dialog">
         <div class="chat">
 
-          <div class="modal-sidebar">
-
+          <!-- <div class="modal-sidebar"> -->
             <!-- search by name  -->
-            <div class="chat-search search">
+            <!-- <div class="chat-search search">
               <div class="search">
                 <div class="search-icon">
                   <i class="fa fa-search"></i>
                 </div>
                 <input type="search" class="search-input" placeholder="ค้นหา" value="">
               </div>
-            </div>
+            </div> -->
 
             <!-- list customer chat -->
-            <div class="chat-users">
-              <ul class="users overflow">
-
-                <?php
-                $msgs = mysqli_query($conn, "SELECT * FROM customer");
-                while ($msg = mysqli_fetch_assoc($msgs)) {
-                ?>
-
+            <!-- <div class="chat-users">
+              <ul class="users">
                   <li class="users-item users-item_group">
                     <div class="users-avatar avatar">
-                      <a href="?toUser=<?php echo $msg["cust_id"]; ?>" class="avatar-wrap">
-                        <?php
-                        preg_match_all('/./u',$msg["cust_name"],$arr_char);
-                        echo $arr_char[0][0];
-                        // ref: https://www.ninenik.com/%E0%B8%97%E0%B8%9A%E0%B8%97%E0%B8%A7%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%B1%E0%B8%94%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2_PHP-194.html 
-                        ?>
+                      <a href="?toUser=0" class="avatar-wrap">
+                        A
                       </a>
                     </div>
-                    <span class="users-note"><?php echo $msg['cust_name'] . ' ' . $msg['cust_surname']; ?> </span>
-                    <!-- <div class="users-counter">
-                      <span class="counter">99+</span>
-                    </div> -->
+                    <span class="users-note">Admin</span>
                   </li>
-
-                <?php
-                }
-                ?>
               </ul>
-            </div>
-          </div>
+            </div> -->
+          <!-- </div> -->
 
           <div class="modal-main">
             <div class="chatbox">
               <form action="sentMessage.php" method="POST">
                 <div class="chatbox-row">
                   <div class="head">
-
-                    <?php
-                    if (isset($_GET["toUser"])) {
-                      $userName = mysqli_query($conn, "SELECT * FROM customer WHERE cust_id = '" . $_GET["toUser"] . "' ");
-                      $uName = mysqli_fetch_assoc($userName);
-
-                      ?>
-                      <div class="head-avatar avatar avatar_larger">
+                    <div class="head-avatar avatar avatar_larger">
                       <a href="#" class="avatar-wrap">
-                      <?php
-                        preg_match_all('/./u',$uName["cust_name"],$arr_char);
-                        echo $arr_char[0][0]; 
-                      ?>
+                        A
                       </a>
                     </div>
 
-                      <?php
+                    <!-- <div class="head-title">MaximModus</div> -->
 
-                      echo '<input type="text" value=' . $_GET["toUser"] . ' id="toUser" name="toUser" hidden/>';
-                      echo '<div class="head-title">' . $uName['cust_name'] . ' ' . $uName['cust_surname'] . '</div>';
-                    } else {
-                      $userName = mysqli_query($conn, "SELECT * FROM customer ");
-                      $uName = mysqli_fetch_assoc($userName);
-                      $_SESSION['toUser'] = $uName['cust_id'];
-
-                      ?>
-                      <div class="head-avatar avatar avatar_larger">
-                      <a href="#" class="avatar-wrap">
-                      <?php
-                        preg_match_all('/./u',$uName["cust_name"],$arr_char);
-                        echo $arr_char[0][0]; 
-                      ?>
-                      </a>
-                    </div>
-
-                      <?php
-                      echo '<input type="text" value=' . $_SESSION["toUser"] . ' id="toUser" name="toUser" hidden/>';
-                      echo '<div class="head-title">' . $uName['cust_name'] . ' ' . $uName['cust_surname'] . '</div>';
-                    }
-                    ?>
+                
+                      <input type="text" value='0' id="toUser" name="toUser" hidden/>
+                      <div class="head-title">Admin</div>
+                    
 
                   </div>
                 </div>
@@ -141,15 +95,11 @@ $user = mysqli_fetch_assoc(($users));
                   <div class="chatbox-content" id="msgBody">
 
                     <?php
-                    if (isset($_GET["toUser"])) {
+                    
                       $sqlChat = "SELECT * FROM messages WHERE (from_user = '" . $_SESSION["cust_id"] . "' AND
-                                                to_user = '" . $_GET["toUser"] . "') OR (from_user = '" . $_GET["toUser"] . "' AND to_user = '" . $_SESSION["cust_id"] . "'  )";
+                                                to_user = '0') OR (from_user = '0' AND to_user = '" . $_SESSION["cust_id"] . "' ) ";
                       $chats = mysqli_query($conn, $sqlChat);
-                    } else {
-                      $sqlChat = "SELECT * FROM messages WHERE (from_user = '" . $_SESSION["cust_id"] . "' AND
-                                                to_user = '" . $_SESSION["toUser"] . "') OR (from_user = '" . $_SESSION["toUser"] . "' AND to_user = '" . $_SESSION["cust_id"] . "' ) ";
-                      $chats = mysqli_query($conn, $sqlChat);
-                    }
+                    
 
                     while ($chat = mysqli_fetch_assoc($chats)) {
                       if ($chat["from_user"] == $_SESSION["cust_id"]) {
@@ -240,7 +190,7 @@ $user = mysqli_fetch_assoc(($users));
                     method:"POST",
                     data: {
                       fromUser:'<?php echo $_SESSION['cust_id']?>',
-                      toUser:"<?php if (isset($_GET["toUser"])) echo $_GET['toUser']; else echo $_SESSION['toUser'];?>"
+                      toUser:"0"
                     },
                     dataType:"text",
                     success:function(data){

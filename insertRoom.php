@@ -1,4 +1,5 @@
 <?php 
+session_start();
 $conn = mysqli_connect('localhost','root','','myapartment');
 
 $id = $_POST['roomId'];
@@ -10,10 +11,10 @@ $sql = " INSERT INTO room (room_id, room_status, type_room) VALUE ('$id', '$stat
 $result = mysqli_query($conn, $sql);
 
             if ($result) {
-                $_SESSION['success'] = "Insert user successfully";
-                header("Location: admin_room.php");
+                $_SESSION['success'] = "ห้อง ".$id."  ประเภท ".$type;
+                header("Location: admin_addroom.php");
             } else {
-                $_SESSION['error'] = "Something went wrong";
+                $_SESSION['error'] = "กรุณาตรวจสอบข้อมูล";
                 header("Location: admin_addroom.php");
             }
 

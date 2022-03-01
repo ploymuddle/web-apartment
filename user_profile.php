@@ -85,7 +85,7 @@ $_GET['menu'] = $page;
 							</div>
 							<div class="grid col-end-30 ">
 								<label for="roomId"></label>
-								<button type="submit">แก้ไขข้อมูล</button>
+								<button class="btn" type="submit">แก้ไขข้อมูล</button>
 							</div>
 						</div>
 					<!-- </div> -->

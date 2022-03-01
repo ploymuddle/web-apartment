@@ -3,20 +3,15 @@
 // เรียกไฟล์ TCPDF Library เข้ามาใช้งาน กำหนดที่อยู่ตามที่แตกไฟล์ไว้
 require_once('TCPDF/tcpdf.php');
 
-$id = $_POST['id'];
+$id = $_GET['id'];
 
 $con = mysqli_connect('localhost','root','','myapartment');
-$sql="SELECT * FROM contract co, customer cu ,  room r , room_type rt 
- WHERE  cu.cust_id = co.cust_id 
- AND r.room_id = co.room_id 
- AND r.type_room = rt.type_room 
- AND co.con_id = '".$id."'";
+$sql="SELECT * FROM payment p ,invoice i WHERE p.inv_id = i.inv_id AND pay_id = '$id' ";
 
 $query = mysqli_query($con, $sql);
 $result = mysqli_fetch_assoc($query);
 $json = json_encode($result);
 $data = json_decode($json);
-
 
 // echo "<script>console.log('Debug Objects: " . $_POST['name'] . "' );</script>";
 
@@ -36,7 +31,7 @@ $pdf->SetKeywords('Mindphp, TCPDF, PDF, example, guide');
 // กำหนดรายละเอียดของหัวกระดาษ สีข้อความและสีของเส้นใต้
 // PDF_HEADER_LOGO = ไฟล์รูปภาพโลโก้
 // PDF_HEADER_LOGO_WIDTH = ขนาดความกว้างของโลโก้
-$pdf->SetHeaderData('', 0, 'AP Apartment', '222 kkk bbb 21000', array (0, 0, 0), array (0, 0, 0));
+$pdf->SetHeaderData('', 0, 'หอพัก AP Apartment', '222 kkk bbb 21000', array (0, 0, 0), array (0, 0, 0));
 
 // กำหนดรายละเอียดของท้ายกระดาษ สีข้อความและสีของเส้น
 $pdf->setFooterData(array (0, 0, 0), array (0, 64, 0));
@@ -70,23 +65,23 @@ $pdf->SetFont('freeserif', '', 14);
 // กำหนดให้สร้างหน้าเอกสาร
 $pdf->AddPage();
 
-$html = '<h3 style="text-align: center;">สัญญาเช่าหอพัก</h3>';
-$html .= '<p style="font-size: 12px;text-align: right;">ฉบับที่ '.$data->con_id.'</p>';
-$html .= '<p style="font-size: 12px;text-align: right;">วันที่ '.$data->con_checkin.'</p>';
-$html .= '<p style="font-size: 12px;text-indent: 80;line-height:20px;">ได้รับเงินจาก คุณ '.$data->cust_name.' '.$data->cust_surname.' เพื่อชำระค่ามัดจำ จำนวน '.$data->con_deposit.' บาท ได้เข้าพัก ณ ห้อง '.$data->room_id.' เป็นห้องพักประเภท '.$data->type_room.' ค่าเช่าห้องพัก เดือนละ '.$data->type_rental.' บาท รายละเอียดข้อมูลลูกค้าดังนี้'.'</p>';
+$html = '<h3 style="text-align: left;">ใบเสร็จ ห้อง '.$data->room_id.'</h3>';
+$html .= '<p style="font-size: 12px;text-align: right;">ใบเสร็จ ห้อง '.$data->room_id.'</p>';
+$html .= '<p style="font-size: 12px;text-align: right;">วันที่ '.$data->room_id.'</p>';
+// $html .= '<p style="font-size: 12px;text-indent: 80;line-height:20px;">ได้รับเงินจาก คุณ '.$data->cust_name.' '.$data->cust_surname.' เพื่อชำระค่ามัดจำ จำนวน '.$data->con_deposit.' บาท ได้เข้าพัก ณ ห้อง '.$data->room_id.' เป็นห้องพักประเภท '.$data->type_room.' ค่าเช่าห้องพัก เดือนละ '.$data->type_rental.' บาท รายละเอียดข้อมูลลูกค้าดังนี้'.'</p>';
 
 $table = '<table border="1" width="400" cellpadding="10" style="font-size: 12px;">';
-$table .= '  <tr><th width="100">ชื่อ</th><td>'.$data->cust_name.'</td></tr>';
-$table .= '  <tr><th width="100">นามสกุล</th><td>'.$data->cust_surname.'</td></tr>';
-$table .= '  <tr><th width="100">เบอร์โทร</th><td>'.$data->cust_tel.'</td></tr>';
-$table .= '  <tr><th width="100">Email</th><td>'.$data->cust_email.'</td></tr>';
+// $table .= '  <tr><th width="100">ชื่อ</th><td>'.$data->cust_name.'</td></tr>';
+// $table .= '  <tr><th width="100">นามสกุล</th><td>'.$data->cust_surname.'</td></tr>';
+// $table .= '  <tr><th width="100">เบอร์โทร</th><td>'.$data->cust_tel.'</td></tr>';
+// $table .= '  <tr><th width="100">Email</th><td>'.$data->cust_email.'</td></tr>';
 $table .= '</table>';
 
 
 // ข้อมูลที่จะแสดงในเนื้อหา
 // $html = "Welcome to <b> ".$_POST['id']."</b>";
 
-$namefile = $d->con_id.'_'.$_POST['id'].'.pdf';
+$namefile = $data->room_id.'_'.$data->con_checkin.'_'.$_POST['id'].'.pdf';
 // กำหนดการแสดงข้อมูลแบบ HTML 
 // สามารถกำหนดความกว้างความสูงของกรอบข้อความ 
 // กำหนดตำแหน่งที่จะแสดงเป็นพิกัด x กับ y ซึ่ง x คือแนวนอนนับจากซ้าย ส่วน y คือแนวตั้งนับจากด้านล่าง

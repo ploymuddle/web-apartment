@@ -46,7 +46,7 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 		<h1 class="title">จัดการห้องพัก</h1>
 		<div class="box">
 			<div class="d-flex content-right">
-				<button class="btn-add" type="submit" onclick="document.location.href='admin_addroom.php'"> เพิ่มห้องพัก</button>
+				<button class="btn btn-add" type="submit" onclick="document.location.href='admin_addroom.php'"> เพิ่มห้องพัก</button>
 			</div>
 
 			<!-- <div class="groub"> -->
@@ -64,8 +64,8 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 					<p class="text2">รายการห้องว่าง</p>
 					<p class="text3"><a><?php echo $count["countN"]; ?></a>&nbsp;<y>/</y>&nbsp;<a><?php echo $count["countTotal"]; ?></a></p>
 
-					<button href="#" class="btn-show" onclick="showData('<?php echo $roomType['type_room']; ?>')">แสดง</button>
-					<button href="#" class="btn-update" onclick="editData('<?php echo $roomType['type_room']; ?>')">แก้ไขข้อมูล</button>
+					<button href="#" class="btn btn-show" onclick="showData('<?php echo $roomType['type_room']; ?>')">แสดง</button>
+					<button href="#" class="btn btn-update" onclick="editData('<?php echo $roomType['type_room']; ?>')">แก้ไขข้อมูล</button>
 
 				</div>
 
@@ -109,7 +109,7 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 				</tbody>
 			</table>
 			<div class="d-flex content-center">
-				<button type="submit" onclick="document.location.href='admin_room.php'">ปิด</button>
+				<button class="btn" type="submit" onclick="document.location.href='admin_room.php'">ปิด</button>
 			</div>
 
 		</div>
@@ -155,8 +155,8 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 			</div>
 
 			<div class="d-flex content-center my-20">
-				<button type="button" onclick="document.location.href='admin_room.php'">ยกเลิก</button>
-				<button type="submit" onclick="document.location.href='admin_room.php'">บันทึก</button>
+				<button class="btn" type="button" onclick="document.location.href='admin_room.php'">ยกเลิก</button>
+				<button class="btn" type="submit" onclick="document.location.href='admin_room.php'">บันทึก</button>
 			</div>
 
 			</form>

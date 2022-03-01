@@ -103,7 +103,7 @@ $custQuery = mysqli_query($conn, $strSQL);
     <div class="box">
 
       <div class="d-flex content-right">
-        <button class="btn-add" type="submit" onclick="document.location.href='admin_contract.php'"> เพิ่มสัญญาลูกค้า</button>
+        <button class="btn btn-add" type="submit" onclick="document.location.href='admin_contract.php'"> เพิ่มสัญญาลูกค้า</button>
       </div>
 
       <div class="show-box">
@@ -134,8 +134,8 @@ $custQuery = mysqli_query($conn, $strSQL);
             </div>
           </div>
           <div class="d-flex content-center">
-            <button type="submit" class="btn-search">ค้นหา</button>
-            <button type="submit" class="btn-clear" name="clear" value="clear">ล้างค่า</button>
+            <button type="submit" class="btn btn-search">ค้นหา</button>
+            <button type="submit" class="btn btn-clear" name="clear" value="clear">ล้างค่า</button>
           </div>
         </form>
       </div>
@@ -156,7 +156,13 @@ $custQuery = mysqli_query($conn, $strSQL);
             </tr>
           </thead>
           <tbody>
-            <?php while ($custList = mysqli_fetch_array($custQuery)) { ?>
+          <?php
+            if (mysqli_num_rows($custQuery) == 0) { ?>
+              <tr>
+                <td colspan="8">ไม่มีข้อมูล</td>
+              </tr>
+            <?php
+            } else { while ($custList = mysqli_fetch_array($custQuery)) { ?>
               <tr>
                 <td><?php $i++;
                     echo $i; ?></td>
@@ -168,7 +174,7 @@ $custQuery = mysqli_query($conn, $strSQL);
                 <td><a class="button" onclick="showData(<?php echo $custList['cust_id']; ?>)"><i class="fas fa-eye" style="font-size:20px;"></i></a></td>
                 <td><a class="button" onclick="showBill(<?php echo $custList['cust_id']; ?>)"><i class="fas fa-file-invoice" style="font-size:22px;"></i></a></td>
               </tr>
-            <?php } ?>
+            <?php } } ?>
           </tbody>
         </table>
 
@@ -204,7 +210,7 @@ $custQuery = mysqli_query($conn, $strSQL);
         <form method="POST" action="updateCustomer.php">
           <div class="">
             <div class="d-flex content-center">
-              <button type="submit" class="btn-save my-20" id="btnSave"> บันทึก</button>
+              <button type="submit" class="btn btn-save my-20" id="btnSave"> บันทึก</button>
             </div>
             <input type="text" id="cust_id" name="cust_id" hidden>
             <div class="grid form-label">
@@ -226,7 +232,7 @@ $custQuery = mysqli_query($conn, $strSQL);
             <div class="d-flex content-space-around content-align-center text-detail my-20 ">
               <p>Username : <a id="username"> - </a></p>
               <p>Password : <a id="password"> - </a></p>
-              <button type="button" id="btn" class="btn-edit" onclick="edit()"><a class="text-white" id="textEdit"></a></button>
+              <button type="button" id="btn" class="btn btn-edit" onclick="edit()"><a class="text-white" id="textEdit"></a></button>
             </div>
           </div>
         </form>
@@ -258,12 +264,12 @@ $custQuery = mysqli_query($conn, $strSQL);
           </div>
 
           <div class="d-flex content-center my-20">
-            <button type="button" class="btn-download" id="dd"></button>
-            <button type="button" class="btn-download" id="dc"></button>
+            <button type="button" class="btn btn-download" id="dd"></button>
+            <button type="button" class="btn btn-download" id="dc"></button>
             <form method="POST" action="updateContract.php" id="cancelCon">
               <input type="text" id="con" name="con" hidden>
             </form>
-            <button type="submit" class="btn-delete" form="cancelCon" value="submit">ยกเลิกสัญญา</button>
+            <button type="submit" class="btn btn-delete" form="cancelCon" value="submit">ยกเลิกสัญญา</button>
           </div>
 
         </div>
@@ -272,7 +278,7 @@ $custQuery = mysqli_query($conn, $strSQL);
       <hr>
 
       <div class="d-flex content-center">
-        <button type="button" id="close" onclick="window.location='admin_customer.php';">ยกเลิก</button>
+        <button type="button" id="close" class="btn" onclick="window.location='admin_customer.php';">ยกเลิก</button>
       </div>
     </div>
 
@@ -341,7 +347,7 @@ $custQuery = mysqli_query($conn, $strSQL);
         <hr>
 
         <div class="d-flex content-center">
-          <button type="button" id="close" onclick="window.location='admin_customer.php';">ยกเลิก</button>
+          <button type="button" id="close" class="btn" onclick="window.location='admin_customer.php';">ยกเลิก</button>
         </div>
 
       </form>

@@ -7,7 +7,7 @@ $_GET['menu'] = $page;
 // -----
 // //เชื่อมต่อฐานข้อมูล
 // // require_once "../connection.php";
-// require_once "connection.php";
+require_once "connection.php";
 
 // //ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
 // if ($_SESSION['id'] == "") {
@@ -20,11 +20,57 @@ $_GET['menu'] = $page;
 //     exit();
 // }
 
-// //คำสั่ง sql ในการดึงข้อมูล
-// $strSQL = "SELECT * FROM employee WHERE emp_id = '" . $_SESSION['id'] . "' ";
-// $objQuery = mysqli_query($conn, $strSQL);
-// $objResult = mysqli_fetch_array($objQuery);
 
+// if (isset($_POST['download'])) {
+//   header('Window-target: _blank');
+//    header('Location: bill.php');
+// } 
+
+if (isset($_POST["clear"])) {
+  $room = 'all';
+  $cust = '';
+  $month = '0';
+  $year = '0';
+} else {
+
+  $room = 'all';
+  $cust = '';
+  $month = '0';
+  $year = '0';
+
+  if ($_POST["room"] != 'all' && $_POST["room"] != '') {
+    $room = $_POST["room"];
+  }
+  if ($_POST["cust"] != '') {
+    $cust = $_POST["cust"];
+  }
+  if ($_POST["month"] != 0) {
+    $month = $_POST["month"];
+  }
+  if ($_POST["year"] != 0) {
+    $year = $_POST["year"];
+  }
+}
+
+
+// //คำสั่ง sql ในการดึงข้อมูล
+$strSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id ";
+if ($room != 'all') {
+  $strSQL =  $strSQL . " AND i.room_id = '" . $room . "' ";
+}
+if ($cust != '') {
+  $strSQL =  $strSQL . " AND i.cust_id = '" . $cust . "' ";
+}
+if ($month  != 0) {
+  $strSQL =  $strSQL . " AND i.inv_date LIKE '%-" . $month . "-%' ";
+}
+if ($year != 0) {
+  $strSQL =  $strSQL . " AND i.inv_date LIKE '%" . $year . "%' ";
+}
+
+$strSQL = $strSQL . " ORDER BY i.inv_date DESC ";
+
+$objQuery = mysqli_query($conn, $strSQL);
 ?>
 
 <!doctype html>
@@ -43,69 +89,153 @@ $_GET['menu'] = $page;
     <div class="box">
 
       <div class="show-box">
-        <div class="grid-search">
-          <div class="grid form-search">
-            <label for="roomId">หมายเลขห้องพัก:</label>
-            <select id="roomId" name="roomId">
-              <option value="">เลือกรายการ</option>
-              <option value="101">101</option>
-            </select>
-          </div>
-          <div class="grid form-search">
+
+        <form name="frmSearch" method="POST" action="admin_bill.php">
+          <div class="grid-search-4">
+            <div class="grid form-search">
+              <label for="room">หมายเลขห้องพัก:</label>
+              <select id="room" name="room">
+                <option <?php if ($room == "all") {
+                          echo "selected";
+                        } ?> value="all">ทั้งหมด</option>
+                <?php
+                $roomSQL = "SELECT * FROM room ";
+                $roomQuery = mysqli_query($conn, $roomSQL);
+                while ($roomlist = mysqli_fetch_array($roomQuery)) {
+                ?>
+                  <option <?php if ($room == $roomlist['room_id']) {
+                            echo "selected";
+                          } ?> value="<?php echo $roomlist['room_id']; ?>"><?php echo $roomlist['room_id']; ?></option>
+                <?php } ?>
+              </select>
+            </div>
+            <!-- <div class="grid form-search">
             <label for="roomId">สถานะ :</label>
             <select id="roomId" name="roomId">
               <option value="">เลือกรายการ</option>
               <option value="101">101</option>
             </select>
-          </div>
-          <div class="grid form-search">
-            <label>วันที่ : </label>
-            <input type="date" id="txtName" name="txtName" />
-          </div>
-          <div class="grid form-search">
-            <label>รหัสสมาชิก : </label>
-            <input type="text" id="txtName" name="txtName" />
-          </div>
-          <div class="grid form-search">
+          </div> -->
+            <div class="grid form-search">
+              <label>เดือน : </label>
+              <select id='month' name="month">
+                <option <?php if ($month == "0") {
+                          echo "selected";
+                        } ?> value='0'>ทั้งหมด</option>
+                <option <?php if ($month == "01") {
+                          echo "selected";
+                        } ?> value='01'>มกราคม</option>
+                <option <?php if ($month == "02") {
+                          echo "selected";
+                        } ?> value='02'>กุมภาพันธ์</option>
+                <option <?php if ($month == "03") {
+                          echo "selected";
+                        } ?> value='03'>มีนาคม</option>
+                <option <?php if ($month == "04") {
+                          echo "selected";
+                        } ?> value='04'>เมษายน</option>
+                <option <?php if ($month == "05") {
+                          echo "selected";
+                        } ?> value='05'>พฤษภาคม</option>
+                <option <?php if ($month == "06") {
+                          echo "selected";
+                        } ?> value='06'>มิถุนายน</option>
+                <option <?php if ($month == "07") {
+                          echo "selected";
+                        } ?> value='07'>กรกฎาคม</option>
+                <option <?php if ($month == "08") {
+                          echo "selected";
+                        } ?> value='08'>สิงหาคม</option>
+                <option <?php if ($month == "09") {
+                          echo "selected";
+                        } ?> value='09'>กันยายน</option>
+                <option <?php if ($month == "10") {
+                          echo "selected";
+                        } ?> value='10'>ตุลาคม</option>
+                <option <?php if ($month == "11") {
+                          echo "selected";
+                        } ?> value='11'>พฤศจิกายน</option>
+                <option <?php if ($month == "12") {
+                          echo "selected";
+                        } ?> value='12'>ธันวาคม</option>
+              </select>
+            </div>
+            <div class="grid form-search">
+              <label>ปี : </label>
+              <select id='year' name="year">
+                <option <?php if ($year == "0") {
+                          echo "selected";
+                        } ?> value='0'>ทั้งหมด</option>
+                <option <?php if ($year == "2020") {
+                          echo "selected";
+                        } ?> value='2020'>2020</option>
+                <option <?php if ($year == "2021") {
+                          echo "selected";
+                        } ?> value='2021'>2021</option>
+                <option <?php if ($year == "2022") {
+                          echo "selected";
+                        } ?> value='2022'>2022</option>
+              </select>
+            </div>
+            <div class="grid form-search">
+              <label>รหัสสมาชิก : </label>
+              <input type="text" id="cust" name="cust" value="<?php echo $cust; ?>" />
+            </div>
+            <!-- <div class="grid form-search">
             <label>ชื่อลูกค้า : </label>
             <input type="text" id="txtName" name="txtName" />
+          </div> -->
+            <div></div>
           </div>
-          <div></div>
-        </div>
-        <div class="d-flex content-center">
-           <button type="submit" class="px-20">ค้นหา</button>
-        </div>
+          <div class="d-flex content-center">
+            <button type="submit" class="btn btn-search">ค้นหา</button>
+            <button type="button" class="btn btn-search"><a class="text-white" href="reportFile.php?room=<?php echo $room; ?>&cust=<?php echo $cust; ?>&month=<?php echo $month; ?>&year=<?php echo $year; ?>" target="_blank">Link</a></button>
+            <button type="submit" class="btn btn-clear" name="clear" value="clear">ล้างค่า</button>
+          </div>
+        </form>
       </div>
+
 
       <div class="show-box">
 
-        <table class="table">
+        <table class="table" id="table">
           <thead>
             <tr>
+              <th>วันที่</th>
               <th>หมายเลขห้อง</th>
               <th>รหัสสมาชิก</th>
               <th>ชื่อลูกค้า</th>
               <th>นามสกุล</th>
               <th>รายการชำระ</th>
               <th>สถานะชำระ</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>A105</td>
-              <td>AAA</td>
-              <td>AAA</td>
-              <td>AAA</td>
-              <td>2000</td>
-              <td>
-                <div class="status-bill">ค้างชำระ</div>
-              </td>
-              <td><button class="button" id="myBtn">ดำเนินการ</button></td>
-            </tr>
+            <?php
+            if (mysqli_num_rows($objQuery) == 0) { ?>
+              <tr>
+                <td colspan="7">ไม่มีข้อมูล</td>
+              </tr>
+            <?php
+            } else {
+              while ($bill = mysqli_fetch_array($objQuery)) {
+            ?>
+              <tr>
+                <td><?php echo $bill['inv_date']; ?></td>
+                <td><?php echo $bill['room_id']; ?></td>
+                <td><?php echo $bill['cust_id']; ?></td>
+                <td><?php echo $bill['cust_name']; ?></td>
+                <td><?php echo $bill['cust_surname']; ?></td>
+                <td><?php echo $bill['inv_total']; ?></td>
+                <td>
+                  <div <?php $bill['pay_status'] == 'ค้างชำระ' ? print ' class="bill-r "' : ($bill['pay_status'] == 'จ่ายแล้ว' ? print ' class="bill-g "' : print ' class="bill-y "') ?>><?php echo $bill['pay_status']; ?>
+                  </div>
+                </td>
+              </tr>
+            <?php } }?>
           </tbody>
         </table>
-
+       
         <div class="pagination">
           <ol id="numbers"></ol>
         </div>
@@ -115,98 +245,10 @@ $_GET['menu'] = $page;
     </div>
   </div>
 
-  <!-- The Modal -->
-  <div id="myModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content show-box">
-
-      <h3>รายการรับชำระ</h3>
-
-      <form method="POST">
-
-        <div class="grid-col">
-          <div class="grid col-40">
-            <label for="roomId">หมายเลขห้องพัก:</label>
-            <select id="roomId" name="roomId">
-              <option value="">เลือกรายการ</option>
-              <option value="101">101</option>
-            </select>
-          </div>
-          <div class="grid col-3-20">
-            <input type="text" id="txtId" name="txtId" placeholder="รหัสสมาชิก">
-            <input type="text" id="txtName" name="txtName" placeholder="ชื่อลูกค้า">
-            <input type="text" id="txtSurname" name="txtSurname" placeholder="นามสกุล">
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="grid-col">
-
-          <div class="grid-row">
-            <img src="https://www.kasikornbank.com/SiteCollectionDocuments/personal/digital-banking/kplus/functions/verified-slip/img/img-03.png" style="width:300px;height:100%;">
-            <p class="d-flex content-center">หลักฐานการชำระเงิน</p>
-          </div>
-
-          <div class="grid-row">
-            <div class="">
-              <input type="text" id="txtRoomId" name="txtRoomId" placeholder="รหัสใบเสร็จ">
-            </div>
-            <div class="grid col-3-20">
-              <label for="roomId">วันที่:</label>
-              <input type="date" id="txtRoomId" name="txtRoomId" placeholder="22/2/2021" disabled>
-            </div>
-            <div class="grid col-3-20">
-              <label for="roomId">จำนวนเงิน:</label>
-              <input type="text" id="txtRoomId" name="txtRoomId" placeholder="0.00" disabled>
-            </div>
-            <div class="grid col-3-20">
-              <label for="roomId">ค้างชำระ:</label>
-              <input type="text" id="txtRoomId" name="txtRoomId" placeholder="0.00" disabled>
-            </div>
-            <div class="grid col-3-20">
-              <label for="roomId">รับชำระ:</label>
-              <input type="text" id="txtRoomId" name="txtRoomId" placeholder="0.00">
-            </div>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="d-flex content-center">
-          <button type="cancel" id="close">ยกเลิก</button>
-          <button type="submit">บันทึกรายการ</button>
-        </div>
-
-      </form>
-    </div>
-
-
-  </div>
-
   <script src="js/script-dropdown.js"></script>
   <script src="js/script.js"></script>
   <script src="js/script-pagination.js"></script>
-  <script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // When the user clicks on the button, open the modal
-    btn.onclick = function() {
-      modal.style.display = "block";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  </script>
+  
 </body>
 
 </html>
