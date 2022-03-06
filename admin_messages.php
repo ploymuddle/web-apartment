@@ -56,7 +56,7 @@ $_SESSION["cust_id"] = $_SESSION["id"];
 
             <!-- list customer chat -->
             <div class="chat-users">
-              <ul class="users overflow">
+              <ul class="users">
 
                 <?php
                 $msgs = mysqli_query($conn, "SELECT  DISTINCT m.from_user , c.*  FROM messages m , customer c WHERE to_user ='0' AND m.from_user = c.cust_id ");
@@ -73,7 +73,7 @@ $_SESSION["cust_id"] = $_SESSION["id"];
                         ?>
                       </a>
                     </div>
-                    <span class="users-note"><?php echo $msg['cust_name'] . ' ' . $msg['cust_surname']; ?> </span>
+                    <span class="users-note"> <a href="?toUser=<?php echo $msg["cust_id"]; ?>"><?php echo $msg['cust_name'] . ' ' . $msg['cust_surname']; ?> </a></span>
                     <!-- <div class="users-counter">
                       <span class="counter">99+</span>
                     </div> -->

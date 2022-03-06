@@ -66,7 +66,7 @@ $countRoom = mysqli_fetch_assoc($query);
 						<y1>จำนวน</y1><a>&nbsp; &nbsp; <a><?php echo $countMessages['count']; ?></a>&nbsp; &nbsp;</a>
 						<y2>รายการ</y2>
 					</p>
-					<button class="btn"><a href="#">ตรวจสอบ</a></button>
+					<button class="btn"><a href="admin_messages.php" class="text-white">ตรวจสอบ</a></button>
 				</div>
 			<!-- </div> -->
 
