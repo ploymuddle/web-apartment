@@ -27,9 +27,6 @@ require_once "connection.php";
 
 $_SESSION["cust_id"] = $_SESSION["id"];
 
-$users = mysqli_query($conn, "SELECT * FROM customer WHERE cust_id = '" . $_SESSION["cust_id"] . "'");
-$user = mysqli_fetch_assoc(($users));
-
 ?>
 
 <!doctype html>
@@ -48,12 +45,13 @@ $user = mysqli_fetch_assoc(($users));
 
             <!-- search by name  -->
             <div class="chat-search search">
-              <div class="search">
+              <!-- <div class="search">
                 <div class="search-icon">
                   <i class="fa fa-search"></i>
                 </div>
                 <input type="search" class="search-input" placeholder="ค้นหา" value="">
-              </div>
+              </div> -->
+              <p class="text-center text-grey">รายชื่อลูกค้าที่แจ้ง</p>
             </div>
 
             <!-- list customer chat -->
@@ -61,7 +59,7 @@ $user = mysqli_fetch_assoc(($users));
               <ul class="users overflow">
 
                 <?php
-                $msgs = mysqli_query($conn, "SELECT * FROM customer");
+                $msgs = mysqli_query($conn, "SELECT  DISTINCT m.from_user , c.*  FROM messages m , customer c WHERE to_user ='0' AND m.from_user = c.cust_id ");
                 while ($msg = mysqli_fetch_assoc($msgs)) {
                 ?>
 
@@ -89,6 +87,7 @@ $user = mysqli_fetch_assoc(($users));
           </div>
 
           <div class="modal-main">
+            
             <div class="chatbox">
               <form action="sentMessage.php" method="POST">
                 <div class="chatbox-row">
@@ -114,9 +113,11 @@ $user = mysqli_fetch_assoc(($users));
                       echo '<input type="text" value=' . $_GET["toUser"] . ' id="toUser" name="toUser" hidden/>';
                       echo '<div class="head-title">' . $uName['cust_name'] . ' ' . $uName['cust_surname'] . '</div>';
                     } else {
-                      $userName = mysqli_query($conn, "SELECT * FROM customer ");
+                      $userName = mysqli_query($conn, "SELECT  DISTINCT m.from_user , c.*  FROM messages m , customer c WHERE to_user ='0' AND m.from_user = c.cust_id ");
                       $uName = mysqli_fetch_assoc($userName);
                       $_SESSION['toUser'] = $uName['cust_id'];
+
+                      if( $_SESSION['toUser'] != '') {
 
                       ?>
                       <div class="head-avatar avatar avatar_larger">
@@ -131,12 +132,19 @@ $user = mysqli_fetch_assoc(($users));
                       <?php
                       echo '<input type="text" value=' . $_SESSION["toUser"] . ' id="toUser" name="toUser" hidden/>';
                       echo '<div class="head-title">' . $uName['cust_name'] . ' ' . $uName['cust_surname'] . '</div>';
+                    } else {
+                      echo '<h1>ไม่มีคำร้องแจ้งปัญหาห้องพัก</h1>'; 
                     }
+                  }
                     ?>
 
                   </div>
                 </div>
 
+                <?php 
+            if($_SESSION["toUser"] == '') ;
+            else {
+            ?>
                 <div class="chatbox-row chatbox-row_fullheight">
                   <div class="chatbox-content" id="msgBody">
 
@@ -192,23 +200,27 @@ $user = mysqli_fetch_assoc(($users));
                   </div>
                 </div>
 
+              
+
 
                 <div class="chatbox-row">
                   <div class="enter">
 
                     <div class="enter-submit">
-                      <button class="button button_id_submit" type="submit">
+                      <button class="button button_id_submit" type="submit" <?php if($_SESSION["toUser"] == '') echo 'disabled' ?>>
                         <i class="fa fa-paper-plane"></i>
                       </button>
                     </div>
                     <div class="enter-textarea">
-                      <textarea name="enterMessage" id="enterMessage" cols="30" rows="2" placeholder="ข้อความ..."></textarea>
+                      <textarea name="enterMessage" id="enterMessage" cols="30" rows="2" placeholder="ข้อความ..." <?php if($_SESSION["toUser"] == '') echo 'disabled' ?>></textarea>
                     </div>
 
                   </div>
                 </div>
+                <?php } ?>
               </form>
             </div>
+        
           </div>
         </div>
       </div>

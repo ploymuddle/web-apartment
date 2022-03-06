@@ -6,25 +6,33 @@ $page = 'หน้าแรก';
 $_GET['menu'] = $page;
 
 //เชื่อมต่อฐานข้อมูล
-// require_once "../connection.php";
-// require_once "connection.php";
+require_once "connection.php";
 
 //ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
-// if ($_SESSION['id'] == "") {
-//     header("location:login.php");
-// }
+if ($_SESSION['id'] == "") {
+    header("location:login.php");
+}
 
 //ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
-// if ($_SESSION['status'] != "admin") {
-// 	echo "This page for Admin only!";
-// 	exit();
-// }
+if ($_SESSION['status'] != "admin") {
+	echo "This page for Admin only!";
+	exit();
+}
 
-//คำสั่ง sql ในการดึงข้อมูล
-// $strSQL = "SELECT * FROM employee WHERE emp_id = '" . $_SESSION['id'] . "' ";
-// $objQuery = mysqli_query($conn, $strSQL);
-// $objResult = mysqli_fetch_array($objQuery);
+//นับจำนวนคำร้องแจ้งปัญหาห้องพัก
+$sqlCountMessages = "SELECT COUNT(DISTINCT from_user) AS count FROM messages ;";
+$query = mysqli_query($conn, $sqlCountMessages);
+$countMessages = mysqli_fetch_assoc($query);
 
+//นับจำนวนรายการค้างชำระ
+$sqlCountPayment = "SELECT COUNT(*) AS count FROM payment WHERE pay_status = 'ค้างชำระ' ;";
+$query = mysqli_query($conn, $sqlCountPayment);
+$countPayment = mysqli_fetch_assoc($query);
+
+//นับจำนวนห้องพัก
+$sqlCountRoom = "SELECT (SELECT COUNT(room_status) FROM room ) AS total , (SELECT COUNT(room_status) FROM room WHERE room_status = 'N') AS N ;";
+$query = mysqli_query($conn, $sqlCountRoom);
+$countRoom = mysqli_fetch_assoc($query);
 ?>
 
 <!doctype html>
@@ -43,19 +51,19 @@ $_GET['menu'] = $page;
 		<div class="box">
 
 			<!-- <div class="card-box"> -->
-				<div class="show-box grid-4">
+				<!-- <div class="show-box grid-4">
 					<i class="far fa-address-book"></i>
 					<p class="text1">สัญญาใหม่รอการอนุมัติ</p>
 					<p class="text2">
 						<y1>จำนวน</y1>&nbsp; &nbsp; <a>4</a>&nbsp; &nbsp;<y2>รายการ</y2>
 					</p>
 					<button class="btn"><a href="#">ตรวจสอบ</a></button>
-				</div>
+				</div> -->
 				<div class="show-box grid-4">
 					<i class="far fa-comment-dots"></i>
 					<p class="text1">คำร้องแจ้งปัญหาห้องพัก</p>
 					<p class="text2">
-						<y1>จำนวน</y1><a>&nbsp; &nbsp; <a>1</a>&nbsp; &nbsp;</a>
+						<y1>จำนวน</y1><a>&nbsp; &nbsp; <a><?php echo $countMessages['count']; ?></a>&nbsp; &nbsp;</a>
 						<y2>รายการ</y2>
 					</p>
 					<button class="btn"><a href="#">ตรวจสอบ</a></button>
@@ -66,12 +74,12 @@ $_GET['menu'] = $page;
 				<div class="show-box grid-4">
 					<i class="fas fa-search-dollar"></i>
 					<p class="text3">รายการค้างชำระ</p>
-					<p class="text4"><a>2</a></p>
+					<p class="text4"><a><?php echo $countPayment['count']; ?></a></p>
 				</div>
 				<div class="show-box grid-4">
 					<i class="fas fa-hotel"></i>
 					<p class="text3">จำนวนห้องว่าง</p>
-					<p class="text4"><a>10</a>&nbsp;<y>/</y>&nbsp;<a>30</a></p>
+					<p class="text4"><a><?php echo $countRoom['N']; ?></a>&nbsp;<y>/</y>&nbsp;<a><?php echo $countRoom['total']; ?></a></p>
 				</div>
 			</div>
 

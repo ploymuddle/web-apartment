@@ -195,7 +195,6 @@ $objQuery = mysqli_query($conn, $strSQL);
         </form>
       </div>
 
-
       <div class="show-box">
 
         <table class="table" id="table">
