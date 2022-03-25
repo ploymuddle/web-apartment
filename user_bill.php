@@ -6,7 +6,7 @@ $page = 'ชำระค่าเช่า';
 $_GET['menu'] = $page;
 
 // //connect database
-// require_once "connection.php";
+require_once "connection.php";
 
 // //check id ว่ามีการ Login
 // if ($_SESSION['id'] == "") {
@@ -20,12 +20,11 @@ $_GET['menu'] = $page;
 // 	exit();
 // }
 
-// //get data in database
-// $strSQL = "SELECT * FROM customer WHERE cust_id = '" . $_SESSION['id'] . "' ";
-// echo "<script>console.log( '" . $strSQL . "')</script>";
+//get customer data in database
+$strSQL = "SELECT * FROM customer WHERE cust_id = '" . $_SESSION['id'] . "' ";
 
-// $objQuery = mysqli_query($conn, $strSQL);
-// $objResult = mysqli_fetch_array($objQuery);
+$objQuery = mysqli_query($conn, $strSQL);
+$objCust = mysqli_fetch_array($objQuery);
 
 ?>
 

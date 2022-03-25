@@ -16,9 +16,11 @@ if ($_SESSION['id'] == "") {
 //กำหนด $_SESSION["cust_id"]
 $_SESSION["cust_id"] = $_SESSION["id"];
 
-//คำสั่ง sql ในการดึงข้อมูลลูกค้า search by cust_id
-$users = mysqli_query($conn, "SELECT * FROM customer WHERE cust_id = '" . $_SESSION["cust_id"] . "'");
-$user = mysqli_fetch_assoc(($users));
+//get customer data in database
+$strSQL = "SELECT * FROM customer WHERE cust_id = '" . $_SESSION['id'] . "' ";
+
+$objQuery = mysqli_query($conn, $strSQL);
+$objCust = mysqli_fetch_array($objQuery);
 
 ?>
 

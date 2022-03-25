@@ -31,7 +31,7 @@
                 ?> <?php //echo $objResult["cust_surname"]; 
                                                             ?></h2> <!-- ต้องดึงมาจาก ฐานข้อมูล -->
             <h3>Room</h3>
-            <h5>A009</h5> <!-- ต้องดึงมาจาก ฐานข้อมูล -->
+            <h5 class=""><?php echo $objCust['cust_username'] ?></h5> <!-- ต้องดึงมาจาก ฐานข้อมูล -->
         </div>
     </div>
 

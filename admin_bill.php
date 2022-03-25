@@ -89,8 +89,8 @@ $objQuery = mysqli_query($conn, $strSQL);
     <div class="box">
 
       <div class="show-box">
-
-        <form name="frmSearch" method="POST" action="admin_bill.php">
+ 
+        <form name=" " method="POST" action="admin_bill.php">
           <div class="grid-search-4">
             <div class="grid form-search">
               <label for="room">หมายเลขห้องพัก:</label>

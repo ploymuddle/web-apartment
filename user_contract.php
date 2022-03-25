@@ -6,7 +6,7 @@ $page = 'สัญญาเช่า';
 $_GET['menu'] = $page;
 
 //connect database
-// require_once "connection.php";
+require_once "connection.php";
 
 // //check id ว่ามีการ Login
 // if ($_SESSION['id'] == "") {
@@ -20,12 +20,11 @@ $_GET['menu'] = $page;
 // 	exit();
 // }
 
-// //get data in database
-// $strSQL = "SELECT * FROM customer WHERE cust_id = '" . $_SESSION['id'] . "' ";
-// echo "<script>console.log( '" . $strSQL . "')</script>";
+//get customer data in database
+$strSQL = "SELECT * FROM customer cu, contract co , room r , room_type rt WHERE cu.cust_id = co.cust_id AND co.room_id = r.room_id  AND r.type_room = rt.type_room   AND cu.cust_id = '" . $_SESSION['id'] . "' ";
 
-// $objQuery = mysqli_query($conn, $strSQL);
-// $objResult = mysqli_fetch_array($objQuery);
+$objQuery = mysqli_query($conn, $strSQL);
+$objCust = mysqli_fetch_array($objQuery);
 
 ?>
 
@@ -59,21 +58,21 @@ $_GET['menu'] = $page;
 
 					<div class="grid-row">
 						<div class="full">
-							<input type="text" id="txtRoomId" name="txtRoomId" value="AAA" disabled>
+							<input type="text" disabled value="<?php echo $objCust['cust_id'] ?>">
 						</div>
 						<div class="full">
-							<input type="text" id="txtRoomId" name="txtRoomId" value="AAA" disabled>
+							<input type="text" disabled value="<?php echo $objCust['cust_name'] ?>">
 						</div>
 						<div class="full">
-							<input type="text" id="txtRoomId" name="txtRoomId" value="XXXXXXXX" disabled>
+							<input type="text" disabled value="<?php echo $objCust['room_id'] ?>">
 						</div>
 						<div class="grid col-30">
 							<label for="roomId">วันที่ทำสัญญา:</label>
-							<input type="text" id="txtRoomId" name="txtRoomId" value="22/01/2020" disabled>
+							<input type="text" value="22/01/2020" disabled value="<?php echo $objCust[''] ?>">
 						</div>
 						<div class="grid col-30">
 							<label for="roomId">กำหนดชำระ:</label>
-							<input type="text" id="txtRoomId" name="txtRoomId" value="วันที่ 1" disabled>
+							<input type="text" value="วันที่ 1" disabled value="<?php echo $objCust['cust_id'] ?>">
 						</div>
 					</div>
 
@@ -82,24 +81,24 @@ $_GET['menu'] = $page;
 
 						</div>
 						<div class="full">
-							<input type="text" id="txtRoomId" name="txtRoomId" value="สกุล" disabled>
+							<input type="text" disabled value="<?php echo $objCust['cust_surname'] ?>">
 						</div>
 						<div class="full">
-							<input type="text" id="txtRoomId" name="txtRoomId" value="XXXXXXXX" disabled>
+							<input type="text" disabled value="<?php echo $objCust['room_type'] ?>">
 						</div>
 						<div class="grid col-30">
 							<label for="roomId">ประเภทห้อง:</label>
-							<input type="text" id="txtRoomId" name="txtRoomId" value="22/01/2020" disabled>
+							<input type="text" value="22/01/2020" disabled value="<?php echo $objCust['type_room'] ?>">
 						</div>
 						<div class="grid col-30">
 							<label for="roomId">ราคาเช่า:</label>
-							<input type="text" id="txtRoomId" name="txtRoomId" value="วันที่ 1" disabled>
+							<input type="text" value="วันที่ 1" disabled value="<?php echo $objCust['type_rental'] ?>">
 						</div>
 					</div>
 
 					<div class="grid-row">
 						<div class="full">
-							<textarea id="w3review" name="w3review" placeholder="ข้อมูลห้องพัก"></textarea>
+							<textarea id="w3review" name="w3review" disabled><?php echo $objCust['type_data'] ?></textarea>
 						</div>
 					</div>
 
@@ -109,7 +108,7 @@ $_GET['menu'] = $page;
 		<div class="box">
 
 			<div class="m-0">
-			<iframe src="http://thaifranchisedownload.com/dl/group2720110902165538.pdf" width="100%" height="600px">
+			<iframe src="file/เอกสารสัญญา_1.pdf" width="100%" height="600px">
 			</div>
 
 

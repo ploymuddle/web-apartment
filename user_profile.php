@@ -5,8 +5,8 @@ session_start();
 $page = 'ข้อมูลส่วนตัว';
 $_GET['menu'] = $page;
 
-// //connect database
-// require_once "connection.php";
+//connect database
+require_once "connection.php";
 
 // //check id ว่ามีการ Login
 // if ($_SESSION['id'] == "") {
@@ -20,12 +20,11 @@ $_GET['menu'] = $page;
 // 	exit();
 // }
 
-// //get data in database
-// $strSQL = "SELECT * FROM customer WHERE cust_id = '" . $_SESSION['id'] . "' ";
-// echo "<script>console.log( '" . $strSQL . "')</script>";
+//get customer data in database
+$strSQL = "SELECT * FROM customer WHERE cust_id = '" . $_SESSION['id'] . "' ";
 
-// $objQuery = mysqli_query($conn, $strSQL);
-// $objResult = mysqli_fetch_array($objQuery);
+$objQuery = mysqli_query($conn, $strSQL);
+$objCust = mysqli_fetch_array($objQuery);
 
 ?>
 
@@ -37,60 +36,60 @@ $_GET['menu'] = $page;
 <body>
 
 	<div class="job">
-		<h1 class="title">Profile...</h1>
 		<h1>สวัสดีท่านสมาชิก</h1>
 
 		<div class="box">
 
 			<div class="show-box">
+
+			<form action="updateCustomer.php" method="POST">
+
 				<div class="grid-col">
 
 					<div class="grid-row">
 						<div class="grid col-20">
-							<label for="roomId"></label>
-							<input type="text" id="txtRoomId" name="txtRoomId" placeholder="รหัสสมาชิก" disabled>
+							<label for="cust_id">รหัสสมาชิก:</label>
+							<input type="text" id="cust_id" name="cust_id" placeholder="รหัสสมาชิก" value="<?php echo $objCust['cust_id'] ?>" readonly>
 						</div>
 						<div class="grid col-20">
-							<label for="roomId">ชื่อ:</label>
-							<input type="text" id="txtRoomId" name="txtRoomId" placeholder="ชื่อ">
+							<label for="custName">ชื่อ:</label>
+							<input type="text" id="name" name="name" placeholder="ชื่อ" value="<?php echo $objCust['cust_name'] ?>">
 						</div>
 						<div class="grid col-20">
-							<label for="roomId">นามสกุล:</label>
-							<input type="text" id="txtRoomId" name="txtRoomId" placeholder="นามสกุล">
+							<label for="surname">นามสกุล:</label>
+							<input type="text" id="surname" name="surname" placeholder="นามสกุล" value="<?php echo $objCust['cust_surname'] ?>">
 						</div>
 						<div class="grid col-20">
-							<label for="roomId">Email:</label>
-							<input type="text" id="txtRoomId" name="txtRoomId" placeholder="Email">
+							<label for="email">Email:</label>
+							<input type="text" id="email" name="email" placeholder="Email" value="<?php echo $objCust['cust_email'] ?>">
 						</div>
 						<div class="grid col-20">
-							<label for="roomId">เบอร์โทร:</label>
-							<input type="text" id="txtRoomId" name="txtRoomId" placeholder="เบอร์โทร">
+							<label for="tel">เบอร์โทร:</label>
+							<input type="text" id="tel" name="tel" placeholder="เบอร์โทร" value="<?php echo $objCust['cust_tel'] ?>">
 						</div>
 					</div>
+				
 
 
 					<!-- <div class="d-flex content-right"> -->
 						<div class="grid-row grid-start">
-							<div class="grid col-end-30">
-								<label for="roomId">ชื่อผู้ใช้:</label>
-								<input type="text" id="txtRoomId" name="txtRoomId" value="AAA" disabled>
+							<div class="grid col-20">
+								<label for="username">ชื่อผู้ใช้:</label>
+								<input type="text" id="username" name="username" placeholder="username" disabled value="<?php echo $objCust['cust_username'] ?>">
 							</div>
-							<div class="grid col-end-30">
-								<label for="roomId">รหัสผ่าน:</label>
-								<input type="text" id="txtRoomId" name="txtRoomId" placeholder="รหัสผ่าน">
+							<div class="grid col-20">
+								<label for="password">รหัสผ่าน:</label>
+								<input type="text" id="password" name="password" placeholder="password" value="<?php echo $objCust['cust_password'] ?>">
 							</div>
-							<div class="grid col-end-30 ">
-								<label for="roomId">กำหนดชำระ:</label>
-								<input type="text" id="txtRoomId" name="txtRoomId" value="วันที่ 1" disabled>
-							</div>
-							<div class="grid col-end-30 ">
-								<label for="roomId"></label>
+							<div class="grid col-20 my-20">
+								<div></div>
 								<button class="btn" type="submit">แก้ไขข้อมูล</button>
 							</div>
 						</div>
 					<!-- </div> -->
-
+					
 				</div>
+			</form>
 			</div>
 
 		</div>
