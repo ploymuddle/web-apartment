@@ -1,7 +1,7 @@
 <?php
 $q = $_GET['q'];
 
-$con = mysqli_connect('localhost','root','','myapartment');
+$con = mysqli_connect('localhost','root','123456','myapartment');
 $sql="SELECT * FROM contract co, customer cu ,  room r , room_type rt 
  WHERE  cu.cust_id = co.cust_id 
  AND r.room_id = co.room_id 

@@ -1,6 +1,6 @@
 <?php
 
-$con = mysqli_connect('localhost','root','','myapartment');
+$con = mysqli_connect('localhost','root','123456','myapartment');
 
 $id = $_POST['billId'];
 $amount = $_POST['payment'];

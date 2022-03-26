@@ -1,7 +1,7 @@
 <?php
 $q = $_GET['q'];
 
-$con = mysqli_connect('localhost','root','','myapartment');
+$con = mysqli_connect('localhost','root','123456','myapartment');
 $sql=" SELECT * FROM room r,room_type rt WHERE r.type_room =  rt.type_room AND  r.room_id = '". $q ."' ";
 $query = mysqli_query($con, $sql);
 $json = array();

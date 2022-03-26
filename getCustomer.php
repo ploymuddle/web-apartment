@@ -1,7 +1,7 @@
 <?php
 $q = intval($_GET['q']);
 
-$con = mysqli_connect('localhost','root','','myapartment');
+$con = mysqli_connect('localhost','root','123456','myapartment');
 
 $sql="SELECT * FROM customer WHERE cust_id = '".$q."'";
 $result = mysqli_query($con,$sql);

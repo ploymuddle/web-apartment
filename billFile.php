@@ -5,7 +5,7 @@ require_once('TCPDF/tcpdf.php');
 
 $id = $_GET['id'];
 
-$con = mysqli_connect('localhost','root','','myapartment');
+$con = mysqli_connect('localhost','root','123456','myapartment');
 $sql="SELECT * FROM payment p ,invoice i WHERE p.inv_id = i.inv_id AND pay_id = '$id' ";
 
 $query = mysqli_query($con, $sql);

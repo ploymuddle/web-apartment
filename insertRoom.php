@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$conn = mysqli_connect('localhost','root','','myapartment');
+$conn = mysqli_connect('localhost','root','123456','myapartment');
 
 $id = $_POST['roomId'];
 $type = $_POST['roomType'];

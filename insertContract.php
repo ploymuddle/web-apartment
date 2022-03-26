@@ -1,5 +1,5 @@
 <?php 
-$conn = mysqli_connect('localhost','root','','myapartment');
+$conn = mysqli_connect('localhost','root','123456','myapartment');
 
 $file='file/'.$_FILES['file']['name'];
 

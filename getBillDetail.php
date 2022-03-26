@@ -1,7 +1,7 @@
 <?php
 $q = $_GET['q'];
 
-$con = mysqli_connect('localhost','root','','myapartment');
+$con = mysqli_connect('localhost','root','123456','myapartment');
 $sql="SELECT * 
 FROM payment p 
 INNER JOIN invoice i ON p.inv_id = i.inv_id 

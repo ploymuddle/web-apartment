@@ -1,6 +1,6 @@
 <?php   
 session_start();
-$conn = mysqli_connect('localhost','root','','myapartment');
+$conn = mysqli_connect('localhost','root','123456','myapartment');
 
 $fromUser = $_SESSION["cust_id"];
 $toUser = $_POST["toUser"];

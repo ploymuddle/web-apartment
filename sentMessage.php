@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$conn = mysqli_connect('localhost','root','','myapartment');
+$conn = mysqli_connect('localhost','root','123456','myapartment');
 
 if(isset($_POST['enterMessage']) && !(strlen($_POST['enterMessage']) == 0) ) {
     $msg = $_POST['enterMessage'];
