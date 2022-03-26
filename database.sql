@@ -74,3 +74,11 @@ INSERT INTO room_type VALUES ('A', 'ห้องไม่มีระเบี�
 INSERT INTO room_type VALUES ('B', 'ห้องมีระเบียง', 2400, 'images/bgroom2.jpeg');
 INSERT INTO room_type VALUES ('C', 'ห้องตรงกลางติดริมบันได', 3600, 'images/bgroom3.jpeg');
 INSERT INTO room_type VALUES ('D', 'ห้องริมตึก', 4800, 'images/bgroom4.jpeg');
+
+CREATE TABLE messages (
+    id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    from_user DATE,
+    to_user INT(10),
+    messages  INT(10),
+    date INT(10)
+);
