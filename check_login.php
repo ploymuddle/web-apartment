@@ -6,7 +6,7 @@ $password = $_POST['txtPassword'];
 $status = $_POST['txtStatus'];
 $mysql = mysqli_connect("localhost","root","123456","myapartment");
 
-if ($status == "admin" && $username == 'admin' && $password == '1234' ) {
+if ($username == 'admin' && $password == '1234' ) {
     $objResult = 'true';
 } else {
     $strSQL = "SELECT * FROM customer WHERE cust_username = '" . $username . "' and cust_password = '" . $password . "';";
@@ -22,12 +22,12 @@ if (!$objResult) {
     if ($status == "admin") {
         $_SESSION["id"] = 0;
         $_SESSION["status"] = $status;
-        session_write_close();
+        // session_write_close();
         header("location:admin_home.php");
     } else {
         $_SESSION["id"] = $objResult["cust_id"];
         $_SESSION["status"] = $status;
-        session_write_close();
+        // session_write_close();
         header("location:user_messages.php");
         // header("location:test/user_page.php");
     }
