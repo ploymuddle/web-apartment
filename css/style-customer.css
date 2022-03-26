@@ -11,7 +11,7 @@
     color: #151515;
     /**กำหนดสี**/
 }
- 
+
 * li {
     list-style: none;
     /**ลบจุดด้านหน้า**/
@@ -180,6 +180,18 @@ h1.title {
     margin-bottom: 10px;
 }
 
+.box-bill {
+    /* background-color: #f1f1f1; */
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    background-color: lightblue;
+    width: 100%;
+    height: 87vh;
+    overflow: scroll;
+}
+
 .show-box {
     background-color: #ffffff;
     border-radius: 10px;
@@ -197,8 +209,12 @@ h1.title {
     box-shadow: 0 0 28px rgba(0, 0, 0, .08);
     padding: 20px;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     /* top-left-bottom-r */
-    margin: 20px auto 10px auto;
+    margin: 15px 0px 10px 10px;
     width: 350px;
     transition: 0.3s;
 }
@@ -257,10 +273,9 @@ h1.title {
 
 .grid-row {
     display: grid;
-    /* grid-template-columns: auto;
-    grid-column-gap: 10%; */
-    /* grid-row-gap: 20px; */
-    text-align: right;
+    grid-template-columns: auto;
+    grid-column-gap: 10%;
+    grid-row-gap: 10px;
 }
 
 .grid-center {
@@ -284,12 +299,6 @@ h1.title {
 } */
 
 .grid-bill {
-    /* display: grid;
-    grid-template-columns: auto auto auto;
-    grid-column-gap: 5px;
-    grid-row-gap: 10px;
-    
-    margin: 10px; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -330,52 +339,54 @@ h1.title {
     padding: 0;
 }
 
-.col-auto {
-    grid-template-columns: auto auto;
+/* Information in user_contract.php */
+.ifm-text-col {
+    display: grid;
+    grid-template-columns: 40% auto;
+    grid-column-gap: 4%;
+    grid-row-gap: 4%;
+    align-items: center;
 }
 
-.col-10 {
-    grid-template-columns: 10% auto;
+.ifm-text-row {
+    display: grid;
+    grid-template-columns: auto;
+    grid-column-gap: 10%;
+    grid-row-gap: 10%;
+    margin-top: 10px;
 }
+
+.ifm-text-pdf {
+    display: grid;
+    grid-template-columns: auto 70%;
+    grid-column-gap: 2%;
+    max-width: 100%;
+}
+
+.ifm-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+/* Information in user_contract.php */
+
+.d-flex {
+    display: flex;
+}
+
+/* Bill */
+.ifm-text-bill {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    align-items: stretch;
+}
+
+/* Bill */
 
 .col-20 {
     grid-template-columns: 20% auto;
-}
-
-.col-30 {
-    grid-template-columns: 30% auto;
-}
-
-.col-40 {
-    grid-template-columns: 40% auto;
-}
-
-.col-end-20 {
-    grid-template-columns: auto 20%;
-}
-
-.col-end-30 {
-    grid-template-columns: auto 30%;
-}
-
-.col-end-10 {
-    grid-template-columns: auto 10%;
-}
-
-.col-end-40 {
-    grid-template-columns: auto 40%;
-}
-
-.col-3-20 {
-    grid-template-columns: 20% auto auto;
-}
-
-.col-3-20 {
-    grid-template-columns: 20% auto auto;
-}
-
-.col-20-30 {
-    grid-template-columns: 20% 30% auto;
 }
 
 .content-center {
@@ -447,11 +458,9 @@ hr {
 
 img {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 180px;
-    height: 100px;
-    object-fit: cover;
+    margin: 10px;
+    width: 80px;
+    height: 80px;
 }
 
 input, textarea {
@@ -538,7 +547,7 @@ form {
     height: 100%;
     text-align: center;
     align-items: stretch;
-  }
+}
 
 .modal-content .form-label {
     font-size: 14px;
@@ -596,33 +605,55 @@ textarea {
     width: 100%;
 }
 
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+    /* height: 600px; */
+}
+
 /**ส่วนเนื่อหา**/
 
 
 /* Use a media query to add a break point at 800px: */
-@media screen and (max-width: 1440px) {
-    iframe {
-        height: 420px;
-    }
-}
+@media screen and (max-width: 1440px) {}
 
 @media screen and (max-width: 1200px) {
     .menu {
         width: 20%;
-    }
-
-    iframe {
-        height: 400px;
     }
 }
 
 @media screen and (max-width: 1152px) {
     .menu {
         width: 10%;
-    }
-
-    iframe {
-        height: 400px;
     }
 
     .job {

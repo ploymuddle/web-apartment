@@ -53,27 +53,136 @@ $objCust = mysqli_fetch_array($objQuery);
 	<div class="job">
 		<h1 class="title">ระบบชำระค่าเช่า</h1>
 
-		<div class="box">
+		<div class="box-bill">
 			<h3>รายการบิลค่าเช่า</h3>
 			<div class="grid-bill">
-				<div class="card-box">
+				<?php
+				$strSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id AND i.cust_id = '" . $_SESSION['id'] . "' ORDER BY i.inv_date DESC";
+				$objQuery = mysqli_query($conn, $strSQL);
 
-				</div>
-				<div class="card-box">
+				while ($bill = mysqli_fetch_array($objQuery)) {
+				?>
 
-				</div>
-				<div class="card-box">
+					<div class="card-box">
+						<p class="">รหัสใบแจ้งหนี้ <?php echo $bill['inv_id']; ?></p>
+						<p class="">รหัสใบเสร็จ <?php echo $bill['pay_id']; ?></p>
+						<p class="">วันที่ <?php echo $bill['inv_date']; ?></p>
+						<img src="https://img.icons8.com/external-smashingstocks-circular-smashing-stocks/100/000000/external-bill-power-and-energy-smashingstocks-circular-smashing-stocks.png" />
 
-				</div>
-				<div class="card-box">
+						<div class="ifm-text-bill">
+							<p class=""><span>ค่าไฟ : </span><?php echo $bill['inv_fire_meter']; ?></p>
+							<p class=""><span>ค่าน้ำ : </span><?php echo $bill['inv_water_meter']; ?></p>
+							<p class=""><span>ค่าเช่า : </span><?php echo $bill['inv_rental']; ?></p>
+							<p class=""><span>รวมเป็นเงิน </span><?php echo $bill['pay_amount']; ?></p>
+						</div>
+						<a class="button" onclick="showBill(<?php echo $bill['cust_id']; ?>)">ชำระเงิน</a>
+					</div>
 
-				</div>
+				<?php } ?>
+
 			</div>
 		</div>
 	</div>
 
+	<!-- The Modal Bill -->
+	<div id="modalBill" class="modal">
+
+		<div class="modal-content show-box">
+
+			<h3>ข้อมูลการชำระ</h3>
+
+			<hr>
+
+			<div class="d-flex content-space-around">
+				<p>รหัสลูกค้า : <a id="id"> - </a></p>
+				<p>ชื่อลูกค้า : </p>
+				<p>ห้องพัก : </p>
+			</div>
+
+			<hr>
+
+			<form method="POST">
+
+				<div class="grid-col">
+					<div class="">
+						<div class="grid form-label">
+							<label>ชื่อลูกค้า : </label>
+							<input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" value="">
+						</div>
+						<div class="grid form-label">
+							<label>นามสกุล : </label>
+							<input type="text" id="surname" name="surname" placeholder="นามสกุล" value="">
+						</div>
+						<div class="grid form-label">
+							<label>เบอร์โทร : </label>
+							<input type="text" id="tel" name="tel" placeholder="เบอร์โทร" value="">
+						</div>
+						<div class="grid form-label">
+							<label>Email : </label>
+							<input type="text" id="email" name="email" placeholder="Email" value="">
+						</div>
+					</div>
+
+					<div class="">
+						<div class="grid form-label">
+							<label>เลขที่ห้องพัก : </label>
+							<input type="text" id="roomId" name="roomId" placeholder="เลขที่ห้องพัก" value="" disabled>
+						</div>
+						<div class="grid form-label">
+							<label>ประเภทห้องพัก : </label>
+							<input type="text" id="roomType" name="roomType" placeholder="ประเภทห้องพัก" value="" disabled>
+						</div>
+						<div class="grid form-label">
+							<label>ข้อมูลห้องพัก : </label>
+							<textarea type="text" id="roomDetail" name="roomDetail" placeholder="ข้อมูลห้องพัก" disabled></textarea>
+						</div>
+						<div class="grid form-label">
+							<label>ราคาค่าเช่า : </label>
+							<input type="text" id="roomRent" name="roomRent" placeholder="0.00" disabled>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+
+				<div class="d-flex content-center">
+					<button type="button" id="close" class="btn" onclick="window.location='user_bill.php';">ยกเลิก</button>
+				</div>
+
+			</form>
+		</div>
+
+	</div>
+	<!-- End The Modal Bill  -->
+
 	<!-- คำสั่งสำหลับแสดงสถานะ ในแถบเมนูที่ใช้งานอยู่ -->
 	<script src="js/script.js"></script>
+	<script>
+		var data;
+		var modalBill = document.getElementById("modalBill");
+		modalBill.style.display = "none";
+
+		function showBill(id) {
+
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+
+				if (this.readyState == 4 && this.status == 200) {
+					var response = this.response;
+					var dataBill = JSON.parse(response);
+					console.log(dataBill);
+					document.getElementById("id").value = dataBill.cust_id;
+					document.getElementById("name").value = dataBill.cust_name;
+					document.getElementById("surname").value = dataBill.cust_surname;
+					document.getElementById("tel").value = dataBill.cust_tel;
+					document.getElementById("email").value = dataBill.cust_email;
+					modalBill.style.display = "block";
+				}
+			}
+			xmlhttp.open("GET", "getBill.php?q=" + id, true);
+			xmlhttp.send();
+		}
+	</script>
 
 </body>
 

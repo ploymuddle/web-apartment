@@ -54,64 +54,29 @@ $objCust = mysqli_fetch_array($objQuery);
 		<h1 class="title">ข้อมูลสัญญาเช่า</h1>
 		<div class="box bg-white">
 
-		<div class="grid-col-3">
+			<div class="ifm-text-pdf">
 
-					<div class="grid-row">
-						<div class="full">
-							<input type="text" disabled value="<?php echo $objCust['cust_id'] ?>">
-						</div>
-						<div class="full">
-							<input type="text" disabled value="<?php echo $objCust['cust_name'] ?>">
-						</div>
-						<div class="full">
-							<input type="text" disabled value="<?php echo $objCust['room_id'] ?>">
-						</div>
-						<div class="grid col-30">
-							<label for="roomId">วันที่ทำสัญญา:</label>
-							<input type="text" value="22/01/2020" disabled value="<?php echo $objCust[''] ?>">
-						</div>
-						<div class="grid col-30">
-							<label for="roomId">กำหนดชำระ:</label>
-							<input type="text" value="วันที่ 1" disabled value="<?php echo $objCust['cust_id'] ?>">
-						</div>
+				<div class="ifm-box">
+					<div class="ifm-text-col">
+						<label>รหัสสมาชิก : </label> <?php echo $objCust['cust_id'] ?>
+						<label>ชื่อ-นามสกุล : </label><?php echo $objCust['cust_name'] . " " . $objCust['cust_surname'] ?>
+						<label> ห้อง : </label><?php echo $objCust['room_id'] ?>
+						<label> ประเภท : </label><?php echo $objCust['type_room'] ?>
+						<label> ค่าเช่า : </label><?php echo $objCust['type_rental'] ?>
+						<label>วันที่ทำสัญญา : </label><?php echo $objCust['con_checkin'] ?>
 					</div>
-
-					<div class="grid-row grid-end">
-						<div class="full">
-
-						</div>
-						<div class="full">
-							<input type="text" disabled value="<?php echo $objCust['cust_surname'] ?>">
-						</div>
-						<div class="full">
-							<input type="text" disabled value="<?php echo $objCust['room_type'] ?>">
-						</div>
-						<div class="grid col-30">
-							<label for="roomId">ประเภทห้อง:</label>
-							<input type="text" value="22/01/2020" disabled value="<?php echo $objCust['type_room'] ?>">
-						</div>
-						<div class="grid col-30">
-							<label for="roomId">ราคาเช่า:</label>
-							<input type="text" value="วันที่ 1" disabled value="<?php echo $objCust['type_rental'] ?>">
-						</div>
+					<div class="ifm-text-row">
+						<label>รายละเอียดห้อง : </label><textarea class="m-0" id="w3review" name="w3review" disabled><?php echo $objCust['type_data'] ?></textarea>
 					</div>
-
-					<div class="grid-row">
-						<div class="full">
-							<textarea id="w3review" name="w3review" disabled><?php echo $objCust['type_data'] ?></textarea>
-						</div>
-					</div>
-
 				</div>
-	</div>
 
-		<div class="box">
+				<div class="m-0">
+					<iframe class="pdf-contract" src="file/เอกสารสัญญา_1.pdf" width="100%" height="600vh">
+				</div>
 
-			<div class="m-0">
-			<iframe src="file/เอกสารสัญญา_1.pdf" width="100%" height="600px">
+
+
 			</div>
-
-
 		</div>
 	</div>
 

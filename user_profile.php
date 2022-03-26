@@ -38,8 +38,6 @@ $objCust = mysqli_fetch_array($objQuery);
 	<div class="job">
 		<h1>สวัสดีท่านสมาชิก</h1>
 
-		<div class="box">
-
 			<div class="show-box">
 
 			<form action="updateCustomer.php" method="POST">
@@ -92,17 +90,10 @@ $objCust = mysqli_fetch_array($objQuery);
 			</form>
 			</div>
 
-		</div>
 	</div>
 
 	<!-- คำสั่งสำหลับแสดงสถานะ ในแถบเมนูที่ใช้งานอยู่ -->
 	<script src="js/script.js"></script>
-	<!-- <script>
-		//  คำสั่งสำหลับแสดงสถานะ ในแถบเมนูที่ใช้งานอยู่
-		$('nav ul li').click(function() {
-			$(this).addClass('active').siblings().removeClass('active')
-		})
-	</script> -->
 
 </body>
 
