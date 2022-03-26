@@ -77,8 +77,8 @@ INSERT INTO room_type VALUES ('D', 'ห้องริมตึก', 4800, 'imag
 
 CREATE TABLE messages (
     id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    from_user DATE,
+    from_user INT(10),
     to_user INT(10),
-    messages  INT(10),
-    date INT(10)
+    message VARCHAR(200),
+    date DATETIME
 );
