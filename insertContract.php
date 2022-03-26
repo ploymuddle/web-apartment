@@ -30,7 +30,7 @@ $resultInsertCust = mysqli_query($conn, $queryInsertCust);
 
 //query cust_id
 $resultId = mysqli_insert_id($conn);
-echo "<script>console.log( 'resultId: " . $resultId . "')</script>";
+// echo "<script>console.log( 'resultId: " . $resultId . "')</script>";
 
 //update room
 $sqlUpdateRoom = "UPDATE room SET room_status = 'O' WHERE room_id = '$roomId'";
@@ -43,7 +43,7 @@ $sql = "INSERT INTO contract (con_checkin, room_id, con_deposit, cust_id, img_do
 $result = mysqli_query($conn, $sql);
 
 $resultCon = mysqli_insert_id($conn);
-echo "<script>console.log( 'resultCon: " . $resultCon . "')</script>";
+// echo "<script>console.log( 'resultCon: " . $resultCon . "')</script>";
 
             if ($result) {
                 $_SESSION['success'] = "Insert user successfully";

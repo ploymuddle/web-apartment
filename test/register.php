@@ -8,9 +8,9 @@
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
         $user_check = "SELECT * FROM user WHERE username = \"".$username."\" ";
-        echo "<script>console.log('SQL: " . $user_check . "' );</script>";
+        // echo "<script>console.log('SQL: " . $user_check . "' );</script>";
         $result = mysqli_query($conn, $user_check);
-        echo "<script>console.log('result: " . $result . "' );</script>";
+        // echo "<script>console.log('result: " . $result . "' );</script>";
         // $user = mysqli_fetch_assoc($result);
         // echo "<script>console.log('result: " . $user . "' );</script>";
 

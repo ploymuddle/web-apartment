@@ -33,7 +33,7 @@ $resultInvoice = mysqli_query($conn, $sqlInvoice);
 
 //query cust_id
 $resultId = mysqli_insert_id($conn);
-echo "<script>console.log( 'resultId: " . $resultId . "')</script>";
+// echo "<script>console.log( 'resultId: " . $resultId . "')</script>";
 
 //add payment in status ค้างชำระ
 $sql = " INSERT INTO payment (inv_id,cust_id,pay_status,pay_amount	) 

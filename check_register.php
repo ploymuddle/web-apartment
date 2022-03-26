@@ -9,9 +9,9 @@ $number = $_POST['txtNumber'];
 $password = $_POST['txtPassword'];
 $passwordConfirm = $_POST['txtPassConfirm'];
 $status = "user";
-echo "<script>console.log( 'status: " . $status . "')</script>";
-echo "<script>console.log( 'name: " . $name . " , surname: " . $surname . " , email: " . $email . "')</script>";
-echo "<script>console.log( 'password: " . $password . " , passwordConfirm: " . $passwordConfirm . "')</script>";
+// echo "<script>console.log( 'status: " . $status . "')</script>";
+// echo "<script>console.log( 'name: " . $name . " , surname: " . $surname . " , email: " . $email . "')</script>";
+// echo "<script>console.log( 'password: " . $password . " , passwordConfirm: " . $passwordConfirm . "')</script>";
 
 if ($password != $passwordConfirm) {
     header("location:register.php");
