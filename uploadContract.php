@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+//เชื่อมต่อฐานข้อมูล
 require_once "connection.php";
 
 ?>

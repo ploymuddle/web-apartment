@@ -1,5 +1,6 @@
 <?php 
-$conn = mysqli_connect('localhost','root','123456','myapartment');
+//เชื่อมต่อฐานข้อมูล
+require_once "connection.php";
 
 $type = $_POST['roomType'];
 $data = $_POST['roomData'];

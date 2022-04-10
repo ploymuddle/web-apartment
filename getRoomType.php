@@ -1,11 +1,13 @@
 <?php
+//ค่าที่ส่งมาจาก javascript
 $q = $_GET['q'];
 
-$con = mysqli_connect('localhost','root','123456','myapartment');
+//เชื่อมต่อฐานข้อมูล
+require_once "connection.php";
 $sql=" SELECT * FROM room r,room_type rt WHERE r.type_room =  rt.type_room AND  r.type_room = '". $q ."' ";
-$result = mysqli_query($con,$sql);
+$result = mysqli_query($conn,$sql);
 $data = array();
-// echo $sql;
+
 while($row = mysqli_fetch_array($result)) {
 
     $hint = array(
@@ -20,7 +22,6 @@ while($row = mysqli_fetch_array($result)) {
 
 echo json_encode($data);
 
-
-mysqli_close($con);
+mysqli_close($conn);
 
 ?>

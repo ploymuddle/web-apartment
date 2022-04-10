@@ -6,7 +6,8 @@ require_once('TCPDF/tcpdf.php');
 $filename = 'report';
 $topic = 'รายงานข้อมูล';
 
-$conn = mysqli_connect('localhost','root','123456','myapartment');
+//เชื่อมต่อฐานข้อมูล
+require_once "connection.php";
 
 $strSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id ";
 if ($_GET["room"] != 'all' && $_GET["room"] != '') {

@@ -4,7 +4,6 @@ require_once "connection.php";
 $username = $_POST['txtUsername'];
 $password = $_POST['txtPassword'];
 $status = $_POST['txtStatus'];
-$mysql = mysqli_connect("localhost","root","123456","myapartment");
 
 if ($username == 'admin' && $password == '1234' ) {
     $objResult = 'true';

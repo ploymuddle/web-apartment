@@ -1,9 +1,10 @@
 <?php
 $q = $_GET['q'];
 
-$con = mysqli_connect('localhost','root','123456','myapartment');
+//เชื่อมต่อฐานข้อมูล
+require_once "connection.php";
 $sql=" SELECT * FROM room_type WHERE type_room = '". $q ."' ";
-$query = mysqli_query($con, $sql);
+$query = mysqli_query($conn, $sql);
 $json = array();
 // echo $sql;
 

@@ -1,6 +1,7 @@
 <?php 
-$conn = mysqli_connect('localhost','root','123456','myapartment');
-
+//อัปเดตเพื่อยกเลิกสัญญา
+//เชื่อมต่อฐานข้อมูล
+require_once "connection.php";
 $id = $_POST['con'];
 
 //query cust_id

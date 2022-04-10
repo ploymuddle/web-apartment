@@ -1,10 +1,11 @@
 <?php
 $q = intval($_GET['q']);
 
-$con = mysqli_connect('localhost','root','123456','myapartment');
+//เชื่อมต่อฐานข้อมูล
+require_once "connection.php";
 
 $sql="SELECT * FROM customer WHERE cust_id = '".$q."'";
-$result = mysqli_query($con,$sql);
+$result = mysqli_query($conn,$sql);
 
 while($row = mysqli_fetch_array($result)) {
 
@@ -24,5 +25,5 @@ while($row = mysqli_fetch_array($result)) {
 echo json_encode($hint);
 
 
-mysqli_close($con);
+mysqli_close($conn);
 ?>

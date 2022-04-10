@@ -90,9 +90,6 @@ if ($_SESSION['status'] != "admin") {
         </div>
     </div>
 
-
-
-
     <script>
         function selectType() {
             var type = document.getElementById("roomType").value;

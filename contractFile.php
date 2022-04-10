@@ -5,14 +5,15 @@ require_once('TCPDF/tcpdf.php');
 
 $id = $_POST['id'];
 
-$con = mysqli_connect('localhost','root','123456','myapartment');
+//เชื่อมต่อฐานข้อมูล
+require_once "connection.php";
 $sql="SELECT * FROM contract co, customer cu ,  room r , room_type rt 
  WHERE  cu.cust_id = co.cust_id 
  AND r.room_id = co.room_id 
  AND r.type_room = rt.type_room 
  AND co.con_id = '".$id."'";
 
-$query = mysqli_query($con, $sql);
+$query = mysqli_query($conn, $sql);
 $result = mysqli_fetch_assoc($query);
 $json = json_encode($result);
 $data = json_decode($json);

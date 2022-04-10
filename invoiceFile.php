@@ -5,10 +5,11 @@ require_once('TCPDF/tcpdf.php');
 
 $id = $_GET['id'];
 
-$con = mysqli_connect('localhost','root','123456','myapartment');
+//เชื่อมต่อฐานข้อมูล
+require_once "connection.php";
 $sql="SELECT * FROM payment p ,invoice i WHERE p.inv_id = i.inv_id AND pay_id = '$id' ";
 
-$query = mysqli_query($con, $sql);
+$query = mysqli_query($conn, $sql);
 $result = mysqli_fetch_assoc($query);
 $json = json_encode($result);
 $data = json_decode($json);
