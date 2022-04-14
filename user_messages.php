@@ -69,14 +69,12 @@ $objCust = mysqli_fetch_array($objQuery);
 
                 <!-- หัวการแชท แสดงชื่อผู้ที่กำลังสนทนาด้วย -->
                   <div class="head">
-                    <div class="head-avatar avatar avatar_larger">
-                      <a href="#" class="avatar-wrap">
-                        A
-                      </a>
+                    <div class="head-title">
+                        แจ้งปัญหาถึง Admin
                     </div>
                 
                       <input type="text" value='0' id="toUser" name="toUser" hidden/>
-                      <div class="head-title">Admin</div>
+                      <div class="head-title">หมายเลขห้องพัก : <?php echo $objCust['cust_username'] ?></div>
                     
                   </div>
                   

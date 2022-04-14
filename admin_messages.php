@@ -39,12 +39,6 @@ $_SESSION["cust_id"] = $_SESSION["id"];
 
             <!-- search by name  -->
             <div class="chat-search search">
-              <!-- <div class="search">
-                <div class="search-icon">
-                  <i class="fa fa-search"></i>
-                </div>
-                <input type="search" class="search-input" placeholder="ค้นหา" value="">
-              </div> -->
               <p class="text-center text-grey">รายชื่อลูกค้าที่แจ้ง</p>
             </div>
 
@@ -54,23 +48,25 @@ $_SESSION["cust_id"] = $_SESSION["id"];
 
                 <?php
                 $msgs = mysqli_query($conn, "SELECT  DISTINCT m.from_user , c.*  FROM messages m , customer c WHERE to_user ='0' AND m.from_user = c.cust_id ");
+            
                 while ($msg = mysqli_fetch_assoc($msgs)) {
+              
                 ?>
 
                   <li class="users-item users-item_group">
-                    <div class="users-avatar avatar">
-                      <a href="?toUser=<?php echo $msg["cust_id"]; ?>" class="avatar-wrap">
-                        <?php
-                        preg_match_all('/./u',$msg["cust_name"],$arr_char);
-                        echo $arr_char[0][0];
-                        // ref: https://www.ninenik.com/%E0%B8%97%E0%B8%9A%E0%B8%97%E0%B8%A7%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%B1%E0%B8%94%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2_PHP-194.html 
-                        ?>
-                      </a>
+                    <?php                 
+                    $roomSql = mysqli_query($conn, "SELECT cust_username  FROM customer WHERE  cust_id = ".$msg['cust_id']." ");
+                    $room = mysqli_fetch_assoc($roomSql);
+                    $countSQL = mysqli_query($conn,"SELECT COUNT(*)  FROM messages m , customer c WHERE to_user ='0' AND m.from_user = c.cust_id AND isFlagRead = 'N' AND from_user =  ".$msg['cust_id']." ");
+                    $count = mysqli_fetch_assoc($countSQL);
+                    ?>
+                    <div class="">ห้อง : </div>
+                    <span class="users-note"> <a href="?toUser=<?php echo $msg["cust_id"]; ?>"><?php echo $room['cust_username'] ?> </a></span>
+                    <?php if ($count['COUNT(*)'] != 0) { ?>
+                    <div class="users-counter">
+                      <span class="counter"><?php echo $count['COUNT(*)']?></span>
                     </div>
-                    <span class="users-note"> <a href="?toUser=<?php echo $msg["cust_id"]; ?>"><?php echo $msg['cust_name'] . ' ' . $msg['cust_surname']; ?> </a></span>
-                    <!-- <div class="users-counter">
-                      <span class="counter">99+</span>
-                    </div> -->
+                    <?php } ?>
                   </li>
 
                 <?php
@@ -86,46 +82,38 @@ $_SESSION["cust_id"] = $_SESSION["id"];
               <form action="sentMessage.php" method="POST">
                 <div class="chatbox-row">
                   <div class="head">
-
+ 
                     <?php
                     if (isset($_GET["toUser"])) {
                       $userName = mysqli_query($conn, "SELECT * FROM customer WHERE cust_id = '" . $_GET["toUser"] . "' ");
                       $uName = mysqli_fetch_assoc($userName);
 
-                      ?>
-                      <div class="head-avatar avatar avatar_larger">
-                      <a href="#" class="avatar-wrap">
+                      $sqlUpdate = "UPDATE messages SET isFlagRead = 'Y' WHERE  from_user =  ".$_GET["toUser"]." ";
+                      $result = mysqli_query($conn, $sqlUpdate);
+                    ?>
+                      <input type="text" value='<?php echo $_GET["toUser"] ?> ' id="toUser" name="toUser" hidden/>
+                      <div class="head-title">
+                        <?php echo '  หมายเลขห้องพัก : ' . $uName['cust_username'] ?>
+                      </div>
+                      <div class="head-title">
+                        <?php echo $uName['cust_name'] . ' ' . $uName['cust_surname'] ?>
+                      </div>
                       <?php
-                        preg_match_all('/./u',$uName["cust_name"],$arr_char);
-                        echo $arr_char[0][0]; 
-                      ?>
-                      </a>
-                    </div>
-
-                      <?php
-
-                      echo '<input type="text" value=' . $_GET["toUser"] . ' id="toUser" name="toUser" hidden/>';
-                      echo '<div class="head-title">' . $uName['cust_name'] . ' ' . $uName['cust_surname'] . '</div>';
                     } else {
                       $userName = mysqli_query($conn, "SELECT  DISTINCT m.from_user , c.*  FROM messages m , customer c WHERE to_user ='0' AND m.from_user = c.cust_id ");
                       $uName = mysqli_fetch_assoc($userName);
                       $_SESSION['toUser'] = $uName['cust_id'];
 
                       if( $_SESSION['toUser'] != '') {
-
                       ?>
-                      <div class="head-avatar avatar avatar_larger">
-                      <a href="#" class="avatar-wrap">
+                       <input type="text" value='<?php echo $_GET["toUser"] ?> ' id="toUser" name="toUser" hidden/>
+                      <div class="head-title">
+                        <?php echo '  หมายเลขห้องพัก : ' . $uName['cust_username'] ?>
+                      </div>
+                      <div class="head-title">
+                        <?php echo $uName['cust_name'] . ' ' . $uName['cust_surname'] ?>
+                      </div>
                       <?php
-                        preg_match_all('/./u',$uName["cust_name"],$arr_char);
-                        echo $arr_char[0][0]; 
-                      ?>
-                      </a>
-                    </div>
-
-                      <?php
-                      echo '<input type="text" value=' . $_SESSION["toUser"] . ' id="toUser" name="toUser" hidden/>';
-                      echo '<div class="head-title">' . $uName['cust_name'] . ' ' . $uName['cust_surname'] . '</div>';
                     } else {
                       echo '<h1>ไม่มีคำร้องแจ้งปัญหาห้องพัก</h1>'; 
                     }
