@@ -27,10 +27,16 @@ if (isset($_POST['month'])) {
 if (isset($_POST['year'])) {
   $year = $_POST['year'];
 }
+if (isset($_POST['status'])) {
+  $status = $_POST['status'];
+}
 
 //คำสั่ง sql ในการดึงข้อมูล
-$billSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id AND i.inv_date LIKE '%-" . $month . "-%' AND i.inv_date LIKE '%" . $year . "%'  ORDER BY i.inv_date DESC ";
-
+$billSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id AND i.inv_date LIKE '%-" . $month . "-%' AND i.inv_date LIKE '%" . $year . "%' ";
+if ($status != 'all') {
+  $billSQL =  $billSQL . " AND p.pay_status = '" . $status . "' ";
+}
+$billSQL = $billSQL . " ORDER BY i.inv_date DESC ";
 ?>
 
 <!doctype html>
@@ -101,6 +107,23 @@ $billSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cu
                     } ?> value='2022'>2022</option>
           </select>
         </div>
+        <div class="grid ">
+          <label>สถานะ : </label>
+          <select id='status' name="status" onchange="this.form.submit()">
+            <option <?php if ($status == "all") {
+                          echo "selected";
+                        } ?> value='all'>ทั้งหมด</option>
+            <option <?php if ($status == "ค้างชำระ") {
+                      echo "selected";
+                    } ?> value='ค้างชำระ'>ค้างชำระ</option>
+            <option <?php if ($status == "ชำระแล้ว") {
+                      echo "selected";
+                    } ?> value='ชำระแล้ว'>ชำระแล้ว</option>
+            <option <?php if ($status == "รอดำเนินการ") {
+                      echo "selected";
+                    } ?> value='รอดำเนินการ'>รอดำเนินการ</option>
+          </select>
+        </div>
         </form>
       </div>
 
@@ -130,7 +153,7 @@ $billSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cu
                 <td><?php echo $bill['cust_surname']; ?></td>
                 <td><?php echo $bill['inv_total']; ?></td>
                 <td>
-                  <div <?php $bill['pay_status'] == 'ค้างชำระ' ? print ' class="bill-r "' : ($bill['pay_status'] == 'จ่ายแล้ว' ? print ' class="bill-g "' : print ' class="bill-y "') ?>><?php echo $bill['pay_status']; ?>
+                  <div <?php $bill['pay_status'] == 'ค้างชำระ' ? print ' class="bill-r "' : ($bill['pay_status'] == 'ชำระแล้ว' ? print ' class="bill-g "' : print ' class="bill-y "') ?>><?php echo $bill['pay_status']; ?>
                   </div>
                 </td>
                 <?php if ($bill['pay_status'] == 'ค้างชำระ') { ?>
@@ -180,7 +203,7 @@ $billSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cu
 
           <div class="grid-row">
             <img id="pic" style="width:200px;height:100%;">
-            <p class="d-flex content-center">หลักฐานการชำระเงิน(<a id="status"></a>)</p>
+            <p class="d-flex content-center">หลักฐานการชำระเงิน(<a id="statusBill"></a>)</p>
           </div>
 
           <div class="grid-row">
@@ -268,21 +291,21 @@ $billSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cu
           document.getElementById("billDate").value = data[0].pay_date;
           document.getElementById("payment").value = data[0].pay_amount;
 
-          if (data[0].pay_status == 'จ่ายแล้ว') {
+          if (data[0].pay_status == 'ชำระแล้ว') {
             document.getElementById("payment").disabled = false;
             document.getElementById("btnUpdate").hidden = false;
-            document.getElementById("status").innerHTML = data[0].pay_status;
-            document.getElementById("status").style.color = 'LimeGreen';
+            document.getElementById("statusBill").innerHTML = data[0].pay_status;
+            document.getElementById("statusBill").style.color = 'LimeGreen';
             document.getElementById("bill").disabled = true;
           } else if (data[0].pay_status == 'ค้างชำระ') {
-            document.getElementById("status").innerHTML = data[0].pay_status;
-            document.getElementById("status").style.color = 'red';
+            document.getElementById("statusBill").innerHTML = data[0].pay_status;
+            document.getElementById("statusBill").style.color = 'red';
             document.getElementById("billDateShow").style.display = 'none';
             document.getElementById("paymentShow").style.display = 'none';
             document.getElementById("bill").disabled = true;
           } else {
-            document.getElementById("status").innerHTML = data[0].pay_status;
-            document.getElementById("status").style.color = 'SlateGray';
+            document.getElementById("statusBill").innerHTML = data[0].pay_status;
+            document.getElementById("statusBill").style.color = 'SlateGray';
           }
 
           modalData.style.display = "block";

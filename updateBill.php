@@ -12,7 +12,7 @@ $result = mysqli_fetch_assoc($query);
 $json = json_encode($result);
 $payId = json_decode($json);
 
-$sqlUpdate = " UPDATE payment SET pay_status = 'ตรวจสอบแล้ว', pay_amount = '$amount' WHERE pay_id = '" . $payId->pay_id . "' ";
+$sqlUpdate = " UPDATE payment SET pay_status = 'รอดำเนินการ', pay_amount = '$amount' WHERE pay_id = '" . $payId->pay_id . "' ";
 $queryUpdate = mysqli_query($conn, $sqlUpdate);
 
             if ($result) {

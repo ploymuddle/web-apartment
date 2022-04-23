@@ -15,8 +15,8 @@ if(isset($_POST['enterMessage']) && !(strlen($_POST['enterMessage']) == 0) ) {
     $date = date("Y-m-d H:i:s");
     
     //add chat
-    $sql = " INSERT INTO messages (from_user, to_user, message, date) 
-                            VALUE ('$from', '$to', '$msg', '$date') ";
+    $sql = " INSERT INTO messages (from_user, to_user, message, date, isFlagRead) 
+                            VALUE ('$from', '$to', '$msg', '$date','N') ";
     $result = mysqli_query($conn, $sql);
     
                 if ($result) {

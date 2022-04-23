@@ -378,6 +378,14 @@ div.out a:hover {
     text-align: left;
 }
 
+.grid-search-5 {
+    display: grid;
+    grid-template-columns: auto 20% 20% 20% 10%;
+    grid-column-gap: 10px;
+    margin: 20px;
+    text-align: left;
+}
+
 .grid-table {
     display: grid;
     grid-template-columns: auto 20% 20%;

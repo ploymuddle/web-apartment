@@ -8,17 +8,17 @@ $_GET['menu'] = $page;
 //connect database
 require_once "connection.php";
 
-// //check id ว่ามีการ Login
-// if ($_SESSION['id'] == "") {
-// 	echo "Please Login!";
-// 	exit();
-// }
+//check id ว่ามีการ Login
+if ($_SESSION['id'] == "") {
+	echo "Please Login!";
+	exit();
+}
 
-// //check status user
-// if ($_SESSION['status'] != "user") {
-// 	echo "This page for User only!";
-// 	exit();
-// }
+//check status user
+if ($_SESSION['status'] != "user") {
+	echo "This page for User only!";
+	exit();
+}
 
 //get customer data in database
 $strSQL = "SELECT * FROM customer cu, contract co , room r , room_type rt WHERE cu.cust_id = co.cust_id AND co.room_id = r.room_id  AND r.type_room = rt.type_room   AND cu.cust_id = '" . $_SESSION['id'] . "' ";
@@ -52,30 +52,33 @@ $objCust = mysqli_fetch_array($objQuery);
 
 	<div class="job">
 		<h1 class="title">ข้อมูลสัญญาเช่า</h1>
-		<div class="box bg-white">
+		<div class="box bg-white m-0">
 
-			<div class="ifm-text-pdf">
+			<div class="ifm-text-box">
 
-				<div class="ifm-box">
-					<div class="ifm-text-col">
-						<label>รหัสสมาชิก : </label> <?php echo $objCust['cust_id'] ?>
-						<label>ชื่อ-นามสกุล : </label><?php echo $objCust['cust_name'] . " " . $objCust['cust_surname'] ?>
-						<label> ห้อง : </label><?php echo $objCust['room_id'] ?>
-						<label> ประเภท : </label><?php echo $objCust['type_room'] ?>
-						<label> ค่าเช่า : </label><?php echo $objCust['type_rental'] ?>
-						<label>วันที่ทำสัญญา : </label><?php echo $objCust['con_checkin'] ?>
-					</div>
-					<div class="ifm-text-row">
-						<label>รายละเอียดห้อง : </label><textarea class="m-0" id="w3review" name="w3review" disabled><?php echo $objCust['type_data'] ?></textarea>
-					</div>
+				<div class="ifm-text-col">
+					<label>รหัสสมาชิก : </label> <?php echo $objCust['cust_id'] ?>
+					<label>ชื่อ-นามสกุล : </label><?php echo $objCust['cust_name'] . " " . $objCust['cust_surname'] ?>
+					<label>เบอร์โทร : </label><?php echo $objCust['cust_tel'] ?>
+					<label>Email : </label><?php echo $objCust['cust_email'] ?>
+					<label>วันที่ทำสัญญา : </label><?php echo $objCust['con_checkin'] ?>
 				</div>
 
-				<div class="m-0">
-					<iframe class="pdf-contract" src="file/เอกสารสัญญา_1.pdf" width="100%" height="600vh">
+				<div class="ifm-text-col">
+					<label> ห้อง : </label><?php echo $objCust['room_id'] ?>
+					<label> ประเภท : </label><?php echo $objCust['type_room'] ?>
+					<label> ค่ามัดจำ : </label><?php echo $objCust['con_deposit'] ?>
+					<label> ค่าเช่า : </label><?php echo $objCust['type_rental'] ?>
 				</div>
 
+				<div class="ifm-text-row">
+					<label>รายละเอียดห้อง : </label><textarea rows="4" cols="20" disabled><?php echo $objCust['type_data'] ?></textarea>
+				</div>
 
+			</div>
 
+			<div class="show-pdf m-0">
+				<iframe class="pdf-contract" src="file/เอกสารสัญญา_1.pdf" width="100%" height="400vh">
 			</div>
 		</div>
 	</div>

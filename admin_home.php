@@ -20,7 +20,7 @@ if ($_SESSION['status'] != "admin") {
 }
 
 //นับจำนวนคำร้องแจ้งปัญหาห้องพัก
-$sqlCountMessages = "SELECT COUNT(DISTINCT from_user) AS count FROM messages ;";
+$sqlCountMessages = "SELECT COUNT(DISTINCT from_user) AS count FROM messages WHERE isFlagRead = 'N' ;";
 $query = mysqli_query($conn, $sqlCountMessages);
 $countMessages = mysqli_fetch_assoc($query);
 
@@ -67,6 +67,15 @@ $countRoom = mysqli_fetch_assoc($query);
 						<y2>รายการ</y2>
 					</p>
 					<button class="btn"><a href="admin_messages.php" class="text-white">ตรวจสอบ</a></button>
+				</div>
+				<div class="show-box grid-4">
+					<i class="far fa-address-book"></i>
+					<p class="text1">คำขอย้าย</p>
+					<p class="text2">
+						<y1>จำนวน</y1>&nbsp; &nbsp; <a><?php echo $countMessages['count']; ?></a>&nbsp; &nbsp;
+						<y2>รายการ</y2>
+					</p>
+					<button class="btn"><a href="approved_to_move.php" class="text-white">ตรวจสอบ</a></button>
 				</div>
 			<!-- </div> -->
 

@@ -30,15 +30,20 @@ if (isset($_POST["clear"])) {
   $cust = '';
   $month = '0';
   $year = '0';
+  $status = 'all';
 } else {
 
   $room = 'all';
   $cust = '';
   $month = '0';
   $year = '0';
+  $status = 'all';
 
   if ($_POST["room"] != 'all' && $_POST["room"] != '') {
     $room = $_POST["room"];
+  }
+  if ($_POST["status"] != 'all' && $_POST["status"] != '') {
+    $status = $_POST["status"];
   }
   if ($_POST["cust"] != '') {
     $cust = $_POST["cust"];
@@ -66,6 +71,9 @@ if ($month  != 0) {
 if ($year != 0) {
   $strSQL =  $strSQL . " AND i.inv_date LIKE '%" . $year . "%' ";
 }
+if ($status != 'all') {
+  $strSQL =  $strSQL . " AND p.pay_status = '" . $status . "' ";
+}
 
 $strSQL = $strSQL . " ORDER BY i.inv_date DESC ";
 
@@ -90,7 +98,7 @@ $objQuery = mysqli_query($conn, $strSQL);
       <div class="show-box">
  
         <form name=" " method="POST" action="admin_bill.php">
-          <div class="grid-search-4">
+          <div class="grid-search-5">
             <div class="grid form-search">
               <label for="room">หมายเลขห้องพัก:</label>
               <select id="room" name="room">
@@ -108,13 +116,6 @@ $objQuery = mysqli_query($conn, $strSQL);
                 <?php } ?>
               </select>
             </div>
-            <!-- <div class="grid form-search">
-            <label for="roomId">สถานะ :</label>
-            <select id="roomId" name="roomId">
-              <option value="">เลือกรายการ</option>
-              <option value="101">101</option>
-            </select>
-          </div> -->
             <div class="grid form-search">
               <label>เดือน : </label>
               <select id='month' name="month">
@@ -177,6 +178,23 @@ $objQuery = mysqli_query($conn, $strSQL);
               </select>
             </div>
             <div class="grid form-search">
+              <label>สถานะ : </label>
+              <select id='status' name="status">
+                <option <?php if ($status == "all") {
+                          echo "selected";
+                        } ?> value='all'>ทั้งหมด</option>
+                <option <?php if ($status == "ค้างชำระ") {
+                          echo "selected";
+                        } ?> value='ค้างชำระ'>ค้างชำระ</option>
+                <option <?php if ($status == "ชำระแล้ว") {
+                          echo "selected";
+                        } ?> value='ชำระแล้ว'>ชำระแล้ว</option>
+                <option <?php if ($status == "รอดำเนินการ") {
+                          echo "selected";
+                        } ?> value='รอดำเนินการ'>รอดำเนินการ</option>
+              </select>
+            </div>
+            <div class="grid form-search">
               <label>รหัสสมาชิก : </label>
               <input type="text" id="cust" name="cust" value="<?php echo $cust; ?>" />
             </div>
@@ -188,7 +206,7 @@ $objQuery = mysqli_query($conn, $strSQL);
           </div>
           <div class="d-flex content-center">
             <button type="submit" class="btn btn-search">ค้นหา</button>
-            <button type="button" class="btn btn-search"><a class="text-white" href="reportFile.php?room=<?php echo $room; ?>&cust=<?php echo $cust; ?>&month=<?php echo $month; ?>&year=<?php echo $year; ?>" target="_blank">Link</a></button>
+            <button type="button" class="btn btn-search"><a class="text-white" href="reportFile.php?room=<?php echo $room; ?>&cust=<?php echo $cust; ?>&month=<?php echo $month; ?>&year=<?php echo $year; ?>&status=<?php echo $status; ?>" target="_blank">รายงาน</a></button>
             <button type="submit" class="btn btn-clear" name="clear" value="clear">ล้างค่า</button>
           </div>
         </form>
@@ -226,7 +244,7 @@ $objQuery = mysqli_query($conn, $strSQL);
                 <td><?php echo $bill['cust_surname']; ?></td>
                 <td><?php echo $bill['inv_total']; ?></td>
                 <td>
-                  <div <?php $bill['pay_status'] == 'ค้างชำระ' ? print ' class="bill-r "' : ($bill['pay_status'] == 'จ่ายแล้ว' ? print ' class="bill-g "' : print ' class="bill-y "') ?>><?php echo $bill['pay_status']; ?>
+                  <div <?php $bill['pay_status'] == 'ค้างชำระ' ? print ' class="bill-r "' : ($bill['pay_status'] == 'ชำระแล้ว' ? print ' class="bill-g "' : print ' class="bill-y "') ?>><?php echo $bill['pay_status']; ?>
                   </div>
                 </td>
               </tr>

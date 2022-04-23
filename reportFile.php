@@ -16,6 +16,12 @@ if ($_GET["room"] != 'all' && $_GET["room"] != '') {
   $room = $_GET["room"];
   $strSQL =  $strSQL . " AND i.room_id = '" . $_GET["room"] . "' ";
 }
+if ($_GET["status"] != 'all' && $_GET["status"] != '') {
+  $topic .= 'ห้องพัก'.$_GET["status"];
+  $filename = $filename . '_'.$_GET["status"];
+  $status = $_GET["status"];
+  $strSQL =  $strSQL . " AND p.pay_status = '" . $_GET["status"] . "' ";
+}
 if ($_GET["cust"] != '') {
   $topic .= 'คุณ'.$_GET["cust"];
   $filename = $filename . '_'.$_GET["cust"];

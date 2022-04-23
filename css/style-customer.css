@@ -344,29 +344,29 @@ h1.title {
     display: grid;
     grid-template-columns: 40% auto;
     grid-column-gap: 4%;
-    grid-row-gap: 4%;
+    grid-row-gap:10px;
     align-items: center;
 }
 
 .ifm-text-row {
     display: grid;
     grid-template-columns: auto;
-    grid-column-gap: 10%;
-    grid-row-gap: 10%;
-    margin-top: 10px;
+    grid-row-gap: 10px;
 }
 
-.ifm-text-pdf {
+.ifm-text-box {
     display: grid;
-    grid-template-columns: auto 70%;
+    grid-template-columns: auto auto auto;
     grid-column-gap: 2%;
     max-width: 100%;
+    margin: 20px 0;
+    padding: 20px;
+    align-items: end;
 }
 
-.ifm-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+.ifm-text-box textarea {
+    width: 100%;
+    padding-top: 2px;
 }
 
 /* Information in user_contract.php */
@@ -601,7 +601,6 @@ textarea {
     background-color: #eee;
     border: none;
     padding: 12px 15px;
-    margin: 8px 0;
     width: 100%;
 }
 
