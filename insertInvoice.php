@@ -2,19 +2,6 @@
 //เชื่อมต่อฐานข้อมูล
 require_once "connection.php";
 
-if(isset($_POST['FM_before'])) {
-    $FU = 0;
-} else {
-    $FU = $_POST['FM'] - $_POST['FM_before'];
-}
-
-if(isset($_POST['WM_before'])) {
-    $WU = 0;
-} else {
-    $WU = $_POST['WM'] - $_POST['WM_before'];
-}
-
-
 $roomId = $_POST['roomId'];
 $custId = $_POST['cust_id'];
 $name = $_POST['name'];
@@ -22,8 +9,10 @@ $suername = $_POST['surname'];
 $date = $_POST['date'];
 $deadtime = $_POST['deadtime'];
 $rental = $_POST['roomRent'];
-$FM = $_POST['FM'];
 $penalty = $_POST['penalty'];
+$FU = $_POST['FU'];
+$FM = $_POST['FM'];
+$WU = $_POST['WU'];
 $WM = $_POST['WM'];
 $total = $_POST['total'];
 

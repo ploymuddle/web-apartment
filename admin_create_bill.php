@@ -80,8 +80,7 @@ if ($_SESSION['status'] != "admin") {
             <div class="grid col-4-20">
               <label for="electronic">มิเตอร์ไฟฟ้า:</label>
               <input type="text" id="FM" name="FM" placeholder="000">
-              <input type="text" id="FM_before"  name="FM_before" readonly="readonly" >
-              <input type="text" id="FU" name="FU" placeholder="ต่อหน่วย" value="7">
+              <input type="text" id="FU" name="FU" placeholder="จำนวนหน่วย" value="7">
             </div>
             <div class="grid col-20">
               <label for="penalty">ค่าปรับ:</label>
@@ -90,8 +89,7 @@ if ($_SESSION['status'] != "admin") {
             <div class="grid col-4-20">
               <label for="water">มิเตอร์น้ำ:</label>
               <input type="text" id="WM" name="WM" placeholder="000">
-              <input type="text" id="WM_before" name="WM_before" readonly="readonly" >
-              <input type="text" id="WU" name="WU" placeholder="ต่อหน่วย" value="10">
+              <input type="text" id="WU" name="WU" placeholder="จำนวนหน่วย" value="10">
             </div>
             <div class="grid"></div>
             <div class="grid col-3-20">
@@ -121,7 +119,7 @@ if ($_SESSION['status'] != "admin") {
     function selectRoom() {
       var room = document.getElementById("roomId").value;
       console.log(room);
-      showDataRoom(room);
+      showDataRoom(room)
     }
 
     function showDataRoom(id) {
@@ -138,40 +136,20 @@ if ($_SESSION['status'] != "admin") {
           document.getElementById("cust_id").value = data[0].cust_id;
           document.getElementById("name").value = data[0].cust_name;
           document.getElementById("surname").value = data[0].cust_surname;
-
+          document.getElementById("date").value = new Date();
           document.getElementById("roomRent").value = data[0].type_rental;
 
-          showDataMeter(id,data[0].cust_id);
         }
       }
       xmlhttp.open("GET", "getRoomDetail.php?q=" + id, true);
       xmlhttp.send();
     }
 
-    function showDataMeter(room,cust) {
-      console.log(room+cust);
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function() {
-
-        if (this.readyState == 4 && this.status == 200) {
-          var response = this.response;
-          // console.log(response);
-          data = JSON.parse(response);
-          console.log(data[0]);
-
-          document.getElementById("FM_before").value = data[0].FM;
-          document.getElementById("WM_before").value = data[0].WM;
-        }
-      }
-      xmlhttp.open("GET", "getMeter.php?room=" + room + "&cust=" + cust, true);
-      xmlhttp.send();
-    }
-
     function sumTotal() {
       var rental = parseInt(document.getElementById("roomRent").value) ? parseInt(document.getElementById("roomRent").value) : 0;
       var penalty = parseInt(document.getElementById("penalty").value) ? parseInt(document.getElementById("penalty").value) : 0;
-      var fire = (document.getElementById("FM").value - document.getElementById("FM_before").value) * document.getElementById("FU").value;
-      var water = (document.getElementById("WM").value - document.getElementById("WM_before").value) * document.getElementById("WU").value ;
+      var fire = (document.getElementById("FM").value) * document.getElementById("FU").value;
+      var water = (document.getElementById("WM").value) * document.getElementById("WU").value ;
       var total =  rental + penalty + fire + water;
       document.getElementById("total").value = total;
     }
