@@ -722,6 +722,7 @@ tr:hover {background-color: #dee2e6;}
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
 }
 
 .btn-download:hover {

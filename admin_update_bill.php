@@ -21,6 +21,7 @@ if ($_SESSION['status'] != "admin") {
 
 $year = date("Y");
 $month = date("m");
+$status = 'all';
 if (isset($_POST['month'])) {
   $month = $_POST['month'];
 }
@@ -244,7 +245,7 @@ $billSQL = $billSQL . " ORDER BY i.inv_date DESC ";
         <hr>
 
         <div class="d-flex content-center">
-          <button class="btn" type="cancel" id="close">ยกเลิก</button>
+          <button class="btn" type="button" id="close" onclick="window.location.reload(true)">ยกเลิก</button>
           <button class="btn" type="submit" id="btnUpdate" hidden>บันทึกรายการ</button>
         </div>
 
@@ -291,11 +292,11 @@ $billSQL = $billSQL . " ORDER BY i.inv_date DESC ";
           document.getElementById("billDate").value = data[0].pay_date;
           document.getElementById("payment").value = data[0].pay_amount;
 
-          if (data[0].pay_status == 'ชำระแล้ว') {
+          if (data[0].pay_status == 'รอดำเนินการ') {
             document.getElementById("payment").disabled = false;
             document.getElementById("btnUpdate").hidden = false;
             document.getElementById("statusBill").innerHTML = data[0].pay_status;
-            document.getElementById("statusBill").style.color = 'LimeGreen';
+            document.getElementById("statusBill").style.color = 'SlateGray';
             document.getElementById("bill").disabled = true;
           } else if (data[0].pay_status == 'ค้างชำระ') {
             document.getElementById("statusBill").innerHTML = data[0].pay_status;
@@ -305,7 +306,7 @@ $billSQL = $billSQL . " ORDER BY i.inv_date DESC ";
             document.getElementById("bill").disabled = true;
           } else {
             document.getElementById("statusBill").innerHTML = data[0].pay_status;
-            document.getElementById("statusBill").style.color = 'SlateGray';
+            document.getElementById("statusBill").style.color = 'LimeGreen';
           }
 
           modalData.style.display = "block";

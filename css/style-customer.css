@@ -180,18 +180,6 @@ h1.title {
     margin-bottom: 10px;
 }
 
-.box-bill {
-    /* background-color: #f1f1f1; */
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-
-    background-color: lightblue;
-    width: 100%;
-    height: 87vh;
-    overflow: scroll;
-}
-
 .show-box {
     background-color: #ffffff;
     border-radius: 10px;
@@ -383,6 +371,91 @@ h1.title {
     align-items: stretch;
 }
 
+.box-bill {
+    /* background-color: #f1f1f1; */
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 87vh;
+    overflow-y: scroll;
+}
+
+.box-bill a.button{
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.status-red {
+    background-color: red;
+    color: white;
+}
+
+.status-green {
+    background-color: green;
+    color: white;
+} 
+
+.status-gray {
+    background-color: gray;
+    color: white;
+}
+
+.modal-bill-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-bill-content {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 2%;
+    max-width: 100%;
+    padding: 20px;
+    align-items:center;
+}
+
+.img-bill-slip {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.img-bill-slip input {
+    background-color: none;
+    border: none;
+    padding: 0;
+    margin-top: 20px;
+    width: 60%;
+}
+
+.btn.btn-download {
+    border: 1px solid #c88820;
+    background-color: #e2a747;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-download:hover {
+    border: 1px solid #c88820;
+    background-color: #c88820;
+}
+
+.btn-download::before {
+    font-family: "FontAwesome";
+    content: "\f56d";
+    font-size: 20px;
+    padding-right: 5px;
+}
+
+.text-white {
+    color: white;
+}
 /* Bill */
 
 .col-20 {

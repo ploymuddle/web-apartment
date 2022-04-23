@@ -8,17 +8,17 @@ $_GET['menu'] = $page;
 // //connect database
 require_once "connection.php";
 
-// //check id ว่ามีการ Login
-// if ($_SESSION['id'] == "") {
-// 	echo "Please Login!";
-// 	exit();
-// }
+//check id ว่ามีการ Login
+if ($_SESSION['id'] == "") {
+	echo "Please Login!";
+	exit();
+}
 
-// //check status user
-// if ($_SESSION['status'] != "user") {
-// 	echo "This page for User only!";
-// 	exit();
-// }
+//check status user
+if ($_SESSION['status'] != "user") {
+	echo "This page for User only!";
+	exit();
+}
 
 //get customer data in database
 $strSQL = "SELECT * FROM customer WHERE cust_id = '" . $_SESSION['id'] . "' ";
@@ -64,18 +64,31 @@ $objCust = mysqli_fetch_array($objQuery);
 				?>
 
 					<div class="card-box">
-						<p class="">รหัสใบแจ้งหนี้ <?php echo $bill['inv_id']; ?></p>
-						<p class="">รหัสใบเสร็จ <?php echo $bill['pay_id']; ?></p>
+						<!-- <p class="">รหัสใบแจ้งหนี้ <?php //echo $bill['inv_id']; 
+														?></p> -->
+						<p class="">รหัสบิล <?php echo $bill['pay_id']; ?></p>
 						<p class="">วันที่ <?php echo $bill['inv_date']; ?></p>
 						<img src="https://img.icons8.com/external-smashingstocks-circular-smashing-stocks/100/000000/external-bill-power-and-energy-smashingstocks-circular-smashing-stocks.png" />
 
 						<div class="ifm-text-bill">
-							<p class=""><span>ค่าไฟ : </span><?php echo $bill['inv_fire_meter']; ?></p>
-							<p class=""><span>ค่าน้ำ : </span><?php echo $bill['inv_water_meter']; ?></p>
-							<p class=""><span>ค่าเช่า : </span><?php echo $bill['inv_rental']; ?></p>
-							<p class=""><span>รวมเป็นเงิน </span><?php echo $bill['pay_amount']; ?></p>
+							<!-- <p class=""><span>ค่าไฟ : </span><?php //echo $bill['inv_fire_meter']; 
+																	?></p> -->
+							<!-- <p class=""><span>ค่าน้ำ : </span><?php //echo $bill['inv_water_meter']; 
+																	?></p> -->
+							<!-- <p class=""><span>ค่าเช่า : </span><?php //echo $bill['inv_rental']; 
+																	?></p> -->
+							<p class=""><span>ยอดเงิน : </span><?php echo $bill['inv_total']; ?></p>
+							<p class=""><span>หมายเลขห้องพัก : </span><?php echo $bill['room_id']; ?></p>
+							<p class=""><span>รหัสลูกค้า : </span><?php echo $bill['cust_id']; ?></p>
+							<p class=""><span>ชื่อลูกค้า : </span><?php echo $bill['cust_name'] . " " . $bill['cust_surname']; ?></p>
 						</div>
-						<a class="button" onclick="showBill(<?php echo $bill['cust_id']; ?>)">ชำระเงิน</a>
+						<?php if ($bill['pay_status'] == "ค้างชำระ") { ?>
+							<a class="button status-red" onclick="showBill(<?php echo $bill['inv_id']; ?>)"><?php echo $bill['pay_status']; ?></a>
+						<?php } else if ($bill['pay_status'] == "ชำระแล้ว") { ?>
+							<a class="button status-green" onclick="showBill(<?php echo $bill['inv_id']; ?>)"><?php echo $bill['pay_status']; ?></a>
+						<?php } else { ?>
+							<a class="button status-gray" onclick="showBill(<?php echo $bill['inv_id']; ?>)"><?php echo $bill['pay_status']; ?></a>
+						<?php } ?>
 					</div>
 
 				<?php } ?>
@@ -93,53 +106,59 @@ $objCust = mysqli_fetch_array($objQuery);
 
 			<hr>
 
-			<div class="d-flex content-space-around">
-				<p>รหัสลูกค้า : <a id="id"> - </a></p>
-				<p>ชื่อลูกค้า : </p>
-				<p>ห้องพัก : </p>
+			<div class="modal-bill-header">
+				<p>รหัสบิลค่าเช่า : <a id="id"> - </a></p>
+				<p>วันที่ : <a id="date"> - </a></p>
 			</div>
 
 			<hr>
 
-			<form method="POST">
+			<form id="form-slip"  method="POST" action="updateSlip.php" enctype="multipart/form-data">
 
-				<div class="grid-col">
-					<div class="">
-						<div class="grid form-label">
-							<label>ชื่อลูกค้า : </label>
-							<input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" value="">
-						</div>
-						<div class="grid form-label">
-							<label>นามสกุล : </label>
-							<input type="text" id="surname" name="surname" placeholder="นามสกุล" value="">
-						</div>
-						<div class="grid form-label">
-							<label>เบอร์โทร : </label>
-							<input type="text" id="tel" name="tel" placeholder="เบอร์โทร" value="">
-						</div>
-						<div class="grid form-label">
-							<label>Email : </label>
-							<input type="text" id="email" name="email" placeholder="Email" value="">
-						</div>
+				<div class="modal-bill-content">
+					<div class="img-bill-slip">
+						<img id="picSilp" style="width:200px;height:100%;">
+							<input type="file" id="img" name="img" accept="image/*">
+							<label for="img" id="textImg">กรุณาแนบหลักฐานการชำระเงิน</label>
 					</div>
 
 					<div class="">
+						<img id="picPayment" style="width:300px;height:100%;" src="https://www.scb.co.th/content/dam/scb/personal-banking/digital-banking/scb-easy/how-to/qr-code/qr-code-generated-7.jpg">
+					</div>
+
+					<div class="">
+
+						<div class="" id="statusBill"></div>
+
 						<div class="grid form-label">
-							<label>เลขที่ห้องพัก : </label>
-							<input type="text" id="roomId" name="roomId" placeholder="เลขที่ห้องพัก" value="" disabled>
+							<label>รหัสบิล : </label>
+							<input type="text" id="billID" name="billID" placeholder="เลขที่ห้องพัก" value="" readonly>
 						</div>
 						<div class="grid form-label">
-							<label>ประเภทห้องพัก : </label>
-							<input type="text" id="roomType" name="roomType" placeholder="ประเภทห้องพัก" value="" disabled>
+							<label>ยอดเงิน : </label>
+							<input type="text" id="payment" name="payment" placeholder="ประเภทห้องพัก" value="" disabled>
 						</div>
 						<div class="grid form-label">
-							<label>ข้อมูลห้องพัก : </label>
-							<textarea type="text" id="roomDetail" name="roomDetail" placeholder="ข้อมูลห้องพัก" disabled></textarea>
+							<label>หมายเลขห้องพัก : </label>
+							<input type="text" id="roomID" name="roomID" placeholder="ข้อมูลห้องพัก" disabled>
 						</div>
 						<div class="grid form-label">
-							<label>ราคาค่าเช่า : </label>
-							<input type="text" id="roomRent" name="roomRent" placeholder="0.00" disabled>
+							<label>รหัสลูกค้า : </label>
+							<input type="text" id="custID" name="custID" placeholder="ชื่อลูกค้า" value="" disabled>
 						</div>
+						<div class="grid form-label">
+							<label>ชื่อลูกค้า : </label>
+							<input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" value="" disabled>
+						</div>
+						<div class="grid form-label">
+							<label>หมายเลขสัญญาเช่า : </label>
+							<input type="text" id="conID" name="conID" placeholder="เบอร์โทร" value="" disabled>
+						</div>
+						<div class="d-flex content-center">
+							<button type="submit" id="submit" class="btn" value="Submit">ยืนยันการชำระเงิน</button>
+							<button type="button" class="btn btn-download" id="bill"></button>
+						</div>
+
 					</div>
 				</div>
 
@@ -169,17 +188,74 @@ $objCust = mysqli_fetch_array($objQuery);
 
 				if (this.readyState == 4 && this.status == 200) {
 					var response = this.response;
-					var dataBill = JSON.parse(response);
+					var data = JSON.parse(response);
+					var dataBill = data[0];
 					console.log(dataBill);
-					document.getElementById("id").value = dataBill.cust_id;
-					document.getElementById("name").value = dataBill.cust_name;
-					document.getElementById("surname").value = dataBill.cust_surname;
-					document.getElementById("tel").value = dataBill.cust_tel;
-					document.getElementById("email").value = dataBill.cust_email;
+					document.getElementById("id").innerHTML = dataBill.pay_id;
+					document.getElementById("date").innerHTML = dataBill.inv_date;
+					document.getElementById("billID").value = dataBill.pay_id;
+					document.getElementById("payment").value = dataBill.inv_total;
+					document.getElementById("roomID").value = dataBill.room_id;
+					document.getElementById("custID").value = dataBill.cust_id;
+					document.getElementById("name").value = dataBill.cust_name + ' ' + dataBill.cust_surname;
+					document.getElementById("conID").value = dataBill.con_id;
+
+					document.getElementById("picSilp").src = 'https://img.icons8.com/external-vitaliy-gorbachev-blue-vitaly-gorbachev/100/000000/external-invoice-home-office-vitaliy-gorbachev-blue-vitaly-gorbachev.png';
+					document.getElementById("picSilp").style.width = "90px";
+
+					if (dataBill.pay_slip == '' || dataBill.pay_slip == null) {
+						document.getElementById("picSilp").src = 'https://img.icons8.com/external-vitaliy-gorbachev-blue-vitaly-gorbachev/100/000000/external-invoice-home-office-vitaliy-gorbachev-blue-vitaly-gorbachev.png';
+						document.getElementById("picSilp").style.width = "90px";
+					} else {
+						document.getElementById("picSilp").src = dataBill.pay_slip;
+						document.getElementById("picSilp").style.width = "300px"
+						document.getElementById("img").style.display = "none";
+						document.getElementById("img").disabled = true;
+						document.getElementById("textImg").innerHTML = "หลักฐานการชำระเงิน";
+					}
+
+					if (dataBill.pay_status == 'รอดำเนินการ') {
+						document.getElementById("statusBill").innerHTML = dataBill.pay_status;
+						document.getElementById("statusBill").className = 'status-gray';
+
+						document.getElementById("submit").hidden = true;
+						document.getElementById("submit").disabled = true;
+						document.getElementById("bill").hidden = false;
+						document.getElementById("bill").disabled = true;
+
+						var btnDB = document.getElementById('bill');
+						var aDB = document.createElement('a');
+						aDB.innerHTML = ' ใบเสร็จ';
+						aDB.setAttribute('class', 'text-white');
+						btnDB.appendChild(aDB);
+
+					} else if (dataBill.pay_status == 'ค้างชำระ') {
+						document.getElementById("statusBill").innerHTML = dataBill.pay_status;
+						document.getElementById("statusBill").className = 'status-red';
+
+						document.getElementById("bill").style.display = "none";
+
+					} else {
+						document.getElementById("statusBill").innerHTML = dataBill.pay_status;
+						document.getElementById("statusBill").className = 'status-green';
+
+						document.getElementById("submit").hidden = true;
+						document.getElementById("submit").disabled = true;
+						document.getElementById("bill").hidden = false;
+
+						var btnDB = document.getElementById('bill');
+						var aDB = document.createElement('a');
+						aDB.innerHTML = ' ใบเสร็จ';
+						aDB.setAttribute('href', 'billFile.php?id=' + dataBill.pay_id);
+						aDB.setAttribute('class', 'text-white');
+						aDB.setAttribute('target', '_blank');
+						btnDB.appendChild(aDB);
+					}
+
 					modalBill.style.display = "block";
 				}
 			}
-			xmlhttp.open("GET", "getBill.php?q=" + id, true);
+			xmlhttp.open("GET", "getBillDetail.php?q=" + id, true);
 			xmlhttp.send();
 		}
 	</script>
