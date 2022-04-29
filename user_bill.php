@@ -57,7 +57,7 @@ $objCust = mysqli_fetch_array($objQuery);
 			<h3>รายการบิลค่าเช่า</h3>
 			<div class="grid-bill">
 				<?php
-				$strSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id AND i.cust_id = '" . $_SESSION['id'] . "' ORDER BY i.inv_date DESC";
+				$strSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id AND c.cust_status = 'live'  AND i.cust_id = '" . $_SESSION['id'] . "' ORDER BY i.inv_date DESC";
 				$objQuery = mysqli_query($conn, $strSQL);
 
 				while ($bill = mysqli_fetch_array($objQuery)) {

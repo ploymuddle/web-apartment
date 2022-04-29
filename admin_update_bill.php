@@ -33,7 +33,7 @@ if (isset($_POST['status'])) {
 }
 
 //คำสั่ง sql ในการดึงข้อมูล
-$billSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id AND i.inv_date LIKE '%-" . $month . "-%' AND i.inv_date LIKE '%" . $year . "%' ";
+$billSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id AND c.cust_status = 'live'  AND i.inv_date LIKE '%-" . $month . "-%' AND i.inv_date LIKE '%" . $year . "%' ";
 if ($status != 'all') {
   $billSQL =  $billSQL . " AND p.pay_status = '" . $status . "' ";
 }

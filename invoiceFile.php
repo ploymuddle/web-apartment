@@ -7,42 +7,40 @@ $id = $_GET['id'];
 
 //เชื่อมต่อฐานข้อมูล
 require_once "connection.php";
-$sql="SELECT * FROM payment p ,invoice i WHERE p.inv_id = i.inv_id AND pay_id = '$id' ";
+$sql="SELECT * FROM invoice i, customer c, payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id AND pay_id = '$id' ";
 
 $query = mysqli_query($conn, $sql);
 $result = mysqli_fetch_assoc($query);
 $json = json_encode($result);
 $data = json_decode($json);
-
-
+  
 // echo "<script>console.log('Debug Objects: " . $_POST['name'] . "' );</script>";
 
 // เรียกใช้ Class TCPDF กำหนดรายละเอียดของหน้ากระดาษ
 // PDF_PAGE_ORIENTATION = กระดาษแนวตั้ง
 // PDF_UNIT = หน่วยวัดขนาดของกระดาษเป็นมิลลิเมตร (mm)
 // PDF_PAGE_FORMAT = รูปแบบของกระดาษเป็น A4
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8');
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, "A5", true, 'UTF-8');
 
 // กำหนดคุณสมบัติของไฟล์ PDF เช่น ผู้สร้างไฟล์ หัวข้อไฟล์ คำค้น 
-$pdf->SetCreator('Mindphp');
-$pdf->SetAuthor('Mindphp Developer');
-$pdf->SetTitle('Mindphp Example 02');
-$pdf->SetSubject('Mindphp Example');
-$pdf->SetKeywords('Mindphp, TCPDF, PDF, example, guide');
+$pdf->SetCreator('AP Admin');
+// $pdf->SetAuthor('Mindphp Developer');
+$pdf->SetTitle('Invoice_'.$data->room_id.'_'.$data->inv_date);
+$pdf->SetSubject('Invoice');
 
 // กำหนดรายละเอียดของหัวกระดาษ สีข้อความและสีของเส้นใต้
 // PDF_HEADER_LOGO = ไฟล์รูปภาพโลโก้
 // PDF_HEADER_LOGO_WIDTH = ขนาดความกว้างของโลโก้
-$pdf->SetHeaderData('', 0, 'หอพัก AP Apartment', '222 kkk bbb 21000', array (0, 0, 0), array (0, 0, 0));
+$pdf->SetHeaderData('', 0, '', '', array (255, 255, 255), array (255, 255, 255));
 
 // กำหนดรายละเอียดของท้ายกระดาษ สีข้อความและสีของเส้น
-$pdf->setFooterData(array (0, 0, 0), array (0, 64, 0));
+$pdf->setFooterData(array (255, 255, 255), array (255, 255, 255));
 
 // กำหนดตัวอักษร รูปแบบและขนาดของตัวอักษร (ตัวอักษรดูได้จากโฟลเดอร์ fonts)
 // PDF_FONT_NAME_MAIN = ชื่อตัวอักษร helvetica
 // PDF_FONT_SIZE_MAIN = ขนาดตัวอักษร 10
-$pdf->setHeaderFont(Array (PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(Array (PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+// $pdf->setHeaderFont(Array (PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+// $pdf->setFooterFont(Array (PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
 // กำหนดระยะขอบกระดาษ
 // PDF_MARGIN_LEFT = ขอบกระดาษด้านซ้าย 15mm
@@ -62,33 +60,50 @@ $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
 // กำหนดตัวอักษรสำหรับส่วนเนื้อหา ชื่อตัวอักษร รูปแบบและขนาดตัวอักษร
-$pdf->SetFont('freeserif', '', 14);
+$pdf->SetFont('freeserif', '', 12);
 
 // กำหนดให้สร้างหน้าเอกสาร
 $pdf->AddPage();
 
-$html = '<h3 style="text-align: left;">ใบแจ้งหนี้ ห้อง '.$data->room_id.'</h3>';
-$html .= '<p style="font-size: 12px;text-align: right;">ใบแจ้งหนี้ ห้อง '.$data->room_id.'</p>';
-$html .= '<p style="font-size: 12px;text-align: right;">วันที่ '.$data->room_id.'</p>';
-// $html .= '<p style="font-size: 12px;text-indent: 80;line-height:20px;">ได้รับเงินจาก คุณ '.$data->cust_name.' '.$data->cust_surname.' เพื่อชำระค่ามัดจำ จำนวน '.$data->con_deposit.' บาท ได้เข้าพัก ณ ห้อง '.$data->room_id.' เป็นห้องพักประเภท '.$data->type_room.' ค่าเช่าห้องพัก เดือนละ '.$data->type_rental.' บาท รายละเอียดข้อมูลลูกค้าดังนี้'.'</p>';
 
-$table = '<table border="1" width="400" cellpadding="10" style="font-size: 12px;">';
-// $table .= '  <tr><th width="100">ชื่อ</th><td>'.$data->cust_name.'</td></tr>';
-// $table .= '  <tr><th width="100">นามสกุล</th><td>'.$data->cust_surname.'</td></tr>';
-// $table .= '  <tr><th width="100">เบอร์โทร</th><td>'.$data->cust_tel.'</td></tr>';
-// $table .= '  <tr><th width="100">Email</th><td>'.$data->cust_email.'</td></tr>';
-$table .= '</table>';
+$html = '<h1 style="text-align: center;">ใบแจ้งหนี้</h1>';
+// $html .= '<div style="font-size: 12px;text-align: right;">ใบแจ้งหนี้ ห้อง '.$data->cust_name.'</div>';
+// $html .= '<div style="font-size: 12px;text-align: right;">วันที่ '.$data->room_id.'</div>';
+$html .= '<table width="100%">';
+$html .= '  <tr><td>หมายเลขห้องพัก: '.$data->room_id.'</td><td style="text-align: right;">วันที่: '.$data->inv_date.'</td></tr>';
+$html .= '  <tr><td>ชื่อลูกค้า: '.$data->cust_name.' '.$data->cust_surname.'</td><td style="text-align: right;">หมายเลขใบแจ้งหนี้: '.$data->inv_id.'</td></tr>';
+$html .= '</table>';
+$html .= '<p style="font-size: 12px;">ใบแจ้งชำระค่าเช่าห้องพัก<p>';
+$html .= '<hr size="5" noshade>';
+$html .= '<p></p>';
+$html .= '<p></p>';
+$html .= '<div ALIGN="CENTER">';
+$html .= '<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>';
+$html .= '<table border="1" cellpadding="5" width="80%" style="font-size: 10px;" >';
+$html .= '  <tr style="background-color: #D6EEEE;border: 2px solid black;"><th>รายการ</th>';
+$html .= '  <th>จำนวนเงิน</th></tr>';
+$html .= '  <tr><td>ค่าเช่ารายเดือน</td>';
+$html .= '  <td>'.$data->inv_rental.'</td></tr>';
+$html .= '  <tr><td>ค่ามิเตอร์ไฟฟ้า</td>';
+$html .= '  <td>'.$data->inv_fire_meter*$data->inv_fire_unit.'</td></tr>';
+$html .= '  <tr><td>ค่ามิเตอร์น้ำ</td>';
+$html .= '  <td>'.$data->inv_water_meter*$data->inv_fire_unit.'</td></tr>';
+$html .= '  <tr><td>ค่าปรับล่าช้า</td>';
+$html .= '  <td>'.$data->inv_penalty.'</td></tr>';
+$html .= '</table>';
+$html .= '<p>กำหนดชำระ วันที่: '.$data->inv_deadtime.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ยอดชำระรวม: '.$data->inv_total.' บาท<p>';
+$html .= '</div>';
 
 
 // ข้อมูลที่จะแสดงในเนื้อหา
 // $html = "Welcome to <b> ".$_POST['id']."</b>";
 
-$namefile = $data->room_id.'_'.$data->con_checkin.'_'.$_POST['id'].'.pdf';
+$namefile = 'Invoice_'.$data->room_id.'_'.$data->inv_date.'.pdf';
 // กำหนดการแสดงข้อมูลแบบ HTML 
 // สามารถกำหนดความกว้างความสูงของกรอบข้อความ 
 // กำหนดตำแหน่งที่จะแสดงเป็นพิกัด x กับ y ซึ่ง x คือแนวนอนนับจากซ้าย ส่วน y คือแนวตั้งนับจากด้านล่าง
 $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
-$pdf->writeHTMLCell(50, '', 50, 90, $table , 0);
+// $pdf->writeHTMLCell(0, '', 50, 30, $table , 0);
 
 // กำหนดการชื่อเอกสาร และรูปแบบการแสดงผล
 $pdf->Output($namefile, 'I');

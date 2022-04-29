@@ -4,19 +4,19 @@ session_start();
 //set menu admin page
 $page = 'แก้ไขข้อมูลลูกค้า';
 $_GET['menu'] = $page;
- 
+
 //เชื่อมต่อฐานข้อมูล
 require_once "connection.php";
 
 //ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
 if ($_SESSION['id'] == "") {
-    header("location:login.php");
+  header("location:login.php");
 }
 
 //ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
 if ($_SESSION['status'] != "admin") {
-    echo "This page for Admin only!";
-    exit();
+  echo "This page for Admin only!";
+  exit();
 }
 
 //ลำดับของ query
@@ -150,25 +150,27 @@ $custQuery = mysqli_query($conn, $strSQL);
             </tr>
           </thead>
           <tbody>
-          <?php
+            <?php
             if (mysqli_num_rows($custQuery) == 0) { ?>
               <tr>
                 <td colspan="8">ไม่มีข้อมูล</td>
               </tr>
-            <?php
-            } else { while ($custList = mysqli_fetch_array($custQuery)) { ?>
-              <tr>
-                <td><?php $i++;
-                    echo $i; ?></td>
-                <td><?php echo $custList["cust_name"]; ?></td>
-                <td><?php echo $custList["cust_surname"]; ?></td>
-                <td><?php echo $custList["cust_tel"]; ?></td>
-                <td><?php echo $custList["cust_email"]; ?></td>
-                <td><?php echo $custList["cust_username"]; ?></td>
-                <td><a class="button" onclick="showData(<?php echo $custList['cust_id']; ?>)"><i class="fas fa-eye" style="font-size:20px;"></i></a></td>
-                <td><a class="button" onclick="showBill(<?php echo $custList['cust_id']; ?>)"><i class="fas fa-file-invoice" style="font-size:22px;"></i></a></td>
-              </tr>
-            <?php } } ?>
+              <?php
+            } else {
+              while ($custList = mysqli_fetch_array($custQuery)) { ?>
+                <tr>
+                  <td><?php $i++;
+                      echo $i; ?></td>
+                  <td><?php echo $custList["cust_name"]; ?></td>
+                  <td><?php echo $custList["cust_surname"]; ?></td>
+                  <td><?php echo $custList["cust_tel"]; ?></td>
+                  <td><?php echo $custList["cust_email"]; ?></td>
+                  <td><?php echo $custList["cust_username"]; ?></td>
+                  <td><a class="button" onclick="showData(<?php echo $custList['cust_id']; ?>)"><i class="fas fa-eye" style="font-size:20px;"></i></a></td>
+                  <td><a class="button" onclick="showBill(<?php echo $custList['cust_id']; ?>)"><i class="fas fa-file-invoice" style="font-size:22px;"></i></a></td>
+                </tr>
+            <?php }
+            } ?>
           </tbody>
         </table>
 
@@ -280,7 +282,7 @@ $custQuery = mysqli_query($conn, $strSQL);
   <!-- End The Modal Data  -->
 
   <!-- The Modal Bill -->
-  <div id="modalBill" class="modal">
+  <div id="modalBill" class="modal ">
 
     <div class="modal-content show-box">
 
@@ -289,62 +291,20 @@ $custQuery = mysqli_query($conn, $strSQL);
       <hr>
 
       <div class="d-flex content-space-around">
-        <p>รหัสลูกค้า : <a id="id"> - </a></p>
-        <p>ชื่อลูกค้า : </p>
-        <p>ห้องพัก : </p>
+        <p>รหัสลูกค้า : <a id="id_showbill"> - </a></p>
+        <p>ชื่อลูกค้า : <a id="name_showbill"> - </a></p>
+        <p>ห้องพัก : <a id="room_showbill"> - </a></p>
       </div>
 
       <hr>
 
-      <form method="POST">
+      <div class="box-bill">
+        <div class="grid-bill" id="showbill"></div>
+      </div>
 
-        <div class="grid-col">
-          <div class="">
-            <div class="grid form-label">
-              <label>ชื่อลูกค้า : </label>
-              <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" value="">
-            </div>
-            <div class="grid form-label">
-              <label>นามสกุล : </label>
-              <input type="text" id="surname" name="surname" placeholder="นามสกุล" value="">
-            </div>
-            <div class="grid form-label">
-              <label>เบอร์โทร : </label>
-              <input type="text" id="tel" name="tel" placeholder="เบอร์โทร" value="">
-            </div>
-            <div class="grid form-label">
-              <label>Email : </label>
-              <input type="text" id="email" name="email" placeholder="Email" value="">
-            </div>
-          </div>
-
-          <div class="">
-            <div class="grid form-label">
-              <label>เลขที่ห้องพัก : </label>
-              <input type="text" id="roomId" name="roomId" placeholder="เลขที่ห้องพัก" value="" disabled>
-            </div>
-            <div class="grid form-label">
-              <label>ประเภทห้องพัก : </label>
-              <input type="text" id="roomType" name="roomType" placeholder="ประเภทห้องพัก" value="" disabled>
-            </div>
-            <div class="grid form-label">
-              <label>ข้อมูลห้องพัก : </label>
-              <textarea type="text" id="roomDetail" name="roomDetail" placeholder="ข้อมูลห้องพัก" disabled></textarea>
-            </div>
-            <div class="grid form-label">
-              <label>ราคาค่าเช่า : </label>
-              <input type="text" id="roomRent" name="roomRent" placeholder="0.00" disabled>
-            </div>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="d-flex content-center">
-          <button type="button" id="close" class="btn" onclick="window.location='admin_customer.php';">ยกเลิก</button>
-        </div>
-
-      </form>
+      <div class="d-flex content-center">
+        <button type="button" id="close" class="btn" onclick="window.location='admin_customer.php';">ยกเลิก</button>
+      </div>
     </div>
 
   </div>
@@ -402,7 +362,7 @@ $custQuery = mysqli_query($conn, $strSQL);
           aDD.innerHTML = 'ไฟล์เอกสาร';
           aDD.setAttribute('href', data[0].img_document);
           aDD.setAttribute('class', 'text-white');
-          aDD.setAttribute('download', 'เอกสารยืนยัน_'+ data[0].con_id +'.pdf');
+          aDD.setAttribute('download', 'เอกสารยืนยัน_' + data[0].con_id + '.pdf');
           btnDD.appendChild(aDD);
 
           var btnDC = document.getElementById('dc');
@@ -410,7 +370,7 @@ $custQuery = mysqli_query($conn, $strSQL);
           aDC.innerHTML = 'ไฟล์สัญญา';
           aDC.setAttribute('href', data[0].img_contract);
           aDC.setAttribute('class', 'text-white');
-          aDC.setAttribute('download', 'เอกสารสัญญา_'+ data[0].con_id +'.pdf');
+          aDC.setAttribute('download', 'เอกสารสัญญา_' + data[0].con_id + '.pdf');
           btnDC.appendChild(aDC);
 
         }
@@ -420,6 +380,7 @@ $custQuery = mysqli_query($conn, $strSQL);
     }
 
     function showBill(id) {
+      console.log(id);
 
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
@@ -428,11 +389,48 @@ $custQuery = mysqli_query($conn, $strSQL);
           var response = this.response;
           var dataBill = JSON.parse(response);
           console.log(dataBill);
-          document.getElementById("id").value = dataBill.cust_id;
-          document.getElementById("name").value = dataBill.cust_name;
-          document.getElementById("surname").value = dataBill.cust_surname;
-          document.getElementById("tel").value = dataBill.cust_tel;
-          document.getElementById("email").value = dataBill.cust_email;
+
+          document.getElementById("id_showbill").innerText = dataBill[0].cust_id;
+          document.getElementById("name_showbill").innerText = dataBill[0].cust_name + ' ' + dataBill[0].cust_surname;
+          document.getElementById("room_showbill").innerText = dataBill[0].room_id;
+
+          for (var i = 0; i < dataBill.length; i++) {
+
+            let txtBill = document.createElement("p");
+            txtBill.innerHTML = "รหัสบิล " + dataBill[i].pay_id;
+            let txtDate = document.createElement("p");
+            txtDate.innerHTML = "วันที่ " + dataBill[i].inv_date;
+            let txtPay = document.createElement("p");
+            txtPay.innerHTML = "ยอดเงิน : " + dataBill[i].inv_total;
+
+            let txtStatus = document.createElement("p");
+            if (dataBill[i].pay_status == "ค้างชำระ") {
+              txtStatus.innerHTML = dataBill[i].pay_status;
+              txtStatus.className = "status-red";
+            } else if (dataBill[i].pay_status == "ชำระแล้ว") {
+              txtStatus.innerHTML = dataBill[i].pay_status;
+              txtStatus.className = "status-green";
+            } else {
+              txtStatus.innerHTML = dataBill[i].pay_status;
+              txtStatus.className = "status-gray";
+            }
+
+            let img = document.createElement("img");
+            img.className = "card-box-img";
+            img.src = "https://img.icons8.com/external-smashingstocks-circular-smashing-stocks/100/000000/external-bill-power-and-energy-smashingstocks-circular-smashing-stocks.png";
+
+            var box = document.createElement('div');
+            box.className = "card-box";
+
+            box.append(txtBill)
+            box.append(txtDate)
+            box.append(img)
+            box.append(txtPay)
+            box.append(txtStatus)
+            document.getElementById('showbill').appendChild(box);
+
+          }
+
           modalBill.style.display = "block";
         }
       }

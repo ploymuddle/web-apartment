@@ -33,6 +33,11 @@ $countPayment = mysqli_fetch_assoc($query);
 $sqlCountRoom = "SELECT (SELECT COUNT(room_status) FROM room ) AS total , (SELECT COUNT(room_status) FROM room WHERE room_status = 'N') AS N ;";
 $query = mysqli_query($conn, $sqlCountRoom);
 $countRoom = mysqli_fetch_assoc($query);
+
+//นับจำนวนแจ้งขอย้าย
+$sqlMove = "SELECT COUNT(*) AS count FROM petition WHERE petition_status = 'ขอย้ายออก' OR petition_status = 'ขอย้ายห้อง';";
+$query = mysqli_query($conn, $sqlMove);
+$countMove = mysqli_fetch_assoc($query);
 ?>
 
 <!doctype html>
@@ -72,7 +77,7 @@ $countRoom = mysqli_fetch_assoc($query);
 					<i class="far fa-address-book"></i>
 					<p class="text1">คำขอย้าย</p>
 					<p class="text2">
-						<y1>จำนวน</y1>&nbsp; &nbsp; <a><?php echo $countMessages['count']; ?></a>&nbsp; &nbsp;
+						<y1>จำนวน</y1>&nbsp; &nbsp; <a><?php echo $countMove['count']; ?></a>&nbsp; &nbsp;
 						<y2>รายการ</y2>
 					</p>
 					<button class="btn"><a href="approved_to_move.php" class="text-white">ตรวจสอบ</a></button>

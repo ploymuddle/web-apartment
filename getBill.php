@@ -1,27 +1,17 @@
 <?php
-$q = intval($_GET['q']);
+$q = $_GET['q'];
 
 //เชื่อมต่อฐานข้อมูล
 require_once "connection.php";
-$sql="SELECT * FROM customer WHERE cust_id = '".$q."'";
-$result = mysqli_query($conn,$sql);
+$sql="SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id AND i.cust_id = '" .$q. "' ORDER BY i.inv_date DESC";
+// echo $sql;
+$query = mysqli_query($conn,$sql);
+$json = array();
 
-while($row = mysqli_fetch_array($result)) {
-
-    $hint = array(
-        "cust_name"=> $row['cust_name'],
-        "cust_surname"=> $row['cust_surname'],
-        "cust_tel"=> $row['cust_tel'],
-        "cust_email"=> $row['cust_email'],
-        "cust_id"=> $row['cust_id']
-    );
-
-  }
-
-//   echo $hint === "" ? "no suggestion" : $hint;
-
-echo json_encode($hint);
-
+while($result = mysqli_fetch_assoc($query)) {    
+    array_push($json, $result);
+}
+echo json_encode($json);
 
 mysqli_close($conn);
 ?>

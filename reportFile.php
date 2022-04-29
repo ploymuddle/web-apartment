@@ -9,15 +9,15 @@ $topic = 'รายงานข้อมูล';
 //เชื่อมต่อฐานข้อมูล
 require_once "connection.php";
 
-$strSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id ";
+$strSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id AND c.cust_status = 'live'  ";
 if ($_GET["room"] != 'all' && $_GET["room"] != '') {
-  $topic .= 'ห้องพัก'.$_GET["room"];
+  $topic .= 'ห้องพัก '.$_GET["room"];
   $filename = $filename . '_'.$_GET["room"];
   $room = $_GET["room"];
   $strSQL =  $strSQL . " AND i.room_id = '" . $_GET["room"] . "' ";
 }
 if ($_GET["status"] != 'all' && $_GET["status"] != '') {
-  $topic .= 'ห้องพัก'.$_GET["status"];
+  $topic .= 'สถานะ'.$_GET["status"];
   $filename = $filename . '_'.$_GET["status"];
   $status = $_GET["status"];
   $strSQL =  $strSQL . " AND p.pay_status = '" . $_GET["status"] . "' ";
@@ -29,13 +29,13 @@ if ($_GET["cust"] != '') {
   $strSQL =  $strSQL . " AND i.cust_id = '" . $_GET["cust"] . "' ";
 }
 if ($_GET["month"] != 0) {
-    $topic .= 'เดือน'.$_GET["month"];
+    $topic .= 'เดือน '.$_GET["month"];
     $filename = $filename . '_'.$_GET["month"];
   $month = $_GET["month"];
   $strSQL =  $strSQL . " AND i.inv_date LIKE '%-" . $month . "-%' ";
 }
 if ($_GET["year"] != 0) {
-    $topic .= 'ปี'.$_GET["year"];
+    $topic .= 'ปี '.$_GET["year"];
     $filename = $filename . '_'.$_GET["year"];
   $year = $_GET["year"];
   $strSQL =  $strSQL . " AND i.inv_date LIKE '%" . $year . "%' ";
@@ -67,15 +67,30 @@ $pdf->SetFont('freeserif', '', 14);
 // กำหนดให้สร้างหน้าเอกสาร
 $pdf->AddPage();
 
-$html = '<h3 style="text-align: center;">'.$topic.'</h3>';
-$html .= '<h6 style="text-align: center;"> ออกรายงานวันที่ ' . date("Y/m/d") .'</h6>';
-$table = '<table style="text-align: center;width: 100%;">';
+// $html = '<h3 style="text-align: center;">'.$topic.'</h3>';
+// $html .= '<h5 style="text-align: center;"> ออกรายงานวันที่ ' . date("Y/m/d") .'</h5>';
+
+$html = '<table width="100%">';
+// $html .= '  <tr><td>รายงานการชำระเงิน</td><td style="text-align: right;">ออกรายงานวันที่: ' . date("Y/m/d") .'</td></tr>';
+$html .= '  <tr><td>'.$topic.'</td><td style="text-align: right;">ออกรายงานวันที่: ' . date("Y/m/d") .'</td></tr>';
+$html .= '</table>';
+
+$table = '<table style="text-align: center;width: 100%;" cellpadding="5" >';
 $table .='<style>';
-$table .='td {border-bottom: 1px solid #000;height:30px;vertical-align: middle;}';
+// $table .='td {border-bottom: 1px solid #000;height:30px;vertical-align: middle;}';
+$table .='td {height:30px;}';
 $table .='th {border-bottom: 2px solid #000;height:25px;}';
 $table .='</style>';
 $table .= '<tr>';
-$table .= '<th style="width:20%">วันที่</th><th style="width:10%">ห้อง</th><th style="width:10%">รหัส</th><th style="width:20%">ชื่อลูกค้า</th><th style="width:20%">รายการชำระ</th><th style="width:20%">สถานะการชำระ</th>';
+$table .= '<th style="width:15%">วันที่</th>
+<th style="width:10%">หมายเลขห้อง</th>
+<th style="width:10%">รหัสสมาชิก</th>
+<th style="width:20%">ชื่อลูกค้า</th>
+<th style="width:5%"></th>
+<th style="width:10%">ยอดเงิน</th>
+<th style="width:10%">ยอดชำระ</th>
+<th style="width:10%">ค้างชำระ</th>
+<th style="width:10%">สถานะ</th>';
 $table .= '</tr>';
 while($row = mysqli_fetch_array($objQuery)) { 
     $table .= '<tr>';
@@ -83,7 +98,10 @@ while($row = mysqli_fetch_array($objQuery)) {
     $table .= '<td>'.$row['room_id'].'</td>';
     $table .= '<td>'. $row['cust_id'].'</td>';
     $table .= '<td>'. $row['cust_name'].' '.$row['cust_surname'].'</td>';
+    $table .= '<td></td>';
+    $table .= '<td>'.$row['inv_total'].'</td>';
     $table .= '<td>'.$row['pay_amount'].'</td>';
+    $table .= '<td>0</td>';
     $table .= '<td>'.$row['pay_status'].'</td>';
     $table .= '</tr>';
  } 

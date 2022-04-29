@@ -458,6 +458,122 @@ h1.title {
 }
 /* Bill */
 
+/* Information in request_to_move.php */
+.rtm-text-col {
+    display: grid;
+    grid-template-columns: 40% auto;
+    grid-column-gap: 4%;
+    grid-row-gap:10px;
+    align-items: center;
+}
+
+.rtm-text-row {
+    display: grid;
+    grid-template-columns: auto;
+    grid-row-gap: 10px;
+}
+
+.rtm-box {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 2%;
+    max-width: 100%;
+    padding: 20px;
+    align-content: stretch;
+}
+
+.rtm-text-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.rtm-text-box textarea {
+    width: 100%;
+    padding-top: 2px;
+}
+
+.rtm-input-box {
+    display: grid;
+    grid-template-columns: auto 20%;
+    grid-column-gap: 2%;
+    max-width: 100%;
+    padding: 20px;
+    align-content: stretch;
+}
+
+.rtm-input-row {
+    display: grid;
+    grid-template-columns: 10% auto auto 25% ;
+    grid-row-gap: 10px;
+    grid-column-gap: 2%;
+}
+
+.rtm-input-row .btn-save {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.show-box .btn-out .btn{
+    background-color: red;
+}
+
+.rtm-input-box form {
+    padding: 0;
+}
+
+.rtm-move-box {
+    display: grid;
+    grid-template-columns: auto;
+    grid-column-gap: 2%;
+    max-width: 100%;
+    padding: 20px;
+    align-content: stretch;
+}
+
+.rtm-text {
+    color: #000000;
+    font-size: 22px;
+    text-align: center;
+    background-color: #f5dd91;
+}
+
+.rtm-text-move {
+    display: grid;
+    grid-template-columns: 10% 50% auto;
+}
+.rtm-input-move {
+    display: grid;
+    grid-template-columns: 80%;
+    justify-content: center;
+}
+.rtm-btn-move {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+}
+
+.bg-move {
+    background-color: #ffaa43;
+    color: #ffffff;
+}
+
+.bg-alert {
+    background-color: #ff4343;
+    color: #ffffff;
+}
+
+.bg-alert a {
+    color: #ffffff;
+}
+
+.box-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Information in request_to_move.php */
+
 .col-20 {
     grid-template-columns: 20% auto;
 }
@@ -663,6 +779,14 @@ form.none {
 }
 
 input {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+select {
     background-color: #eee;
     border: none;
     padding: 12px 15px;

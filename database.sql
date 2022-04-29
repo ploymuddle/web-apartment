@@ -82,3 +82,25 @@ CREATE TABLE messages (
     message VARCHAR(200),
     date DATETIME
 );
+
+
+CREATE TABLE moveout (
+    move_id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    cust_id INT(10),
+    new_room_id VARCHAR(10),
+    status  VARCHAR(10),
+    FOREIGN KEY (cust_id) REFERENCES customer(cust_id),
+    FOREIGN KEY (new_room_id) REFERENCES room(room_id)
+);
+
+
+CREATE TABLE petition (
+    petition_id INT(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    petition_detail VARCHAR(10),
+    petition_date date,
+    petition_status VARCHAR(10),
+    room_id VARCHAR(10),
+    con_id INT(10),
+    FOREIGN KEY (room_id) REFERENCES room(room_id),
+    FOREIGN KEY (con_id) REFERENCES contract(con_id),
+); 

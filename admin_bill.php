@@ -58,7 +58,7 @@ if (isset($_POST["clear"])) {
 
 
 // //คำสั่ง sql ในการดึงข้อมูล
-$strSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id ";
+$strSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id AND c.cust_status = 'live' ";
 if ($room != 'all') {
   $strSQL =  $strSQL . " AND i.room_id = '" . $room . "' ";
 }
