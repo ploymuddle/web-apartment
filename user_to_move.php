@@ -1,24 +1,9 @@
 <?php
 session_start();
+require_once "connection/connection.php";
 
-//set menu user_profile page
 $page = 'แจ้งขอย้าย';
 $_GET['menu'] = $page;
-
-//connect database
-require_once "connection.php";
-
-//check id ว่ามีการ Login
-if ($_SESSION['id'] == "") {
-	echo "Please Login!";
-	exit();
-}
-
-//check status user
-if ($_SESSION['status'] != "user") {
-	echo "This page for User only!";
-	exit();
-}
 
 //get customer data in database
 $strSQL = "SELECT * FROM customer cu, contract co , room r , room_type rt WHERE cu.cust_id = co.cust_id AND co.room_id = r.room_id  AND r.type_room = rt.type_room   AND cu.cust_id = '" . $_SESSION['id'] . "' ";
@@ -42,7 +27,7 @@ $objPay = mysqli_fetch_array($payQuery);
 
 <!doctype html>
 <html>
-
+ 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
@@ -64,7 +49,21 @@ $objPay = mysqli_fetch_array($payQuery);
 
 	<div class="job">
 		<h1 class="title">ระบบขอย้ายห้อง/ย้ายออก</h1>
+        <!-- Alert -->
+		<?php if(isset($_SESSION['error'])) {?>
+        <div class="alert error">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>บันทึกข้อมูลไม่สำเร็จ! </strong> <?php echo $_SESSION['error'] ?>
+        </div>
+       <?php  unset($_SESSION['error']); } ?>
 
+       <?php if(isset($_SESSION['success'])) {?>
+        <div class="alert success">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>บันทึกข้อมูลสำเร็จ! </strong> <?php echo $_SESSION['success'] ?>
+        </div>
+       <?php  unset($_SESSION['success']); } ?>
+       <!-- Alert -->
 
 		<div class="rtm-box">
 			<div class="rtm-text-box">
@@ -108,25 +107,25 @@ $objPay = mysqli_fetch_array($payQuery);
 						<input type="text" id="room" name="room" value="<?php echo $objCust['room_id'] ?>" hidden>
 						<input type="text" id="con" name="con" value="<?php echo $objCust['con_id'] ?>" hidden>
 						<div class="rtm-text-move">
-							<input type="radio" id="moveroom" name="move" value="room">
+							<input type="radio" id="moveroom" name="move" value="room" required>
 							<label for="moveroom">ขอย้ายห้อง</label>
 						</div>
 						<div class="rtm-text-move">
-							<input type="radio" id="moveout" name="move" value="out">
+							<input type="radio" id="moveout" name="move" value="out" required>
 							<label for="moveout">ขอย้ายออก</label>
 						</div>
 						<br>
 						<div class="rtm-input-move">
 							<label>ระบุสาเหตุการย้าย:</label>
-							<textarea type="text" id="detail" name="detail" rows="4" cols="20"></textarea>
+							<textarea type="text" id="detail" name="detail" rows="4" cols="20" required></textarea>
 						</div>
 						<div class="rtm-input-move">
 							<label>ระบุวันย้าย:</label>
-							<input type="date" id="date" name="date" value="">
+							<input type="date" id="date" name="date" value="" required>
 						</div>
 						<br>
 						<div class="btn-save rtm-btn-move">
-							<button type="button" class="btn" onclick="window.location='request_to_move.php';">ยกเลิก</button>
+							<button type="button" class="btn" onclick="window.location='user_to_move.php';" >ยกเลิก</button>
 							<button type="submit" class="btn">ส่งคำขอ</button>
 						</div>
 					</form>
@@ -183,19 +182,6 @@ $objPay = mysqli_fetch_array($payQuery);
 
 			}
 
-			function sendData(id) {
-
-				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function() {
-
-					if (this.readyState == 4 && this.status == 200) {
-						var response = this.responseText;
-						console.log(response);
-					}
-				}
-				xmlhttp.open("GET", "insertMoveout.php?id=" + id, true);
-				xmlhttp.send();
-			}
 		</script>
 
 		<!-- คำสั่งสำหลับแสดงสถานะ ในแถบเมนูที่ใช้งานอยู่ -->

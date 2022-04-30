@@ -1,26 +1,12 @@
 <?php
 session_start();
+require_once "connection/connection.php";
 
-//set menu admin page
 $page = 'คำขอย้าย';
 $_GET['menu'] = $page;
 
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
-
-//ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
-if ($_SESSION['id'] == "") {
-  header("location:login.php");
-}
-
-//ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
-if ($_SESSION['status'] != "admin") {
-  echo "This page for Admin only!";
-  exit();
-}
-
 //คำสั่ง sql ในการดึงข้อมูล
-$strSQL = "SELECT * FROM petition p,customer c,contract co WHERE p.petition_status = 'ขอย้ายออก' OR p.petition_status = 'ขอย้ายห้อง' ";
+$strSQL = "SELECT * FROM petition p LEFT JOIN contract con ON p.con_id = con.con_id LEFT JOIN customer c ON con.cust_id = c.cust_id WHERE p.petition_status = 'ขอย้ายออก' OR p.petition_status = 'ขอย้ายห้อง' ";
 
 ?>
 

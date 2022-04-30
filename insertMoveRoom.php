@@ -1,8 +1,6 @@
 <?php 
 session_start();
-
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 
 if($_POST['move'] == 'room') {
     $detail = $_POST['detail'];
@@ -17,7 +15,7 @@ if($_POST['move'] == 'room') {
     $status = 'ขอย้ายออก';
     $date = $_POST['date'];
 } else {
-    header("Location: request_to_move.php");
+    header("Location: user_to_move.php");
     exit();
 }
 
@@ -27,10 +25,10 @@ $result = mysqli_query($conn, $sql);
 
             if ($result) {
                 $_SESSION['success'] = "ส่งคำขอย้ายห้องสำเร็จ";
-                header("Location: request_to_move.php");
+                header("Location: user_to_move.php");
             } else {
                 $_SESSION['error'] = "กรุณาตรวจสอบข้อมูล";
-                header("Location: request_to_move.php");
+                header("Location: user_to_move.php");
             }
 
 exit();

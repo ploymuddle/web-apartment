@@ -6,7 +6,7 @@ $page = 'User messages';
 $_GET['menu'] = $page;
 
 //เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 
 // //ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
 if ($_SESSION['id'] == "") {

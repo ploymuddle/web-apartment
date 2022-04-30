@@ -2,7 +2,7 @@
 session_start();
 
 //เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 
 if(isset($_POST['enterMessage']) && !(strlen($_POST['enterMessage']) == 0) ) {
     $msg = $_POST['enterMessage'];

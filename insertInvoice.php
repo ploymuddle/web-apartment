@@ -1,6 +1,6 @@
 <?php 
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+session_start();
+require_once "connection/connection.php";
 
 $roomId = $_POST['roomId'];
 $custId = $_POST['cust_id'];
@@ -23,7 +23,6 @@ $resultInvoice = mysqli_query($conn, $sqlInvoice);
 
 //query cust_id
 $resultId = mysqli_insert_id($conn);
-// echo "<script>console.log( 'resultId: " . $resultId . "')</script>";
 
 //add payment in status ค้างชำระ
 $sql = " INSERT INTO payment (inv_id,cust_id,pay_status,pay_amount	) 
@@ -31,14 +30,12 @@ $sql = " INSERT INTO payment (inv_id,cust_id,pay_status,pay_amount	)
 
 $result = mysqli_query($conn, $sql);
 
-
-            if ($result) {
-                $_SESSION['success'] = "Insert user successfully";
-                header("Location: admin_update_bill.php");
+            if ($result && $resultInvoice) {
+                $_SESSION['success'] = "";
+                header("Location: admin_create_bill.php");
             } else {
-                // $_SESSION['error'] = "Something went wrong";
-                // header("Location: insertInvoice.php");
-                echo $sqlInvoice;
+                $_SESSION['error'] = "กรุณาตรวจสอบข้อมูล";
+                header("Location: admin_create_bill.php");
             }
 
 exit();

@@ -1,6 +1,6 @@
 <?php 
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+//อัปเดตข้อมูลห้องพักตามชนิด แก้ไข รูปภาพ รายละเอียด ค่าเช่า
+require_once "connection/connection.php";
 
 $type = $_POST['roomType'];
 $data = $_POST['roomData'];

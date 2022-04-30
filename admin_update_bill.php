@@ -1,23 +1,9 @@
 <?php
 session_start();
+require_once "connection/connection.php";
 
-//set menu admin page
 $page = 'ระบบรับชำระ';
 $_GET['menu'] = $page;
-
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
-
-//ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
-if ($_SESSION['id'] == "") {
-    header("location:login.php");
-}
-
-//ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
-if ($_SESSION['status'] != "admin") {
-    echo "This page for Admin only!";
-    exit();
-}
 
 $year = date("Y");
 $month = date("m");
@@ -42,13 +28,28 @@ $billSQL = $billSQL . " ORDER BY i.inv_date DESC ";
 
 <!doctype html>
 <html>
-<!-- import menu page -->
+
 <?php include('admin_menu.php'); ?>
 
 <body>
 
   <div class="job">
     <h1 class="title">รายการรับชำระ</h1>
+    <!-- Alert -->
+    <?php if(isset($_SESSION['error'])) {?>
+        <div class="alert error">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>บันทึกข้อมูลไม่สำเร็จ! </strong> <?php echo $_SESSION['error'] ?>
+        </div>
+       <?php  unset($_SESSION['error']); } ?>
+
+       <?php if(isset($_SESSION['success'])) {?>
+        <div class="alert success">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>บันทึกข้อมูลสำเร็จ! </strong> <?php echo $_SESSION['success'] ?>
+        </div>
+       <?php  unset($_SESSION['success']); } ?>
+       <!-- Alert -->
 
     <div class="box">
       <div class="grid-table">

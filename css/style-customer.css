@@ -152,7 +152,7 @@ nav ul li a.user_messages::before {
     content: "Messages";
 }
 
-nav ul li a.request_to_move::before {
+nav ul li a.user_to_move::before {
     content: "แจ้งขอย้าย";
 }
 
@@ -876,7 +876,7 @@ textarea {
         content: "\f01c";
     }
 
-    nav ul li a.request_to_move::before {
+    nav ul li a.user_to_move::before {
         font-family: "FontAwesome";
         content: "\f5c1";
     }
@@ -899,3 +899,32 @@ textarea {
         grid-template-columns: auto;
     }
 }
+
+.alert {
+    padding: 20px;
+  }
+
+  .error {
+    background-color: #f44336;
+    color: white;
+  }
+
+  .success {
+    background-color: #27bd3b;
+    color: white;
+  }
+  
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: black;
+  }

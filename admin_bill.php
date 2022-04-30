@@ -1,29 +1,9 @@
 <?php
 session_start();
+require_once "connection/connection.php";
 
-//set menu admin page
 $page = 'รายงานการชำระ';
 $_GET['menu'] = $page;
-
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
-
-//ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
-if ($_SESSION['id'] == "") {
-    header("location:login.php");
-}
-
-//ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
-if ($_SESSION['status'] != "admin") {
-    echo "This page for Admin only!";
-    exit();
-}
-
-
-// if (isset($_POST['download'])) {
-//   header('Window-target: _blank');
-//    header('Location: bill.php');
-// } 
 
 if (isset($_POST["clear"])) {
   $room = 'all';
@@ -198,10 +178,7 @@ $objQuery = mysqli_query($conn, $strSQL);
               <label>รหัสสมาชิก : </label>
               <input type="text" id="cust" name="cust" value="<?php echo $cust; ?>" />
             </div>
-            <!-- <div class="grid form-search">
-            <label>ชื่อลูกค้า : </label>
-            <input type="text" id="txtName" name="txtName" />
-          </div> -->
+
             <div></div>
           </div>
           <div class="d-flex content-center">

@@ -1,35 +1,36 @@
 <?php
 session_start();
+require_once "connection/connection.php";
 
-//set menu admin page
 $page = 'จดมิเตอร์';
 $_GET['menu'] = $page;
-
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
-
-//ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
-if ($_SESSION['id'] == "") {
-    header("location:login.php");
-}
-
-//ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
-if ($_SESSION['status'] != "admin") {
-    echo "This page for Admin only!";
-    exit();
-}
 
 ?>
 
 <!doctype html>
 <html>
-<!-- import menu page -->
+
 <?php include('admin_menu.php'); ?>
 
 <body>
 
   <div class="job">
     <h1 class="title">จดมิเตอร์</h1>
+     <!-- Alert -->
+     <?php if(isset($_SESSION['error'])) {?>
+        <div class="alert error">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>บันทึกข้อมูลไม่สำเร็จ! </strong> <?php echo $_SESSION['error'] ?>
+        </div>
+       <?php  unset($_SESSION['error']); } ?>
+
+       <?php if(isset($_SESSION['success'])) {?>
+        <div class="alert success">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>บันทึกข้อมูลสำเร็จ! </strong> <?php echo $_SESSION['success'] ?>
+        </div>
+       <?php  unset($_SESSION['success']); } ?>
+       <!-- Alert -->
     <div class="box">
       <div class="show-box">
         <h3>สร้างรายการบิล</h3>
@@ -39,8 +40,7 @@ if ($_SESSION['status'] != "admin") {
           <div class="grid-col">
             <div class="grid col-40">
               <label for="roomId">หมายเลขห้องพัก:</label>
-              <!-- <input type="text" id="txtRoomId" name="txtRoomId" placeholder="เลือกรายการ"> -->
-              <select id="roomId" name="roomId" onchange="selectRoom()">
+              <select id="roomId" name="roomId" onchange="selectRoom()" required>
                 <option value="">เลือกรายการ</option>
                 <?php
                 $roomSQL = "SELECT * FROM room WHERE room_status = 'O' ";
@@ -52,9 +52,9 @@ if ($_SESSION['status'] != "admin") {
               </select>
             </div>
             <div class="grid col-3-20">
-              <input type="text" id="cust_id" name="cust_id" placeholder="รหัสสมาชิก">
-              <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า">
-              <input type="text" id="surname" name="surname" placeholder="นามสกุล">
+              <input type="text" id="cust_id" name="cust_id" placeholder="รหัสสมาชิก" required>
+              <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" required>
+              <input type="text" id="surname" name="surname" placeholder="นามสกุล" required>
             </div>
           </div>
 
@@ -63,38 +63,34 @@ if ($_SESSION['status'] != "admin") {
           <div class="grid-col col-40">
             <div class="grid col-20">
               <label for="date">วันที่ทำรายการ:</label>
-              <input type="date" id="date" name="date" placeholder="22/2/2021">
+              <input type="date" id="date" name="date" placeholder="22/2/2021" required>
             </div>
             <div class="grid col-20">
               <label for="deadtime">วันที่กำหนดจ่าย:</label>
-              <input type="date" id="deadtime" name="deadtime" placeholder="22/2/2021">
+              <input type="date" id="deadtime" name="deadtime" placeholder="22/2/2021" required>
             </div>
-            <!-- <div class="grid col-20"> -->
-            <!-- <label for=""></label>
-              <input type="text" id="" name="" placeholder="รหัสใบเสร็จ"> -->
-            <!-- </div> -->
             <div class="grid col-20">
               <label for="roomRent">ค่าเช่าห้อง:</label>
-              <input type="text" id="roomRent" name="roomRent" placeholder="0.00">
+              <input type="text" id="roomRent" name="roomRent" placeholder="0.00" required>
             </div>
             <div class="grid col-4-20">
               <label for="electronic">มิเตอร์ไฟฟ้า:</label>
-              <input type="text" id="FM" name="FM" placeholder="000">
-              <input type="text" id="FU" name="FU" placeholder="จำนวนหน่วย" value="7">
+              <input type="text" id="FM" name="FM" placeholder="000" required>
+              <input type="text" id="FU" name="FU" placeholder="จำนวนหน่วย" value="7" required>
             </div>
             <div class="grid col-20">
               <label for="penalty">ค่าปรับ:</label>
-              <input type="text" id="penalty" name="penalty" placeholder="0.00" value="0">
+              <input type="text" id="penalty" name="penalty" placeholder="0.00" value="0" required>
             </div>
             <div class="grid col-4-20">
               <label for="water">มิเตอร์น้ำ:</label>
-              <input type="text" id="WM" name="WM" placeholder="000">
-              <input type="text" id="WU" name="WU" placeholder="จำนวนหน่วย" value="10">
+              <input type="text" id="WM" name="WM" placeholder="000" required>
+              <input type="text" id="WU" name="WU" placeholder="จำนวนหน่วย" value="10" required>
             </div>
             <div class="grid"></div>
             <div class="grid col-3-20">
               <label for="total">ยอดชำระเงิน:</label>
-              <input type="text" id="total" name="total" placeholder="0.00">
+              <input type="text" id="total" name="total" placeholder="0.00" required>
               <button class="btn" type="button" onclick="sumTotal()">คำนวณ</button>
             </div>
           </div>
@@ -102,7 +98,7 @@ if ($_SESSION['status'] != "admin") {
           <hr>
 
           <div class="d-flex content-center">
-            <button class="btn" type="cancel">ยกเลิก</button>
+            <button class="btn" type="button" onclick="document.location.href='admin_create_bill.php'" >ยกเลิก</button>
             <button class="btn" type="submit">บันทึกรายการ</button>
           </div>
 

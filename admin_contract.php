@@ -1,47 +1,45 @@
 <?php
 session_start();
+require_once "connection/connection.php";
 
-//set menu admin page
 $page = 'เพิ่มสัญญาลูกค้า';
 $_GET['menu'] = $page;
-
-// //เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
-
-//ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
-if ($_SESSION['id'] == "") {
-    header("location:login.php");
-}
-
-//ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
-if ($_SESSION['status'] != "admin") {
-    echo "This page for Admin only!";
-    exit();
-}
 
 ?>
 
 <!doctype html>
 <html>
-<!-- <link rel="stylesheet" href="css/style-admin-contract.css"> -->
 
-<!-- import menu page -->
 <?php include('admin_menu.php'); ?>
 
 <body>
 
     <div class="job">
         <h1 class="title d-flex content-center">เพิ่มสัญญาใหม่</h1>
+        <!-- Alert -->
+       <?php if(isset($_SESSION['error'])) {?>
+        <div class="alert error">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>บันทึกข้อมูลไม่สำเร็จ! </strong> <?php echo $_SESSION['error'] ?>
+        </div>
+       <?php  unset($_SESSION['error']); } ?>
+
+       <?php if(isset($_SESSION['success'])) {?>
+        <div class="alert success">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>บันทึกข้อมูลสำเร็จ! </strong> <?php echo $_SESSION['success'] ?>
+        </div>
+       <?php  unset($_SESSION['success']); } ?>
+       <!-- Alert -->
 
         <div class="box bg-white">
         <form method="POST" action="insertContract.php" enctype="multipart/form-data">
 
-
                 <div class="grid-4 content-center">
-                    <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า">
-                    <input type="text" id="surname" name="surname" placeholder="นามสกุล">
-                    <input type="text" id="tel" name="tel" placeholder="เบอร์โทร">
-                    <input type="text" id="email" name="email" placeholder="Email">
+                    <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" required>
+                    <input type="text" id="surname" name="surname" placeholder="นามสกุล" required>
+                    <input type="text" id="tel" name="tel" placeholder="เบอร์โทร" required>
+                    <input type="text" id="email" name="email" placeholder="Email" required>
                 </div>
 
                 <hr>
@@ -50,7 +48,7 @@ if ($_SESSION['status'] != "admin") {
                     <div class="grid-row">
                         <div class="grid col-20">
                             <label for="roomType">ประเภทห้องพัก:</label>
-                            <select id="roomType" name="roomType" onchange="selectType()">
+                            <select id="roomType" name="roomType" onchange="selectType()" required>
                                 <option value="">เลือกรายการ</option>
                                 <?php
                                 $typeSQL = "SELECT * FROM room_type ";
@@ -63,7 +61,7 @@ if ($_SESSION['status'] != "admin") {
                         </div>
                         <div class="grid col-20">
                             <label for="roomId">เลือกห้องพัก:</label>
-                            <select id="roomId" name="roomId" disabled>
+                            <select id="roomId" name="roomId" disabled required>
                             </select>
                         </div>
                         <div class="grid col-20">
@@ -79,25 +77,17 @@ if ($_SESSION['status'] != "admin") {
                     <div class="grid-row">
                         <div class="grid col-30">
                             <label for="contractDate">วันที่ทำสัญญา:</label>
-                            <input type="date" id="contractDate" name="contractDate">
-                            <!-- <input type="text" id="contract" name="contract" placeholder="หมายเลขสัญญา"> -->
+                            <input type="date" id="contractDate" name="contractDate" required>
                         </div>
-                        <!-- <div class="grid col-20">
-                            <label for="contractDay">วันที่ทำสัญญา:</label>
-                            <select id="contractDay" name="contractDay">
-                                <option value="1">วันที่ 1</option>
-                            </select>
-                            <input type="text" id="contract" name="contract" placeholder="รหัสสมาชิก">
-                        </div> -->
 
                         <div class="grid col-30">
                             <label for="contract">ค่ามัดจำ:</label>
-                            <input type="text" id="contract" name="contract">
+                            <input type="text" id="contract" name="contract" required>
                         </div>
 
                         <div class="grid col-30">
                             <label for="file">เอกสารยืนยัน:</label>
-                            <input type="file" id="file" name="file">
+                            <input type="file" id="file" name="file" required>
                         </div>
                   
                     </div>

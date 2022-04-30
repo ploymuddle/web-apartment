@@ -1,27 +1,13 @@
 <?php
 session_start();
+require_once "connection/connection.php";
+unset($_SESSION["error"]);
 
-//set menu admin page
 $page = 'แก้ไขข้อมูลลูกค้า';
 $_GET['menu'] = $page;
 
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
-
-//ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
-if ($_SESSION['id'] == "") {
-  header("location:login.php");
-}
-
-//ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
-if ($_SESSION['status'] != "admin") {
-  echo "This page for Admin only!";
-  exit();
-}
-
 //ลำดับของ query
 $i = 0;
-
 
 //sql query customer data
 $keyName = null;
@@ -77,8 +63,6 @@ if ($keyStatus == 'live') {
   }
   $strSQL = $strSQL . " ORDER BY cust_id DESC";
 }
-// echo '' . $strSQL . '';
-// echo '' . $keyStatus . '';
 
 $custQuery = mysqli_query($conn, $strSQL);
 
@@ -474,7 +458,6 @@ $custQuery = mysqli_query($conn, $strSQL);
       }
     }
 
-    function save() {}
   </script>
 
 </body>

@@ -1,24 +1,9 @@
 <?php
 session_start();
+require_once "connection/connection.php";
 
-//set menu user_profile page
 $page = 'สัญญาเช่า';
 $_GET['menu'] = $page;
-
-//connect database
-require_once "connection.php";
-
-//check id ว่ามีการ Login
-if ($_SESSION['id'] == "") {
-	echo "Please Login!";
-	exit();
-}
-
-//check status user
-if ($_SESSION['status'] != "user") {
-	echo "This page for User only!";
-	exit();
-}
 
 //get customer data in database
 $strSQL = "SELECT * FROM customer cu, contract co , room r , room_type rt WHERE cu.cust_id = co.cust_id AND co.room_id = r.room_id  AND r.type_room = rt.type_room   AND cu.cust_id = '" . $_SESSION['id'] . "' ";

@@ -2,7 +2,7 @@
 $q = intval($_GET['q']);
 
 //เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 
 $sql="SELECT * FROM customer WHERE cust_id = '".$q."'";
 $result = mysqli_query($conn,$sql);

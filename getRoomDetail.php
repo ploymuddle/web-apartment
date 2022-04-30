@@ -2,7 +2,7 @@
 $q = $_GET['q'];
 
 //เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 $sql="SELECT * FROM contract co, customer cu ,  room r , room_type rt 
  WHERE  cu.cust_id = co.cust_id 
  AND r.room_id = co.room_id 

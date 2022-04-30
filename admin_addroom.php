@@ -1,32 +1,15 @@
 <?php
 session_start();
+require_once "connection/connection.php";
 
-//set menu admin page
 $page = 'เพิ่มห้องพัก';
 $_GET['menu'] = 'จัดการห้องพัก';
-
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
-
-//ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
-if ($_SESSION['id'] == "") {
-    header("location:login.php");
-}
-
-// //ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
-if ($_SESSION['status'] != "admin") {
-  
-    $_SESSION['page_error'] = 'หน้านี้เฉพาะแอดมินเท่านั้น';
-    header("location:only_admin.php");
-}
 
 ?>
 
 <!doctype html>
 <html>
-<!-- <link rel="stylesheet" href="css/style-admin-contract.css"> -->
 
-<!-- import menu page -->
 <?php include('admin_menu.php'); ?>
 
 <body>
@@ -34,6 +17,7 @@ if ($_SESSION['status'] != "admin") {
     <div class="job">
         <h1 class="title  d-flex content-center"><?php echo $page; ?></h1>
 
+        <!-- Alert -->
        <?php if(isset($_SESSION['error'])) {?>
         <div class="alert error">
             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -47,6 +31,7 @@ if ($_SESSION['status'] != "admin") {
             <strong>บันทึกข้อมูลสำเร็จ! </strong> <?php echo $_SESSION['success'] ?>
         </div>
        <?php  unset($_SESSION['success']); } ?>
+       <!-- Alert -->
 
         <div class="box bg-white">
             <form method="POST" class="" action="insertRoom.php">
@@ -54,11 +39,11 @@ if ($_SESSION['status'] != "admin") {
                 <div class="grid-row">
                     <div class="grid col-20">
                         <label for="roomId">เลขที่ห้องพัก:</label>
-                        <input type="text" id="roomId" name="roomId" placeholder="X000">
+                        <input type="text" id="roomId" name="roomId" placeholder="X000" required>
                     </div>
                     <div class="grid col-20">
                         <label for="roomType">ประเภทห้องพัก:</label>
-                        <select id="roomType" name="roomType" onchange="selectType()">
+                        <select id="roomType" name="roomType" onchange="selectType()" required>
                             <option value="">เลือกรายการ</option>
                             <?php
                             $typeSQL = "SELECT * FROM room_type ";

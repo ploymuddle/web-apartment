@@ -7,7 +7,7 @@ $filename = 'report';
 $topic = 'รายงานข้อมูล';
 
 //เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 
 $strSQL = "SELECT * FROM invoice i,customer c,payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id AND c.cust_status = 'live'  ";
 if ($_GET["room"] != 'all' && $_GET["room"] != '') {

@@ -1,23 +1,10 @@
 <?php
 session_start();
+require_once "connection/connection.php";
 
-//set menu admin page
 $page = 'Admin messages';
 $_GET['menu'] = $page;
 
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
-
-//ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
-if ($_SESSION['id'] == "") {
-    header("location:login.php");
-}
-
-//ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
-if ($_SESSION['status'] != "admin") {
-    echo "This page for Admin only!";
-    exit();
-}
 
 $_SESSION["cust_id"] = $_SESSION["id"];
 
@@ -209,21 +196,8 @@ $_SESSION["cust_id"] = $_SESSION["id"];
     </div>
   </div>
 
-
-  <!-- <script>
-        var input = document.getElementById("enterMessage");
-        input.addEventListener("keyup", function(event) {
-            if (event.keyCode === 13) {
-                event.preventDefault();
-                document.getElementById("myBtn").click();
-            }
-        });
-    </script> -->
-
-
   <script src="js/script-dropdown.js"></script>
   <script src="js/script.js"></script>
-  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script> -->
     <script type="text/javascript">
         $(function() {
             setInterval(function() { // เขียนฟังก์ชัน javascript ให้ทำงานทุก ๆ 30 วินาที

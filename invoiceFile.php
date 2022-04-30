@@ -6,7 +6,7 @@ require_once('TCPDF/tcpdf.php');
 $id = $_GET['id'];
 
 //เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 $sql="SELECT * FROM invoice i, customer c, payment p WHERE  i.cust_id = c.cust_id AND i.inv_id = p.inv_id AND pay_id = '$id' ";
 
 $query = mysqli_query($conn, $sql);

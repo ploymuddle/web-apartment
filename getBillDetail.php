@@ -2,7 +2,7 @@
 $q = $_GET['q'];
 
 //เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 $sql="SELECT * 
 FROM payment p 
 INNER JOIN invoice i ON p.inv_id = i.inv_id 

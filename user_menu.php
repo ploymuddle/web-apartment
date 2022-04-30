@@ -54,7 +54,7 @@
 
         <li <?php if ($_GET['menu'] == "แจ้งขอย้าย") {
                 echo "class=\"active\"";
-            } ?>><a href="request_to_move.php" class="request_to_move"></a></li>
+            } ?>><a href="user_to_move.php" class="user_to_move"></a></li>
     </ul>
 
     <div class="out">

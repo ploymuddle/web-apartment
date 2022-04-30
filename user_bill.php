@@ -1,24 +1,9 @@
 <?php
 session_start();
+require_once "connection/connection.php";
 
-//set menu user_profile page
 $page = 'ชำระค่าเช่า';
 $_GET['menu'] = $page;
-
-// //connect database
-require_once "connection.php";
-
-//check id ว่ามีการ Login
-if ($_SESSION['id'] == "") {
-	echo "Please Login!";
-	exit();
-}
-
-//check status user
-if ($_SESSION['status'] != "user") {
-	echo "This page for User only!";
-	exit();
-}
 
 //get customer data in database
 $strSQL = "SELECT * FROM customer WHERE cust_id = '" . $_SESSION['id'] . "' ";
@@ -52,6 +37,23 @@ $objCust = mysqli_fetch_array($objQuery);
 
 	<div class="job">
 		<h1 class="title">ระบบชำระค่าเช่า</h1>
+		<!-- Alert -->
+		<?php if (isset($_SESSION['error'])) { ?>
+			<div class="alert error">
+				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+				<strong>บันทึกข้อมูลไม่สำเร็จ! </strong> <?php echo $_SESSION['error'] ?>
+			</div>
+		<?php unset($_SESSION['error']);
+		} ?>
+
+		<?php if (isset($_SESSION['success'])) { ?>
+			<div class="alert success">
+				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+				<strong>บันทึกข้อมูลสำเร็จ! </strong> <?php echo $_SESSION['success'] ?>
+			</div>
+		<?php unset($_SESSION['success']);
+		} ?>
+		<!-- Alert -->
 
 		<div class="box-bill">
 			<h3>รายการบิลค่าเช่า</h3>
@@ -91,7 +93,14 @@ $objCust = mysqli_fetch_array($objQuery);
 						<?php } ?>
 					</div>
 
-				<?php } ?>
+				<?php } 
+				if(mysqli_num_rows($objQuery)==0) { ?>
+				<div class="card-box">
+		
+						<p class="">ยังไม่มีรายการชำระ</p>
+						
+					</div>
+				<?php }?>
 
 			</div>
 		</div>
@@ -113,13 +122,13 @@ $objCust = mysqli_fetch_array($objQuery);
 
 			<hr>
 
-			<form id="form-slip"  method="POST" action="updateSlip.php" enctype="multipart/form-data">
+			<form id="form-slip" method="POST" action="updateSlip.php" enctype="multipart/form-data">
 
 				<div class="modal-bill-content">
 					<div class="img-bill-slip">
 						<img id="picSilp" style="width:200px;height:100%;">
-							<input type="file" id="img" name="img" accept="image/*">
-							<label for="img" id="textImg">กรุณาแนบหลักฐานการชำระเงิน</label>
+						<input type="file" id="img" name="img" accept="image/*">
+						<label for="img" id="textImg">กรุณาแนบหลักฐานการชำระเงิน</label>
 					</div>
 
 					<div class="">

@@ -1,25 +1,10 @@
 <?php
 session_start();
+require_once "connection/connection.php";
 
-//set menu admin page
 $page = 'จัดการห้องพัก';
 $_GET['menu'] = $page;
 
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
-
-//ตรวจสอบการเข้าใช้งาน ถ้าไม่มีให้กลับไป login.php
-if ($_SESSION['id'] == "") {
-    header("location:login.php");
-}
-
-//ตรวจสอบสถานะว่าเป็น admin เข้าใช้งานในหน้านี้เท่านั้น
-if ($_SESSION['status'] != "admin") {
-	echo "This page for Admin only!";
-	exit();
-}
-
-//คำสั่ง sql ในการดึงข้อมูล
 $roomTypeSQL = "SELECT * FROM room_type ";
 $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 
@@ -28,8 +13,7 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 
 <!doctype html>
 <html>
-<!-- <link rel="stylesheet" href="css/style-admin-room.css"> -->
-<!-- import menu page -->
+
 <?php include('admin_menu.php'); ?>
 
 <body>
@@ -41,7 +25,6 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 				<button class="btn btn-add" type="submit" onclick="document.location.href='admin_addroom.php'"> เพิ่มห้องพัก</button>
 			</div>
 
-			<!-- <div class="groub"> -->
 			<?php while ($roomType = mysqli_fetch_array($roomTypeQuery)) {
 				$countSQL = "SELECT ";
 				$countSQL = $countSQL . "(SELECT COUNT(*) FROM room WHERE type_room = '" . $roomType['type_room'] . "') AS countTotal ";
@@ -62,7 +45,6 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 				</div>
 
 			<?php } ?>
-			<!-- </div> -->
 		</div>
 	</div>
 
@@ -124,15 +106,15 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 				<div class="">
 					<div class="grid col-30">
 						<label for="roomType">ประเภทห้องพัก :</label>
-						<input id="roomType" name="roomType" placeholder="ประเภทห้องพัก" readonly="readonly">
+						<input id="roomType" name="roomType" placeholder="ประเภทห้องพัก" readonly="readonly" required>
 					</div>
 					<div class="grid col-30">
 						<label for="roomData"></label>
-						<textarea id="roomData" name="roomData" rows="4" cols="50" placeholder="ข้อมูลห้องพัก" ></textarea>
+						<textarea id="roomData" name="roomData" rows="4" cols="50" placeholder="ข้อมูลห้องพัก" required></textarea>
 					</div>
 					<div class="grid col-30">
 						<label for="roomRental">ราคาค่าเช่า :</label>
-						<input type="text" id="roomRental" name="roomRental" placeholder="0.00" >
+						<input type="text" id="roomRental" name="roomRental" placeholder="0.00" required>
 					</div>
 				</div>
 				<div class="d-flex content-center f-column">
@@ -141,7 +123,7 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 					</div>
 					<div class="grid col-20">
 						<label for="pic">รูปภาพ :</label>
-						<input type="file" id="pic" name="pic" class="bg-white">
+						<input type="file" id="pic" name="pic" class="bg-white" required>
 					</div>
 				</div>
 			</div>

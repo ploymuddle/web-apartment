@@ -2,7 +2,7 @@
 session_start();
 
 //เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 
 $fromUser = $_SESSION["cust_id"];
 $toUser = $_POST["toUser"];

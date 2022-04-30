@@ -1,10 +1,9 @@
 <?php
+//อัปเดตสถานะห้องพักเมื่อมีการปรับปรุง
+session_start();
 $id = $_GET['q'];
+require_once "connection/connection.php";
 
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
-
-//query room status
 $sql = "SELECT room_status FROM room WHERE room_id = '" . $id . "' ";
 $query = mysqli_query($conn, $sql);
 $result = mysqli_fetch_assoc($query);

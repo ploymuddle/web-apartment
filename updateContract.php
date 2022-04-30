@@ -2,7 +2,7 @@
 session_start();
 //อัปเดตเพื่อยกเลิกสัญญา
 //เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 $id = $_POST['con'];
 
 
@@ -32,6 +32,10 @@ $result = mysqli_query($conn, $sqlRoom);
 //delete message
 $sqlMessage = "DELETE FROM messages WHERE from_user = '$data->room_id' OR to_user = '$data->room_id'  ";
 $result = mysqli_query($conn, $sqlMessage);
+
+//delete petition
+$sqlPetition = "DELETE FROM petition WHERE room_id = '$data->room_id' ";
+$result = mysqli_query($conn, $sqlPetition);
 
 //update contract
 $sqlUpdate = "UPDATE contract SET con_status = 'V' WHERE con_id = '$id'  ";

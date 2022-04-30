@@ -1,6 +1,6 @@
 <?php 
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+session_start();
+require_once "connection/connection.php";
 
 $file='file/'.$_FILES['file']['name'];
 
@@ -31,7 +31,6 @@ $resultInsertCust = mysqli_query($conn, $queryInsertCust);
 
 //query cust_id
 $resultId = mysqli_insert_id($conn);
-// echo "<script>console.log( 'resultId: " . $resultId . "')</script>";
 
 //update room
 $sqlUpdateRoom = "UPDATE room SET room_status = 'O' WHERE room_id = '$roomId'";
@@ -40,17 +39,14 @@ $result = mysqli_query($conn, $sqlUpdateRoom);
 //add contract
 $sql = "INSERT INTO contract (con_checkin, room_id, con_deposit, cust_id, img_document, img_contract, con_status)
                         VALUE ('$date', '$roomId', '$deposit', '$resultId' , '$file' , 'www', 'O')";
-
 $result = mysqli_query($conn, $sql);
 
 $resultCon = mysqli_insert_id($conn);
-// echo "<script>console.log( 'resultCon: " . $resultCon . "')</script>";
 
             if ($result) {
-                $_SESSION['success'] = "Insert user successfully";
                 header('Location: uploadContract.php?id='.$resultCon);
             } else {
-                $_SESSION['error'] = "Something went wrong";
+                $_SESSION['error'] = "กรุณาตรวจสอบข้อมูล";
                 header("Location: admin_contract.php");
             }
 

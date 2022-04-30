@@ -47,7 +47,7 @@
 
 		<div class="grid-card">
 			<?php
-			require_once "connection.php";
+			require_once "connection/connection.php";
 			$roomTypeSQL = "SELECT * FROM room_type ";
 			$roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 			while ($roomType = mysqli_fetch_array($roomTypeQuery)) {
@@ -71,8 +71,7 @@
 			<div class="modal-header">
 				<h2 id="type"></h2>
 			</div>
-
-
+			
 			<div class="modal-text">
 				<hr>
 				<p id="data"></p>
@@ -132,9 +131,7 @@
 						div.append(img)
 						div.append(textSpan)
 						document.getElementById('divResult').appendChild(div);
-
 					}
-
 				}
 			}
 			xmlhttp.open("GET", "getRoomType.php?q=" + id, true);

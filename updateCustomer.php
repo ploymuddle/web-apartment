@@ -1,7 +1,7 @@
 <?php 
 session_start();
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
+
 $id = $_POST['cust_id'];
 $name = $_POST['name'];
 $surname = $_POST['surname'];
@@ -16,14 +16,14 @@ $sqlUpdate = "UPDATE customer SET cust_name = '$name' , cust_surname = '$surname
 $result = mysqli_query($conn, $sqlUpdate);
 
             if ($result) {
-                $_SESSION['success'] = "Insert user successfully";
+                $_SESSION['success'] = "";
                 if ($_SESSION['status'] == "user") {
                     header("Location: user_profile.php");
                 } else {
                     header("Location: admin_customer.php");
                 }
             } else {
-                $_SESSION['error'] = "Something went wrong";
+                $_SESSION['error'] = "กรุณาตรวจสอบข้อมูล";
                 if ($_SESSION['status'] == "user") {
                     header("Location: user_profile.php");
                 } else {

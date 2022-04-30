@@ -6,7 +6,7 @@ require_once('TCPDF/tcpdf.php');
 $id = $_POST['id'];
 
 //เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 $sql="SELECT * FROM contract co, customer cu ,  room r , room_type rt 
  WHERE  cu.cust_id = co.cust_id 
  AND r.room_id = co.room_id 
@@ -18,14 +18,7 @@ $result = mysqli_fetch_assoc($query);
 $json = json_encode($result);
 $data = json_decode($json);
 
-
-// echo "<script>console.log('Debug Objects: " . $_POST['name'] . "' );</script>";
-
-// เรียกใช้ Class TCPDF กำหนดรายละเอียดของหน้ากระดาษ
-// PDF_PAGE_ORIENTATION = กระดาษแนวตั้ง
-// PDF_UNIT = หน่วยวัดขนาดของกระดาษเป็นมิลลิเมตร (mm)
-// PDF_PAGE_FORMAT = รูปแบบของกระดาษเป็น A4
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8');
+$pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8');
 
 // กำหนดคุณสมบัติของไฟล์ PDF เช่น ผู้สร้างไฟล์ หัวข้อไฟล์ คำค้น 
 $pdf->SetCreator('Mindphp');
@@ -37,7 +30,7 @@ $pdf->SetKeywords('Mindphp, TCPDF, PDF, example, guide');
 // กำหนดรายละเอียดของหัวกระดาษ สีข้อความและสีของเส้นใต้
 // PDF_HEADER_LOGO = ไฟล์รูปภาพโลโก้
 // PDF_HEADER_LOGO_WIDTH = ขนาดความกว้างของโลโก้
-$pdf->SetHeaderData('', 0, 'AP Apartment', '222 kkk bbb 21000', array (0, 0, 0), array (0, 0, 0));
+$pdf->SetHeaderData('', 0, 'AP Apartment', '', array (255, 255, 255), array (255, 255, 255));
 
 // กำหนดรายละเอียดของท้ายกระดาษ สีข้อความและสีของเส้น
 $pdf->setFooterData(array (0, 0, 0), array (0, 64, 0));

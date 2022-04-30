@@ -1,16 +1,11 @@
 <?php
 session_start();
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 
 ?>
 
 <!doctype html>
 <html>
-
-<!-- import menu page -->
-<?php //include('admin_menu.php'); 
-?>
 
 <head>
     <meta charset="utf-8">
@@ -36,6 +31,21 @@ require_once "connection.php";
 
     <div class="my-20">
         <h1 class="title d-flex content-center">Upload สัญญาใหม่</h1>
+         <!-- Alert -->
+       <?php if(isset($_SESSION['error'])) {?>
+        <div class="alert error">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>บันทึกข้อมูลไม่สำเร็จ! </strong> <?php echo $_SESSION['error'] ?>
+        </div>
+       <?php  unset($_SESSION['error']); } ?>
+
+       <?php if(isset($_SESSION['success'])) {?>
+        <div class="alert success">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>บันทึกข้อมูลสำเร็จ! </strong> <?php echo $_SESSION['success'] ?>
+        </div>
+       <?php  unset($_SESSION['success']); } ?>
+       <!-- Alert -->
 
         <div class="box bg-white">
 

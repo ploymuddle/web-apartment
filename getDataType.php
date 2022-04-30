@@ -1,12 +1,11 @@
 <?php
+//แสดงข้อมูลชนิดห้องพัก ตามประเภทนั้นๆ
 $q = $_GET['q'];
 
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 $sql=" SELECT * FROM room_type WHERE type_room = '". $q ."' ";
 $query = mysqli_query($conn, $sql);
 $json = array();
-// echo $sql;
 
 while($result = mysqli_fetch_assoc($query)) {    
     array_push($json, $result);

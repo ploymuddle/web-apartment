@@ -1,9 +1,8 @@
 <?php
-//ค่าที่ส่งมาจาก javascript
+//แสดงรายชื่อห้องพักทั้งหมด ตามชนิด
 $q = $_GET['q'];
 
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 $sql=" SELECT * FROM room r,room_type rt WHERE r.type_room =  rt.type_room AND  r.type_room = '". $q ."' ";
 $result = mysqli_query($conn,$sql);
 $data = array();

@@ -1,14 +1,11 @@
 <?php 
 session_start();
-
-//เชื่อมต่อฐานข้อมูล
-require_once "connection.php";
+require_once "connection/connection.php";
 
 $id = $_POST['roomId'];
 $type = $_POST['roomType'];
 $status = 'N';
 
-//add contract
 $sql = " INSERT INTO room (room_id, room_status, type_room) VALUE ('$id', '$status', '$type') ";
 $result = mysqli_query($conn, $sql);
 
@@ -18,7 +15,7 @@ $result = mysqli_query($conn, $sql);
             } else {
                 $_SESSION['error'] = "กรุณาตรวจสอบข้อมูล";
                 header("Location: admin_addroom.php");
-            }
+            } 
 
 exit();
 
