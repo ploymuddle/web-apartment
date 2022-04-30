@@ -26,7 +26,6 @@
 				<nav>
 					<ul>
 						<li><a href="index.php" class="btn-home active">HOME</a></li>
-						<!-- <li><a href="register.php" class="btn-signup">Sign..UP</a></li> -->
 						<li><a href="login.php" class="btn-login">LOG IN</a></li>
 					</ul>
 				</nav>
