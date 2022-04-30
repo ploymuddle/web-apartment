@@ -16,7 +16,7 @@ if ($username == 'admin' && $password == '1234' ) {
 
 if (!$objResult) {
 
-    echo "Username and Password ไม่ถูกต้อง!";
+    header("location:error_page.php");
 
 } else {
 
