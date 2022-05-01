@@ -295,9 +295,11 @@ div.out a:hover {
     border-radius: 10px;
     -webkit-box-shadow: 0 0 28px rgba(0, 0, 0, .08);
     box-shadow: 0 0 28px rgba(0, 0, 0, .08);
-    padding: 20px;
-    margin: 20px;
     align-items: center;
+    padding: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin: 10px;
 }
 
 .bg-white{
@@ -610,7 +612,7 @@ tr:hover {background-color: #dee2e6;}
 }
 
 /**ส่วนเนื่อหา**/
-
+ 
 /* pagination */
 .pagination {
     background: none;
