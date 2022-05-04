@@ -2,5 +2,8 @@
 session_start();
 unset($_SESSION["id"]);
 unset($_SESSION["status"]);
+unset($_SESSION["error"]);
+unset($_SESSION["cust_id"]);
+unset($_SESSION["success"]);
 header("Location:login.php");
 ?>

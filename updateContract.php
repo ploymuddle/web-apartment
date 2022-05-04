@@ -30,7 +30,7 @@ $sqlRoom = "UPDATE room SET room_status = 'N' WHERE room_id = '$data->room_id'  
 $result = mysqli_query($conn, $sqlRoom);
 
 //delete message
-$sqlMessage = "DELETE FROM messages WHERE from_user = '$data->room_id' OR to_user = '$data->room_id'  ";
+$sqlMessage = "DELETE FROM messages WHERE from_user = '$data->cust_id' OR to_user = '$data->cust_id'  ";
 $result = mysqli_query($conn, $sqlMessage);
 
 //delete petition
