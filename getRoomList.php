@@ -3,7 +3,7 @@
 $q = $_GET['q'];
 
 require_once "connection/connection.php";
-$sql = "SELECT * FROM room WHERE room_status = 'N' AND type_room = '". $q ."' ";
+$sql = "SELECT * FROM room WHERE room_status = 'N' AND type_room = '". $q ."' ORDER BY room_id ASC;";
 $query = mysqli_query($conn, $sql);
 $json = array();
 

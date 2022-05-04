@@ -9,7 +9,7 @@ $toUser = $_POST["toUser"];
 $output = "";
 
 $sqlChat = "SELECT * FROM messages WHERE (from_user = '" . $fromUser . "' AND
-                            to_user = '" . $toUser . "') OR (from_user = '" . $toUser . "' AND to_user = '" . $fromUser . "'  )";
+                            to_user = '" . $toUser . "') OR (from_user = '" . $toUser . "' AND to_user = '" . $fromUser . "'  ) ORDER BY date ASC";
 $chats = mysqli_query($conn, $sqlChat);
 while ($chat = mysqli_fetch_assoc($chats)) {
     if ($chat["from_user"] == $fromUser) {

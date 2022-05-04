@@ -1,88 +1,15 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: arial;
-}
 
-* a {
-    text-decoration: none;
-    /**ลบเส้นใต้**/
-    color: #151515;
-    /**กำหนดสี**/
-}
-
-* li {
-    list-style: none;
-    /**ลบจุดด้านหน้า**/
-}
-
-
-/**กำหนดรายละเอียด Body**/
-
-body {
-    background-color: #FFFFFF;
-}
-
-
-/**ส่วนเมนู**/
-
-
-/**กำหนดรายละเอียดแถบบาร์เล็ก ใช้จริง**/
-
-.out {
-    position: absolute;
-    top: 0px;
-    left: 248px;
-    height: 100%;
-    width: 45px;
-    background-color: #24344B;
-    text-align: center;
-    border-radius: 6px;
-}
-
-
-/**กำหนดรายละเอียดicon ในแถบบาร์เล็ก ใช้จริง**/
-
-.out i {
-    color: #FFFFFF;
-    font-size: 25px;
-    line-height: 60px;
-    padding: 0px 0px;
-    transition: .3s ease;
-    cursor: pointer;
-}
-
-
-/**กำหนดรายละเอียดicon เวลาชี้เมาส์ ในแถบบาร์เล็ก ใช้จริง**/
-
-.out i:hover {
-    color: #778899;
-    font-size: 32px;
-}
-
-
-/**กำหนดรายละเอียดแถบเมนูบาร์ใหญ่ ใช้จริง**/
-
-.menubar {
-    position: fixed;
-    width: 240px;
-    height: 100%;
-    background-color: #24344B;
-    border-radius: 4px;
-}
-
-
-/**กำหนดรายละเอียดส่วนหัว (โปรไฟล์)  ใช้จริง**/
-
+.menu {
+    background-color: #24344b;
+  }
+/**กำหนดรายละเอียดส่วนหัว**/
 .header {
     margin: 2rem 0;
     line-height: 30px;
     text-align: center;
 }
 
-
-/**กำหนดรายละเอียด logo ส่วนหัว (โปรไฟล์)  ใช้จริง**/
+/**กำหนดรายละเอียด logo ส่วนหัว**/
 
 #logo {
     font-size: 5rem;
@@ -90,16 +17,7 @@ body {
     margin-bottom: 20px;
 }
 
-
-/**กำหนดรายละเอียดรูปภาพ (โปรไฟล์)  ใช้จริง**/
-
-
-/**.header .header-img img{
-    border-radius: 25%;
-} **/
-
-
-/**กำหนดรายละเอียดส่วนชื่อ  ใช้จริง**/
+/**กำหนดรายละเอียดส่วนชื่อ**/
 
 .header .header-name h2 {
     color: #FFFFFF;
@@ -108,7 +26,7 @@ body {
 }
 
 
-/**กำหนดกรอบอักษร (แถบเมนู) ใช้จริง**/
+/**กำหนดกรอบอักษร (แถบเมนู)**/
 
 nav ul {
     background-color: #2B3C58;
@@ -117,14 +35,14 @@ nav ul {
 }
 
 
-/**กำหนดความห่าง (แถบเมนู) ใช้จริง**/
+/**กำหนดความห่าง (แถบเมนู)**/
 
 nav ul li {
     line-height: 50px;
 }
 
 
-/**กำหนดรายละอักษร (แถบเมนู) ใช้จริง**/
+/**กำหนดรายละอักษร (แถบเมนู)**/
 
 nav ul li a {
     position: relative;
@@ -140,7 +58,7 @@ nav ul li a {
 }
 
 
-/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนู) ใช้จริง**/
+/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนู)**/
 
 nav ul li:hover a {
     color: #2B3C58;
@@ -149,7 +67,7 @@ nav ul li:hover a {
 }
 
 
-/**กำหนดรายละแถบเมนูเวลาคลิกเมาส์ (แถบเมนู) ใช้จริง**/
+/**กำหนดรายละแถบเมนูเวลาคลิกเมาส์ (แถบเมนู)**/
 
 nav ul li.active a {
     color: #FFFFFF;
@@ -158,7 +76,7 @@ nav ul li.active a {
 }
 
 
-/**คำสั่งซ่อนเมนู เพิ่มสัญญาลูกค้า/แก้ไขข้อมูลลูกค้า  ใช้จริง**/
+/**คำสั่งซ่อนเมนู เพิ่มสัญญาลูกค้า/แก้ไขข้อมูลลูกค้า**/
 
 nav ul ul {
     position: static;
@@ -174,7 +92,7 @@ nav ul .serv-show.show {
 }
 
 
-/**กำหนดรายละแถบเมนู serv-show (แถบเมนูในสามเหลี่ยม) ใช้จริง**/
+/**กำหนดรายละแถบเมนู serv-show (แถบเมนูในสามเหลี่ยม)**/
 
 nav ul ul li a {
     font-size: 16px;
@@ -183,7 +101,7 @@ nav ul ul li a {
 }
 
 
-/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนูในสามเหลี่ยม) ใช้จริง**/
+/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนูในสามเหลี่ยม)**/
 
 nav ul li.active ul li a {
     color: #FFFFFF;
@@ -192,15 +110,15 @@ nav ul li.active ul li a {
 }
 
 
-/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนูในสามเหลี่ยม) ใช้จริง**/
+/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนูในสามเหลี่ยม)**/
 
-nav ul li ul li a:hover {
+nav ul li ul li a :hover {
     color: #2B3C58;
     background-color: #FFFFFF;
 }
 
 
-/**กำหนดรายละแถบเมนูเวลาคลิกเมาส์ (แถบเมนูในสามเหลี่ยม) ใช้จริง**/
+/**กำหนดรายละแถบเมนูเวลาคลิกเมาส์ (แถบเมนูในสามเหลี่ยม)**/
 
 nav ul li ul li.active a {
     color: #FFFFFF;
@@ -208,9 +126,9 @@ nav ul li ul li.active a {
 }
 
 
-/**กำหนดรายละปุ่มสามเหลี่ยม ใช้จริง**/
+/**กำหนดรายละปุ่มสามเหลี่ยม**/
 
-nav ul li a span {
+nav ul li a span.second {
     position: absolute;
     top: 50%;
     right: 20px;
@@ -219,96 +137,143 @@ nav ul li a span {
     transition: transform .4s;
 }
 
-nav ul li a span.rotate {
+nav ul li a span.second.rotate {
     transform: translateY(-50%) rotate(-180deg);
 }
 
+nav ul li a.admin_home::before {
+    content: "หน้าแรก - Home";
+}
 
-/* CSS layout */
+nav ul li a.admin_room::before {
+    content: "จัดการห้องพัก";
+}
 
-.p-10 {
+nav ul li a.admin_contract::before {
+    content: "เพิ่มสัญญาลูกค้า";
+}
+
+nav ul li a.admin_customer::before {
+    content: "จัดการลูกค้า";
+}
+
+nav ul li a.admin_create_bill::before {
+    content: "จดมิเตอร์";
+}
+
+nav ul li a.admin_update_bill::before {
+    content: "ระบบรับชำระ";
+}
+
+nav ul li a.admin_bill::before {
+    content: "รายงานการชำระ";
+}
+
+nav ul li a.admin_messages::before {
+    content: "Admin messages";
+}
+
+nav ul li a.approved_to_move::before {
+    content: "คำขอย้ายห้อง/ย้ายออก";
+}
+
+nav ul li a.serv-btn::before {
+    content: "จัดการลูกค้า";
+}
+
+/* กำหนดปุ่ม ออกจากระบบ */
+.out {
+    border-radius: 30px;
     padding: 10px;
-}
-
-.p-20 {
-    padding: 20px;
-}
-
-.p-30 {
-    padding: 30px;
-}
-
-.py-10 {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.px-10 {
-    padding-right: 10px;
-    padding-left: 10px;
-}
-
-.my-10 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.mx-10 {
-    margin-right: 10px;
-    margin-left: 10px;
-}
-
-
-/**ส่วนเนื้อหา**/
-
-.job {
+    background-color: white;
+    bottom: 30px;
     position: fixed;
-    top: 30px;
-    left: 310px;
-    width: 80%;
-    bottom: 20px;
+    margin-left: 3%;
 }
 
-.box {
-    display: flex;
-    flex-direction: column;
-    background-color: #DCDCDC;
+div.out a::before {
     padding: 20px;
-    margin: 20px;
-    border: #DCDCDC;
-    border-style: solid;
-    height: 90%;
-    width: 100%;
+    content: "ออกจากระบบ ";
 }
 
-a1 {
-    font-size: 30px;
-    /* line-height: 50px; */
-    color: #000000;
-    margin: 20px;
+div.out a:hover {
+    color: #316fc5;
 }
 
-a2 {
-    /* position: absolute; */
-    font-size: 36px;
-    color: #000000;
-    margin: 20px;
-}
+@media screen and (max-width: 1228px) {
 
-.text-blue {
-    color: #336699;
-}
+    nav ul li a.admin_home::before {
+        font-family: "FontAwesome";
+        content: "\f015";
+    }
 
+    nav ul li a.admin_room::before {
+        font-family: "FontAwesome";
+        content: "\f236";
 
-/* .card-box {
-    background-color: #c3d3e2;
-    border-radius: 10px;
-    -webkit-box-shadow: 0 0 28px rgba(0, 0, 0, .08);
-    box-shadow: 0 0 28px rgba(0, 0, 0, .08);
-    padding: 20px;
-    margin: 20px;
-} */
+    }
 
-@media screen and (max-width: 1680px) {
-    .job {}
+    nav ul li a.admin_contract::before {
+        font-family: "FontAwesome";
+        content: "\f56c";
+    }
+
+    nav ul li a.admin_customer::before {
+        font-family: "FontAwesome";
+        content: "\f573";
+    }
+
+    nav ul li a.admin_create_bill::before {
+        font-family: "FontAwesome";
+        content: "\f14b";
+    }
+
+    nav ul li a.admin_update_bill::before {
+        font-family: "FontAwesome";
+        content: "\f4c0";
+    }
+
+    nav ul li a.admin_bill::before {
+        font-family: "FontAwesome";
+        content: "\f571";
+    }
+
+    nav ul li a.admin_messages::before {
+        font-family: "FontAwesome";
+        content: "\f01c";
+    }
+
+    nav ul li a.approved_to_move::before {
+        font-family: "FontAwesome";
+        content: "\f5c1";
+    }
+
+    nav ul li a.serv-btn::before {
+        font-family: "FontAwesome";
+        content: "\f4fe";
+    }
+
+    nav ul li a,
+    nav ul ul li a {
+        padding-left: 25px;
+        font-size: 15px;
+    }
+
+    nav ul li span.fa-caret-down:before {
+        display: none;
+    }
+
+    div.out a::before {
+        padding: 0px;
+        content: "";
+    }
+
+    div.out {
+        margin: 20px;
+        content: "";
+    }
+
+    #logo {
+        font-size: 2rem;
+    }
 }

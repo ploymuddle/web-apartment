@@ -73,12 +73,6 @@ $objCust = mysqli_fetch_array($objQuery);
 						<img src="https://img.icons8.com/external-smashingstocks-circular-smashing-stocks/100/000000/external-bill-power-and-energy-smashingstocks-circular-smashing-stocks.png" />
 
 						<div class="ifm-text-bill">
-							<!-- <p class=""><span>ค่าไฟ : </span><?php //echo $bill['inv_fire_meter']; 
-																	?></p> -->
-							<!-- <p class=""><span>ค่าน้ำ : </span><?php //echo $bill['inv_water_meter']; 
-																	?></p> -->
-							<!-- <p class=""><span>ค่าเช่า : </span><?php //echo $bill['inv_rental']; 
-																	?></p> -->
 							<p class=""><span>ยอดเงิน : </span><?php echo $bill['inv_total']; ?></p>
 							<p class=""><span>หมายเลขห้องพัก : </span><?php echo $bill['room_id']; ?></p>
 							<p class=""><span>รหัสลูกค้า : </span><?php echo $bill['cust_id']; ?></p>
@@ -144,12 +138,12 @@ $objCust = mysqli_fetch_array($objQuery);
 							<input type="text" id="billID" name="billID" placeholder="เลขที่ห้องพัก" value="" readonly>
 						</div>
 						<div class="grid form-label">
-							<label>ยอดเงิน : </label>
-							<input type="text" id="payment" name="payment" placeholder="ประเภทห้องพัก" value="" disabled>
-						</div>
-						<div class="grid form-label">
 							<label>หมายเลขห้องพัก : </label>
 							<input type="text" id="roomID" name="roomID" placeholder="ข้อมูลห้องพัก" disabled>
+						</div>
+						<div class="grid form-label">
+							<label>หมายเลขสัญญาเช่า : </label>
+							<input type="text" id="conID" name="conID" placeholder="เบอร์โทร" value="" disabled>
 						</div>
 						<div class="grid form-label">
 							<label>รหัสลูกค้า : </label>
@@ -159,9 +153,10 @@ $objCust = mysqli_fetch_array($objQuery);
 							<label>ชื่อลูกค้า : </label>
 							<input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" value="" disabled>
 						</div>
+					
 						<div class="grid form-label">
-							<label>หมายเลขสัญญาเช่า : </label>
-							<input type="text" id="conID" name="conID" placeholder="เบอร์โทร" value="" disabled>
+							<label>ยอดเงิน : </label>
+							<input type="text" id="payment" name="payment" placeholder="ประเภทห้องพัก" value="" disabled>
 						</div>
 						<div class="d-flex content-center">
 							<button type="submit" id="submit" class="btn" value="Submit">ยืนยันการชำระเงิน</button>

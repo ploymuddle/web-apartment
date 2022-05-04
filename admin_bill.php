@@ -78,8 +78,8 @@ $objQuery = mysqli_query($conn, $strSQL);
       <div class="show-box">
  
         <form name=" " method="POST" action="admin_bill.php">
-          <div class="grid-search-5">
-            <div class="grid form-search">
+          <div class="bill-search">
+            <div class="form-search">
               <label for="room">หมายเลขห้องพัก:</label>
               <select id="room" name="room">
                 <option <?php if ($room == "all") {
@@ -96,7 +96,7 @@ $objQuery = mysqli_query($conn, $strSQL);
                 <?php } ?>
               </select>
             </div>
-            <div class="grid form-search">
+            <div class="form-search">
               <label>เดือน : </label>
               <select id='month' name="month">
                 <option <?php if ($month == "0") {
@@ -140,7 +140,7 @@ $objQuery = mysqli_query($conn, $strSQL);
                         } ?> value='12'>ธันวาคม</option>
               </select>
             </div>
-            <div class="grid form-search">
+            <div class="form-search">
               <label>ปี : </label>
               <select id='year' name="year">
                 <option <?php if ($year == "0") {
@@ -157,7 +157,7 @@ $objQuery = mysqli_query($conn, $strSQL);
                         } ?> value='2022'>2022</option>
               </select>
             </div>
-            <div class="grid form-search">
+            <div class="form-search">
               <label>สถานะ : </label>
               <select id='status' name="status">
                 <option <?php if ($status == "all") {
@@ -174,14 +174,14 @@ $objQuery = mysqli_query($conn, $strSQL);
                         } ?> value='รอดำเนินการ'>รอดำเนินการ</option>
               </select>
             </div>
-            <div class="grid form-search">
+            <div class="form-search">
               <label>รหัสสมาชิก : </label>
               <input type="text" id="cust" name="cust" value="<?php echo $cust; ?>" />
             </div>
 
             <div></div>
           </div>
-          <div class="d-flex content-center">
+          <div class="box-btn-center">
             <button type="submit" class="btn btn-search">ค้นหา</button>
             <button type="button" class="btn btn-search"><a class="text-white" href="reportFile.php?room=<?php echo $room; ?>&cust=<?php echo $cust; ?>&month=<?php echo $month; ?>&year=<?php echo $year; ?>&status=<?php echo $status; ?>" target="_blank">รายงาน</a></button>
             <button type="submit" class="btn btn-clear" name="clear" value="clear">ล้างค่า</button>

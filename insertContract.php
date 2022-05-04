@@ -9,7 +9,6 @@ if(move_uploaded_file($_FILES['file']['tmp_name'],$file))
     
 }
 else {
-    echo 'not';
 }
 
 $name = $_POST['name'];

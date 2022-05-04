@@ -39,14 +39,14 @@ $_SESSION["cust_id"] = $_SESSION["id"];
                 while ($msg = mysqli_fetch_assoc($msgs)) {
               
                 ?>
-
-                  <li class="users-item users-item_group">
-                    <?php                 
+                 <?php                 
                     $roomSql = mysqli_query($conn, "SELECT cust_username  FROM customer WHERE  cust_id = ".$msg['cust_id']." ");
                     $room = mysqli_fetch_assoc($roomSql);
                     $countSQL = mysqli_query($conn,"SELECT COUNT(*)  FROM messages m , customer c WHERE to_user ='0' AND m.from_user = c.cust_id AND isFlagRead = 'N' AND from_user =  ".$msg['cust_id']." ");
                     $count = mysqli_fetch_assoc($countSQL);
                     ?>
+                  <li class="users-item users-item_group <?php if($_GET['toUser'] == $msg["cust_id"]) {echo " active";} ?>">
+  
                     <div class="">ห้อง : </div>
                     <span class="users-note"> <a href="?toUser=<?php echo $msg["cust_id"]; ?>"><?php echo $room['cust_username'] ?> </a></span>
                     <?php if ($count['COUNT(*)'] != 0) { ?>
@@ -55,7 +55,7 @@ $_SESSION["cust_id"] = $_SESSION["id"];
                     </div>
                     <?php } ?>
                   </li>
-
+ 
                 <?php
                 }
                 ?>
@@ -120,11 +120,11 @@ $_SESSION["cust_id"] = $_SESSION["id"];
                     <?php
                     if (isset($_GET["toUser"])) {
                       $sqlChat = "SELECT * FROM messages WHERE (from_user = '" . $_SESSION["cust_id"] . "' AND
-                                                to_user = '" . $_GET["toUser"] . "') OR (from_user = '" . $_GET["toUser"] . "' AND to_user = '" . $_SESSION["cust_id"] . "'  )";
+                                                to_user = '" . $_GET["toUser"] . "') OR (from_user = '" . $_GET["toUser"] . "' AND to_user = '" . $_SESSION["cust_id"] . "' ) ORDER BY date ASC";
                       $chats = mysqli_query($conn, $sqlChat);
                     } else {
                       $sqlChat = "SELECT * FROM messages WHERE (from_user = '" . $_SESSION["cust_id"] . "' AND
-                                                to_user = '" . $_SESSION["toUser"] . "') OR (from_user = '" . $_SESSION["toUser"] . "' AND to_user = '" . $_SESSION["cust_id"] . "' ) ";
+                                                to_user = '" . $_SESSION["toUser"] . "') OR (from_user = '" . $_SESSION["toUser"] . "' AND to_user = '" . $_SESSION["cust_id"] . "' ) ORDER BY date ASC";
                       $chats = mysqli_query($conn, $sqlChat);
                     }
 
@@ -132,10 +132,6 @@ $_SESSION["cust_id"] = $_SESSION["id"];
                       if ($chat["from_user"] == $_SESSION["cust_id"]) {
                     ?>
                         <div class="message">
-                          <!-- <div class="message-head">
-                                        <span class="message-note"><?php //echo $uName['cust_name'] . ' ' . $uName['cust_surname']; 
-                                                                    ?></span>
-                                    </div> -->
 
                           <div class="message-base me">
                             <div class="message-head me">
@@ -176,12 +172,12 @@ $_SESSION["cust_id"] = $_SESSION["id"];
                   <div class="enter">
 
                     <div class="enter-submit">
-                      <button class="button button_id_submit" type="submit" <?php if($_SESSION["toUser"] == '') echo 'disabled' ?>>
+                      <button class="button button_id_submit" type="submit" <?php if($_GET["toUser"] == '') echo 'disabled' ?>>
                         <i class="fa fa-paper-plane"></i>
                       </button>
                     </div>
                     <div class="enter-textarea">
-                      <textarea name="enterMessage" id="enterMessage" cols="30" rows="2" placeholder="ข้อความ..." <?php if($_SESSION["toUser"] == '') echo 'disabled' ?>></textarea>
+                      <textarea name="enterMessage" id="enterMessage" cols="30" rows="2" placeholder="ข้อความ..." <?php if($_GET["toUser"] == '') echo 'disabled' ?>></textarea>
                     </div>
 
                   </div>

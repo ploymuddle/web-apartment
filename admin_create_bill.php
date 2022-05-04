@@ -16,34 +16,36 @@ $_GET['menu'] = $page;
 
   <div class="job">
     <h1 class="title">จดมิเตอร์</h1>
-     <!-- Alert -->
-     <?php if(isset($_SESSION['error'])) {?>
-        <div class="alert error">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            <strong>บันทึกข้อมูลไม่สำเร็จ! </strong> <?php echo $_SESSION['error'] ?>
-        </div>
-       <?php  unset($_SESSION['error']); } ?>
+    <!-- Alert -->
+    <?php if (isset($_SESSION['error'])) { ?>
+      <div class="alert error">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>บันทึกข้อมูลไม่สำเร็จ! </strong> <?php echo $_SESSION['error'] ?>
+      </div>
+    <?php unset($_SESSION['error']);
+    } ?>
 
-       <?php if(isset($_SESSION['success'])) {?>
-        <div class="alert success">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            <strong>บันทึกข้อมูลสำเร็จ! </strong> <?php echo $_SESSION['success'] ?>
-        </div>
-       <?php  unset($_SESSION['success']); } ?>
-       <!-- Alert -->
+    <?php if (isset($_SESSION['success'])) { ?>
+      <div class="alert success">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>บันทึกข้อมูลสำเร็จ! </strong> <?php echo $_SESSION['success'] ?>
+      </div>
+    <?php unset($_SESSION['success']);
+    } ?>
+    <!-- Alert -->
     <div class="box">
       <div class="show-box">
-        <h3>สร้างรายการบิล</h3>
+        <h2 class="text-center">สร้างรายการบิล</h2>
 
         <form method="POST" action="insertInvoice.php">
 
-          <div class="grid-col">
-            <div class="grid col-40">
+          <div class="create-bill-input-room">
+            <div class="create-bill-input-room-select">
               <label for="roomId">หมายเลขห้องพัก:</label>
               <select id="roomId" name="roomId" onchange="selectRoom()" required>
                 <option value="">เลือกรายการ</option>
                 <?php
-                $roomSQL = "SELECT * FROM room WHERE room_status = 'O' ";
+                $roomSQL = "SELECT * FROM room WHERE room_status = 'O' ORDER BY room_id ASC; ";
                 $roomQuery = mysqli_query($conn, $roomSQL);
                 while ($room = mysqli_fetch_array($roomQuery)) {
                 ?>
@@ -51,44 +53,43 @@ $_GET['menu'] = $page;
                 <?php } ?>
               </select>
             </div>
-            <div class="grid col-3-20">
-              <input type="text" id="cust_id" name="cust_id" placeholder="รหัสสมาชิก" required>
-              <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" required>
-              <input type="text" id="surname" name="surname" placeholder="นามสกุล" required>
-            </div>
+
+            <input type="text" id="cust_id" name="cust_id" placeholder="รหัสสมาชิก" required>
+            <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" required>
+            <input type="text" id="surname" name="surname" placeholder="นามสกุล" required>
           </div>
 
           <hr>
 
-          <div class="grid-col col-40">
-            <div class="grid col-20">
+          <div class="create-bill-row">
+            <div class="create-bill-input-2">
               <label for="date">วันที่ทำรายการ:</label>
               <input type="date" id="date" name="date" placeholder="22/2/2021" required>
             </div>
-            <div class="grid col-20">
+            <div class="create-bill-input-date-2">
               <label for="deadtime">วันที่กำหนดจ่าย:</label>
               <input type="date" id="deadtime" name="deadtime" placeholder="22/2/2021" required>
             </div>
-            <div class="grid col-20">
+            <div class="create-bill-input-2">
               <label for="roomRent">ค่าเช่าห้อง:</label>
               <input type="text" id="roomRent" name="roomRent" placeholder="0.00" required>
             </div>
-            <div class="grid col-4-20">
+            <div class="create-bill-input-3">
               <label for="electronic">มิเตอร์ไฟฟ้า:</label>
               <input type="text" id="FM" name="FM" placeholder="000" required>
               <input type="text" id="FU" name="FU" placeholder="จำนวนหน่วย" value="7" required>
             </div>
-            <div class="grid col-20">
+            <div class="create-bill-input-2">
               <label for="penalty">ค่าปรับ:</label>
               <input type="text" id="penalty" name="penalty" placeholder="0.00" value="0" required>
             </div>
-            <div class="grid col-4-20">
+            <div class="create-bill-input-3">
               <label for="water">มิเตอร์น้ำ:</label>
               <input type="text" id="WM" name="WM" placeholder="000" required>
               <input type="text" id="WU" name="WU" placeholder="จำนวนหน่วย" value="10" required>
             </div>
-            <div class="grid"></div>
-            <div class="grid col-3-20">
+            <div class=""></div>
+            <div class="create-bill-input-3">
               <label for="total">ยอดชำระเงิน:</label>
               <input type="text" id="total" name="total" placeholder="0.00" required>
               <button class="btn" type="button" onclick="sumTotal()">คำนวณ</button>
@@ -97,8 +98,8 @@ $_GET['menu'] = $page;
 
           <hr>
 
-          <div class="d-flex content-center">
-            <button class="btn" type="button" onclick="document.location.href='admin_create_bill.php'" >ยกเลิก</button>
+          <div class="box-btn-center">
+            <button class="btn" type="button" onclick="document.location.href='admin_create_bill.php'">ยกเลิก</button>
             <button class="btn" type="submit">บันทึกรายการ</button>
           </div>
 
@@ -145,8 +146,8 @@ $_GET['menu'] = $page;
       var rental = parseInt(document.getElementById("roomRent").value) ? parseInt(document.getElementById("roomRent").value) : 0;
       var penalty = parseInt(document.getElementById("penalty").value) ? parseInt(document.getElementById("penalty").value) : 0;
       var fire = (document.getElementById("FM").value) * document.getElementById("FU").value;
-      var water = (document.getElementById("WM").value) * document.getElementById("WU").value ;
-      var total =  rental + penalty + fire + water;
+      var water = (document.getElementById("WM").value) * document.getElementById("WU").value;
+      var total = rental + penalty + fire + water;
       document.getElementById("total").value = total;
     }
   </script>

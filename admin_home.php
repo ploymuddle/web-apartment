@@ -40,6 +40,7 @@ $countMove = mysqli_fetch_assoc($query);
 	<div class="job">
 		<h1 class="title">หน้าแรก</h1>
 		<h1>Hello Admin</h1>
+		
 		<!-- Alert -->
 		<?php if(isset($_SESSION['error'])) {?>
         <div class="alert error">
@@ -56,37 +57,37 @@ $countMove = mysqli_fetch_assoc($query);
        <?php  unset($_SESSION['success']); } ?>
        <!-- Alert -->
 
-		<div class="box">
+		<div class="box home">
 
-			<div class="show-box grid-4">
+			<div class="show-box home-box-100">
 				<i class="far fa-comment-dots"></i>
-				<p class="text1">คำร้องแจ้งปัญหาห้องพัก</p>
-				<p class="text2">
+				<p class="text-main">คำร้องแจ้งปัญหาห้องพัก</p>
+				<p class="text">
 					<y1>จำนวน</y1><a>&nbsp; &nbsp; <a><?php echo $countMessages['count']; ?></a>&nbsp; &nbsp;</a>
 					<y2>รายการ</y2>
 				</p>
-				<button class="btn"><a href="admin_messages.php" class="text-white">ตรวจสอบ</a></button>
+				<button class="btn"><a href="admin_messages.php">ตรวจสอบ</a></button>
 			</div>
-			<div class="show-box grid-4">
+			<div class="show-box home-box-100">
 				<i class="far fa-address-book"></i>
-				<p class="text1">คำขอย้าย</p>
-				<p class="text2">
+				<p class="text-main">คำขอย้าย</p>
+				<p class="text">
 					<y1>จำนวน</y1>&nbsp; &nbsp; <a><?php echo $countMove['count']; ?></a>&nbsp; &nbsp;
 					<y2>รายการ</y2>
 				</p>
-				<button class="btn"><a href="approved_to_move.php" class="text-white">ตรวจสอบ</a></button>
+				<button class="btn"><a href="approved_to_move.php">ตรวจสอบ</a></button>
 			</div>
 
-			<div class="grid">
-				<div class="show-box grid-4">
+			<div class="home-row">
+				<div class="show-box home-box-50">
 					<i class="fas fa-search-dollar"></i>
-					<p class="text3">รายการค้างชำระ</p>
-					<p class="text4"><a><?php echo $countPayment['count']; ?></a></p>
+					<p class="text-main">รายการค้างชำระ</p>
+					<p class="text"><a><?php echo $countPayment['count']; ?></a></p>
 				</div>
-				<div class="show-box grid-4">
+				<div class="show-box home-box-50">
 					<i class="fas fa-hotel"></i>
-					<p class="text3">จำนวนห้องว่าง</p>
-					<p class="text4"><a><?php echo $countRoom['N']; ?></a>&nbsp;<y>/</y>&nbsp;<a><?php echo $countRoom['total']; ?></a></p>
+					<p class="text-main">จำนวนห้องว่าง</p>
+					<p class="text"><a><?php echo $countRoom['N']; ?></a>&nbsp;<y>/</y>&nbsp;<a><?php echo $countRoom['total']; ?></a></p>
 				</div>
 			</div>
 

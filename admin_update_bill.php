@@ -52,9 +52,9 @@ $billSQL = $billSQL . " ORDER BY i.inv_date DESC ";
        <!-- Alert -->
 
     <div class="box">
-      <div class="grid-table">
+      <div class="update-bill-search">
         <form method="POST" class="none">
-        <div class="grid ">
+        <div class="update-bill-input">
           <label>เดือน : </label>
           <select id='month' name="month" onchange="this.form.submit()">
             <option <?php if ($month == "01") {
@@ -95,7 +95,7 @@ $billSQL = $billSQL . " ORDER BY i.inv_date DESC ";
                     } ?> value='12'>ธันวาคม</option>
           </select>
         </div>
-        <div class="grid ">
+        <div class="update-bill-input ">
           <label>ปี : </label>
           <select id='year' name="year" onchange="this.form.submit()">
             <option <?php if ($year == "2020") {
@@ -109,7 +109,7 @@ $billSQL = $billSQL . " ORDER BY i.inv_date DESC ";
                     } ?> value='2022'>2022</option>
           </select>
         </div>
-        <div class="grid ">
+        <div class="update-bill-input ">
           <label>สถานะ : </label>
           <select id='status' name="status" onchange="this.form.submit()">
             <option <?php if ($status == "all") {
@@ -187,56 +187,52 @@ $billSQL = $billSQL . " ORDER BY i.inv_date DESC ";
 
       <form method="POST" action="updateBill.php">
 
-        <div class="grid-col">
-          <div class="grid col-40">
+        <div class="create-bill-input-room">
+          <div class="create-bill-input-room-select">
             <label for="">ห้องพัก:</label>
             <input type="text" id="roomId" name="roomId" readonly>
           </div>
-          <div class="grid col-3-20">
+          
             <input type="text" id="id" name="id" placeholder="รหัสสมาชิก" readonly>
             <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" readonly>
             <input type="text" id="surname" name="surname" placeholder="นามสกุล" readonly>
-          </div>
+
         </div>
 
         <hr>
 
-        <div class="grid-col">
+        <div class="create-bill-row">
 
-          <div class="grid-row">
+          <div class="update-bill-status">
             <img id="pic" style="width:200px;height:100%;">
             <p class="d-flex content-center">หลักฐานการชำระเงิน(<a id="statusBill"></a>)</p>
           </div>
 
-          <div class="grid-row">
+          <div class="update-bill-confirm">
 
-            <div class="form-label">
+            <div class="create-bill-input-2">
               <label for="">รหัสใบแจ้งหนี้:</label>
               <input type="text" id="billId" name="billId" placeholder="รหัสใบเสร็จ" readonly>
             </div>
 
-            <div class="grid col-3-20">
+            <div class="create-bill-input-2">
               <label for="">วันที่สร้าง:</label>
               <input type="date" id="billCreateDate" name="billCreateDate" placeholder="22/2/2021" disabled>
             </div>
-            <div class="grid col-3-20" id="billDateShow">
+            <div class="create-bill-input-2" id="billDateShow">
               <label for="">วันที่ชำระ:</label>
               <input type="date" id="billDate" name="billDate" placeholder="22/2/2021" disabled>
             </div>
-            <div class="grid col-3-20">
+            <div class="create-bill-input-2">
               <label for="">จำนวนเงิน:</label>
               <input type="text" id="amount" name="amount" placeholder="0.00" readonly>
             </div>
-            <!-- <div class="grid col-3-20">
-              <label for="">ค้างชำระ:</label>
-              <input type="text" id="overdue" name="overdue" placeholder="0.00" value="0">
-            </div> -->
-            <div class="grid col-3-20" id="paymentShow">
+            <div class="create-bill-input-2" id="paymentShow">
               <label for="">รับชำระ:</label>
               <input type="text" id="payment" name="payment" placeholder="0.00" disabled>
             </div>
 
-            <div class="grid">
+            <div class="box-btn-center">
               <button type="button" class=" btn btn-download" id="invoice"></button>
               <button type="button" class=" btn btn-download" id="bill"></button>
             </div>
@@ -245,7 +241,7 @@ $billSQL = $billSQL . " ORDER BY i.inv_date DESC ";
 
         <hr>
 
-        <div class="d-flex content-center">
+        <div class="box-btn-center">
           <button class="btn" type="button" id="close" onclick="window.location.reload(true)">ยกเลิก</button>
           <button class="btn" type="submit" id="btnUpdate" hidden>บันทึกรายการ</button>
         </div>
@@ -316,7 +312,7 @@ $billSQL = $billSQL . " ORDER BY i.inv_date DESC ";
           var aDI = document.createElement('a');
           aDI.innerHTML = ' ใบแจ้งหนี้';
           aDI.setAttribute('href', 'invoiceFile.php?id=' + data[0].pay_id);
-          aDI.setAttribute('class', 'text-white');
+          aDI.setAttribute('class', '');
           aDI.setAttribute('target', '_blank');
           btnDI.appendChild(aDI);
 
@@ -324,7 +320,7 @@ $billSQL = $billSQL . " ORDER BY i.inv_date DESC ";
           var aDB = document.createElement('a');
           aDB.innerHTML = ' ใบเสร็จ';
           aDB.setAttribute('href', 'billFile.php?id=' + data[0].pay_id);
-          aDB.setAttribute('class', 'text-white');
+          aDB.setAttribute('class', '');
           aDB.setAttribute('target', '_blank');
           btnDB.appendChild(aDB);
 

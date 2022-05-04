@@ -15,7 +15,7 @@ $_GET['menu'] = 'จัดการห้องพัก';
 <body>
 
     <div class="job">
-        <h1 class="title  d-flex content-center"><?php echo $page; ?></h1>
+        <h1 class="title  text-center"><?php echo $page; ?></h1>
 
         <!-- Alert -->
        <?php if(isset($_SESSION['error'])) {?>
@@ -36,12 +36,12 @@ $_GET['menu'] = 'จัดการห้องพัก';
         <div class="box bg-white">
             <form method="POST" class="" action="insertRoom.php">
                 <hr>
-                <div class="grid-row">
-                    <div class="grid col-20">
+                <div class="addroom-input">
+                    <div class="addroom-input">
                         <label for="roomId">เลขที่ห้องพัก:</label>
                         <input type="text" id="roomId" name="roomId" placeholder="X000" required>
                     </div>
-                    <div class="grid col-20">
+                    <div class="addroom-input">
                         <label for="roomType">ประเภทห้องพัก:</label>
                         <select id="roomType" name="roomType" onchange="selectType()" required>
                             <option value="">เลือกรายการ</option>
@@ -54,11 +54,11 @@ $_GET['menu'] = 'จัดการห้องพัก';
                             <?php } ?>
                         </select>
                     </div>
-                    <div class="grid col-20">
+                    <div class="addroom-input">
                         <label for="roomData"></label>
                         <textarea id="roomData" name="roomData" rows="4" cols="50" placeholder="ข้อมูลห้องพัก" disabled></textarea>
                     </div>
-                    <div class="grid col-20">
+                    <div class="addroom-input">
                         <label for="roomRental">ราคาค่าเช่า:</label>
                         <input type="text" id="roomRental" name="roomRental" placeholder="0.00" disabled>
                     </div>
@@ -66,8 +66,8 @@ $_GET['menu'] = 'จัดการห้องพัก';
 
                 <hr>
 
-                <div class="d-flex content-center">
-                    <button class="btn" type="button" id="close" onclick="window.location='admin_room.php';">กลับหน้าจัดการห้องพัก</button>
+                <div class="box-btn-center">
+                    <button class="btn btn-back" type="button" id="close" onclick="window.location='admin_room.php';">กลับหน้าจัดการห้องพัก</button>
                     <button class="btn" type="submit">บันทึกรายการ</button>
                 </div>
 

@@ -15,7 +15,7 @@ $_GET['menu'] = $page;
 <body>
 
     <div class="job">
-        <h1 class="title d-flex content-center">เพิ่มสัญญาใหม่</h1>
+        <h1 class="title text-center">เพิ่มสัญญาใหม่</h1>
         <!-- Alert -->
        <?php if(isset($_SESSION['error'])) {?>
         <div class="alert error">
@@ -35,18 +35,18 @@ $_GET['menu'] = $page;
         <div class="box bg-white">
         <form method="POST" action="insertContract.php" enctype="multipart/form-data">
 
-                <div class="grid-4 content-center">
+                <div class="contract-input-4">
                     <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" required>
                     <input type="text" id="surname" name="surname" placeholder="นามสกุล" required>
-                    <input type="text" id="tel" name="tel" placeholder="เบอร์โทร" required>
-                    <input type="text" id="email" name="email" placeholder="Email" required>
+                    <input type="text" id="tel" name="tel" placeholder="เบอร์โทร" pattern="[0-9]{10,11}" required >
+                    <input type="email" id="email" name="email" placeholder="Email" required>
                 </div>
 
                 <hr>
 
-                <div class="grid-col">
-                    <div class="grid-row">
-                        <div class="grid col-20">
+                <div class="contract-row">
+                    <div class="">
+                        <div class="contract-input">
                             <label for="roomType">ประเภทห้องพัก:</label>
                             <select id="roomType" name="roomType" onchange="selectType()" required>
                                 <option value="">เลือกรายการ</option>
@@ -59,33 +59,33 @@ $_GET['menu'] = $page;
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="grid col-20">
+                        <div class="contract-input">
                             <label for="roomId">เลือกห้องพัก:</label>
                             <select id="roomId" name="roomId" disabled required>
                             </select>
                         </div>
-                        <div class="grid col-20">
+                        <div class="contract-input">
                             <label for=""></label>
                             <textarea id="roomData" name="roomData" rows="4" cols="50" placeholder="ข้อมูลห้องพัก" disabled></textarea>
                         </div>
-                        <div class="grid col-20">
+                        <div class="contract-input">
                             <label for="roomRental">ราคาค่าเช่า:</label>
                             <input type="text" id="roomRental" name="roomRental" placeholder="0.00" disabled>
                         </div>
                     </div>
 
-                    <div class="grid-row">
-                        <div class="grid col-30">
+                    <div class="">
+                        <div class="contract-input">
                             <label for="contractDate">วันที่ทำสัญญา:</label>
                             <input type="date" id="contractDate" name="contractDate" required>
                         </div>
 
-                        <div class="grid col-30">
+                        <div class="contract-input">
                             <label for="contract">ค่ามัดจำ:</label>
-                            <input type="text" id="contract" name="contract" required>
+                            <input type="number" id="contract" name="contract" required>
                         </div>
 
-                        <div class="grid col-30">
+                        <div class="contract-input">
                             <label for="file">เอกสารยืนยัน:</label>
                             <input type="file" id="file" name="file" required>
                         </div>
@@ -94,7 +94,7 @@ $_GET['menu'] = $page;
                 </div>
                 <hr>
 
-                <div class="d-flex content-center">
+                <div class="box-btn-center">
                     <button type="button" class="btn btn-back" onclick="window.location='admin_customer.php';">กลับหน้าจัดการข้อมูล</button>
                     <button type="submit" class="btn">บันทึกรายการ</button>
                 </div>

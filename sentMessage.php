@@ -20,16 +20,12 @@ if(isset($_POST['enterMessage']) && !(strlen($_POST['enterMessage']) == 0) ) {
     $result = mysqli_query($conn, $sql);
     
                 if ($result) {
-                    $_SESSION['success'] = "Insert user successfully";
                     if($from == '0') {
                         header("Location: admin_messages.php?toUser=".$to);
                     } else {
                         header("Location: user_messages.php?toUser=".$to);
                     }
                 } else {
-                    // $_SESSION['error'] = "Something went wrong";
-                    // header("Location: admin_messages.php");
-                    echo $sql;
                 }
 } else  if(isset($_POST['toUser'])) {
     header("Location: admin_messages.php?toUser=".$_POST['toUser']);

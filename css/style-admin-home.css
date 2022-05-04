@@ -67,7 +67,7 @@ body {
 
 /**กำหนดรายละเอียดแถบเมนูบาร์ใหญ่ ใช้จริง**/
 
-.menubar {
+.menu {
     position: fixed;
     width: 240px;
     height: 100%;

@@ -1,261 +1,14 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Mitr', sans-serif;
-}
-
-* a {
-    text-decoration: none;
-    /**ลบเส้นใต้**/
-    color: #151515;
-    /**กำหนดสี**/
-}
-
-* li {
-    list-style: none;
-    /**ลบจุดด้านหน้า**/
-}
-
-/**กำหนดรายละเอียด Body**/
-body {
-    background-color: #FFFFFF;
-}
-
-/**กำหนดรายละเอียด Body**/
-
-
-/**ส่วนเมนู**/
-
-/**กำหนดรายละเอียดแถบบาร์เล็ก ใช้จริง**/
-.out {
-    border-radius: 30px;
-    padding: 10px;
-    background-color: white;
-    bottom: 30px;
-    position: fixed;
-    margin-left: 3%;
-}
-
-div.out a::before {
-    padding: 20px;
-    content: "ออกจากระบบ ";
-}
-
-div.out a:hover {
-    color: #003333;
-}
-
-/**กำหนดรายละเอียดแถบเมนูบาร์ใหญ่ ใช้จริง**/
-.menu {
-    padding: 20px;
-    float: left;
-    width: 20%;
-    background-color: #003333;
-    border-radius: 4px;
-    height: 100vh;
-}
-
-/**กำหนดรายละเอียดส่วนหัว (โปรไฟล์)  ใช้จริง**/
-.header {
-    margin: 2rem 0;
-    line-height: 33px;
-    text-align: center;
-}
-
-/**กำหนดรายละเอียด logo ส่วนหัว (โปรไฟล์)  ใช้จริง**/
-#logo {
-    font-size: 5rem;
-    color: #FFFFFF;
-    margin-bottom: 20px;
-}
-
-/**กำหนดรายละเอียดรูปภาพ (โปรไฟล์)  ใช้จริง**/
-/**.header .header-img img{
-    border-radius: 25%;
-} **/
-
-/**กำหนดรายละเอียดส่วนชื่อ  ใช้จริง**/
-.header .header-name h2 {
-    color: #FFFFFF;
-    font-weight: 500px;
-    font-size: 20px;
-}
-
-/**กำหนดรายละเอียดส่วนตำแหน่ง ใช้จริง**/
-.header .header-name h3 {
-    color: #F5F5F5;
-    font-weight: 10px;
-    font-size: 18px;
-}
-
-/**กำหนดรายละเอียดส่วนตำแหน่ง ใช้จริง**/
-.header .header-name h5 {
-    color: #778899;
-    font-size: 15px;
-}
-
-/**กำหนดกรอบอักษร (แถบเมนู) ใช้จริง**/
-nav ul {
-    background-color: #5F9EA0;
-    width: 100%;
-    list-style: none;
-}
-
-/**กำหนดความห่าง (แถบเมนู) ใช้จริง**/
-nav ul li {
-    line-height: 50px;
-}
-
-/**กำหนดรายละอักษร (แถบเมนู) ใช้จริง**/
-nav ul li a {
-    position: relative;
-    color: #FFFFFF;
-    text-decoration: none;
-    font-size: 15px;
-    padding-left: 40px;
-    font-weight: 500;
-    display: block;
-    width: 100%;
-    border-left: 3px solid transparent;
-    transition: .6s ease;
-}
-
-/**กำหนดรายละแถบเมนูเวลาชี้เมาส์ (แถบเมนู) ใช้จริง**/
-nav ul li:hover a {
-    color: #778899;
-    background-color: #FFFFFF;
-    font-size: 17px;
-}
-
-/**กำหนดรายละแถบเมนูเวลาคลิกเมาส์ (แถบเมนู) ใช้จริง**/
-nav ul li.active a {
-    color: #FFFFFF;
-    background-color: #2F4F4F;
-    border-left-color: #FFFFFF;
-}
-
-
-nav ul li a.user_profile::before {
-    content: "ข้อมูลส่วนตัว";
-}
-
-nav ul li a.user_contract::before {
-    content: "สัญญาเช่า";
-}
-
-nav ul li a.user_bill::before {
-    content: "ชำระค่าเช่า";
-}
-
-nav ul li a.user_messages::before {
-    content: "Messages";
-}
-
-nav ul li a.user_to_move::before {
-    content: "แจ้งขอย้าย";
-}
-
-
-/**ส่วนเมนู**/
-
 /**ส่วนเนื่อหา**/
-h1.title {
-    font-size: 28px;
-    font-weight: 500;
-}
-
-.job {
-    background-color: #ffffff;
-    padding: 20px;
-    float: left;
-    width: 80%;
-    /* The width is 60%, by default */
-}
-
-.box {
-    background-color: #f1f1f1;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
 .show-box {
-    background-color: #ffffff;
-    border-radius: 10px;
-    -webkit-box-shadow: 0 0 28px rgba(0, 0, 0, .08);
-    box-shadow: 0 0 28px rgba(0, 0, 0, .08);
     padding: 20px;
-    margin: 20px;
-    align-items: center;
 }
 
-.card-box {
-    background-color: #ffffff;
-    border-radius: 10px;
-    -webkit-box-shadow: 0 0 28px rgba(0, 0, 0, .08);
-    box-shadow: 0 0 28px rgba(0, 0, 0, .08);
-    padding: 20px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    /* top-left-bottom-r */
-    margin: 15px 0px 10px 10px;
-    width: 350px;
-    transition: 0.3s;
-}
-
-.card-box:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    max-width: 100%;
-    align-items: center;
-}
-
-.full {
-    display: contents;
-}
-
-.grid-3 {
-    display: grid;
-    grid-template-columns: auto auto auto;
-}
-
-.grid-4 {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-column-gap: 10px;
-}
-
-.grid-5 {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-}
-
-.grid-6 {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
-}
+/* profile  */
 
 .grid-col {
     display: grid;
     grid-template-columns: auto auto;
     grid-column-gap: 10%;
-    grid-row-gap: 20px;
-}
-
-.grid-col-3 {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    grid-column-gap: 5%;
     grid-row-gap: 20px;
 }
 
@@ -278,55 +31,6 @@ h1.title {
     align-content: end;
 }
 
-/* .grid-end {
-    justify-content: end;
-}
-
-.grid-start {
-    justify-content: start;
-} */
-
-.grid-bill {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
-
-.grid-search {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    margin: 20px;
-    text-align: left;
-}
-
-.grid-table {
-    display: grid;
-    grid-template-columns: auto 10% 20%;
-    grid-column-gap: 10px;
-}
-
-.grid-table label {
-    text-align: right;
-}
-
-.grid-header {
-    display: grid;
-    grid-template-columns: auto 20% 5% 5%;
-    grid-column-gap: 10px;
-}
-
-.grid-header label {
-    text-align: right;
-}
-
-.grid-header input {
-    text-align: center;
-    padding: 0;
-}
-
 /* Information in user_contract.php */
 .ifm-text-col {
     display: grid;
@@ -347,7 +51,6 @@ h1.title {
     grid-template-columns: auto auto auto;
     grid-column-gap: 2%;
     max-width: 100%;
-    margin: 20px 0;
     padding: 20px;
     align-items: end;
 }
@@ -369,6 +72,62 @@ h1.title {
     flex-direction: column;
     align-content: space-around;
     align-items: stretch;
+}
+.card-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 28px rgba(0, 0, 0, .08);
+    box-shadow: 0 0 28px rgba(0, 0, 0, .08);
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* top-left-bottom-r */
+    margin: 15px 0px 10px 10px;
+    width: 350px;
+    transition: 0.3s;
+}
+
+.card-box:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.grid-bill {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.card-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 28px rgba(0, 0, 0, .08);
+    box-shadow: 0 0 28px rgba(0, 0, 0, .08);
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* top-left-bottom-r */
+    margin: 15px 0px 10px 10px;
+    width: 350px;
+    transition: 0.3s;
+}
+
+.card-box:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.grid-bill {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .box-bill {
@@ -656,54 +415,6 @@ input, textarea {
     padding-left: 10px;
 }
 
-.text1 {}
-
-.text2 {}
-
-.show-box i {
-    font-size: 30px;
-}
-
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
-}
-
-.table td, .table th {
-    padding: .75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
-    text-align: center;
-}
-
-/* .table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6; } */
-
-/* .table tbody + tbody {
-    border-top: 2px solid #dee2e6; } */
-
-.table-sm td, .table-sm th {
-    padding: .3rem;
-}
-
-.table-bordered {
-    border: 1px solid #dee2e6;
-}
-
-.table-bordered td, .table-bordered th {
-    border: 1px solid #dee2e6;
-}
-
-.table-bordered thead td, .table-bordered thead th {
-    border-bottom-width: 2px;
-}
-
-.table-borderless tbody+tbody, .table-borderless td, .table-borderless th, .table-borderless thead th {
-    border: 0;
-}
-
 .status-bill {
     /* padding: 10px; */
     background-color: red;
@@ -801,130 +512,4 @@ textarea {
     width: 100%;
 }
 
-/* The Modal (background) */
-.modal {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    /* Could be more or less, depending on screen size */
-    /* height: 600px; */
-}
-
 /**ส่วนเนื่อหา**/
-
-
-/* Use a media query to add a break point at 800px: */
-@media screen and (max-width: 1440px) {}
-
-@media screen and (max-width: 1200px) {
-    .menu {
-        width: 20%;
-    }
-}
-
-@media screen and (max-width: 1152px) {
-    .menu {
-        width: 10%;
-    }
-
-    .job {
-        width: 90%;
-    }
-
-    nav ul li a.user_profile::before {
-        font-family: "FontAwesome";
-        content: "\f015";
-    }
-
-    nav ul li a.user_contract::before {
-        font-family: "FontAwesome";
-        content: "\f573";
-    }
-
-    nav ul li a.user_bill::before {
-        font-family: "FontAwesome";
-        content: "\f571";
-    }
-
-    nav ul li a.user_messages::before {
-        font-family: "FontAwesome";
-        content: "\f01c";
-    }
-
-    nav ul li a.user_to_move::before {
-        font-family: "FontAwesome";
-        content: "\f5c1";
-    }
-
-    nav ul li a {
-        padding-left: 25px;
-        font-size: 15px;
-    }
-
-    #logo {
-        font-size: 2rem;
-    }
-
-    div.out a::before {
-        padding-left: 0px;
-        content: "";
-    }
-
-    .grid-col {
-        grid-template-columns: auto;
-    }
-}
-
-.alert {
-    padding: 20px;
-  }
-
-  .error {
-    background-color: #f44336;
-    color: white;
-  }
-
-  .success {
-    background-color: #27bd3b;
-    color: white;
-  }
-  
-  .closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .closebtn:hover {
-    color: black;
-  }

@@ -80,23 +80,23 @@ $custQuery = mysqli_query($conn, $strSQL);
 
     <div class="box">
 
-      <div class="d-flex content-right">
+      <div class="box-btn-add">
         <button class="btn btn-add" type="submit" onclick="document.location.href='admin_contract.php'"> เพิ่มสัญญาลูกค้า</button>
       </div>
 
       <div class="show-box">
         <form name="frmSearch" method="POST" action="admin_customer.php">
-          <div class="grid-search col-3-20">
-            <div class="grid form-search">
+          <div class="customer-search ">
+            <div class="form-search">
               <label for="roomId">หมายเลขห้องพัก :</label>
               <input type="text" id="txtRoomId" name="txtRoomId" value="<?php echo $keyRoom; ?>" />
 
             </div>
-            <div class="grid form-search">
+            <div class="form-search">
               <label>ชื่อลูกค้า : </label>
               <input type="text" id="txtName" name="txtName" value="<?php echo $keyName; ?>" />
             </div>
-            <div class="grid form-search">
+            <div class="form-search">
               <label for="status">สถานะ :</label>
               <select id="status" name="status">
                 <option value="live" <?php if ($keyStatus == "live") {
@@ -111,7 +111,7 @@ $custQuery = mysqli_query($conn, $strSQL);
               </select>
             </div>
           </div>
-          <div class="d-flex content-center">
+          <div class="box-btn-center">
             <button type="submit" class="btn btn-search">ค้นหา</button>
             <button type="submit" class="btn btn-clear" name="clear" value="clear">ล้างค่า</button>
           </div>
@@ -178,7 +178,7 @@ $custQuery = mysqli_query($conn, $strSQL);
 
       <hr>
 
-      <div class="d-flex content-space-around">
+      <div class="customer-text-row">
         <p>รหัสลูกค้า : <a id="id"> - </a></p>
         <p>วันที่ทำสัญญา : <a id="date"> - </a></p>
         <p>สถานะ : <a id="cust_status"> - </a></p>
@@ -186,39 +186,42 @@ $custQuery = mysqli_query($conn, $strSQL);
 
       <hr>
 
-      <div class="grid-col">
+      <div class="customer-row">
         <form method="POST" action="updateCustomer.php">
           <div class="">
-            <div class="d-flex content-center">
+            <div class="box-btn-center">
               <button type="submit" class="btn btn-save my-20" id="btnSave"> บันทึก</button>
             </div>
             <input type="text" id="cust_id" name="cust_id" hidden>
-            <div class="grid form-label">
+            <input type="text" id="roomId" name="roomId" hidden>
+            <div class="form-label">
               <label>ชื่อลูกค้า : </label>
               <input type="text" id="name" name="name" placeholder="ชื่อลูกค้า" disabled>
             </div>
-            <div class="grid form-label">
+            <div class="form-label">
               <label>นามสกุล : </label>
               <input type="text" id="surname" name="surname" placeholder="นามสกุล" disabled>
             </div>
-            <div class="grid form-label">
+            <div class="form-label">
               <label>เบอร์โทร : </label>
               <input type="text" id="tel" name="tel" placeholder="เบอร์โทร" disabled>
             </div>
-            <div class="grid form-label">
+            <div class="form-label">
               <label>Email : </label>
               <input type="text" id="email" name="email" placeholder="Email" disabled>
             </div>
-            <div class="d-flex content-space-around content-align-center text-detail my-20 ">
+            <div class="customer-input-pw text-detail my-20">
               <p>Username : <a id="username"> - </a></p>
               <p>Password : <a id="password"> - </a></p>
+            </div>
+            <div class="box-btn-center">
               <button type="button" id="btn" class="btn btn-edit" onclick="edit()"><a class="text-white" id="textEdit"></a></button>
             </div>
           </div>
         </form>
 
         <div class="">
-          <div class="grid">
+          <div class="customer-row">
             <div class="form-label">
               <label>เลขที่ห้องพัก : </label>
               <input type="text" id="roomId" name="roomId" placeholder="เลขที่ห้องพัก" disabled>
@@ -228,11 +231,11 @@ $custQuery = mysqli_query($conn, $strSQL);
               <input type="text" id="roomType" name="roomType" placeholder="ประเภทห้องพัก" disabled>
             </div>
           </div>
-          <div class="grid form-label">
+          <div class="form-label">
             <label>ข้อมูลห้องพัก : </label>
             <textarea type="text" id="roomDetail" name="roomDetail" placeholder="ข้อมูลห้องพัก" disabled></textarea>
           </div>
-          <div class="grid">
+          <div class="customer-row">
             <div class="form-label">
               <label>ราคาค่าเช่า : </label>
               <input type="text" id="roomRent" name="roomRent" placeholder="0.00" disabled>
@@ -243,7 +246,7 @@ $custQuery = mysqli_query($conn, $strSQL);
             </div>
           </div>
 
-          <div class="d-flex content-center my-20">
+          <div class="box-btn-center my-20">
             <button type="button" class="btn btn-download" id="dd"></button>
             <button type="button" class="btn btn-download" id="dc"></button>
             <form method="POST" action="updateContract.php" id="cancelCon">
@@ -257,7 +260,7 @@ $custQuery = mysqli_query($conn, $strSQL);
 
       <hr>
 
-      <div class="d-flex content-center">
+      <div class="box-btn-center">
         <button type="button" id="close" class="btn" onclick="window.location='admin_customer.php';">ยกเลิก</button>
       </div>
     </div>
@@ -274,7 +277,7 @@ $custQuery = mysqli_query($conn, $strSQL);
 
       <hr>
 
-      <div class="d-flex content-space-around">
+      <div class="customer-text-row">
         <p>รหัสลูกค้า : <a id="id_showbill"> - </a></p>
         <p>ชื่อลูกค้า : <a id="name_showbill"> - </a></p>
         <p>ห้องพัก : <a id="room_showbill"> - </a></p>
@@ -286,7 +289,7 @@ $custQuery = mysqli_query($conn, $strSQL);
         <div class="grid-bill" id="showbill"></div>
       </div>
 
-      <div class="d-flex content-center">
+      <div class="box-btn-center my-20">
         <button type="button" id="close" class="btn" onclick="window.location='admin_customer.php';">ยกเลิก</button>
       </div>
     </div>
@@ -320,6 +323,7 @@ $custQuery = mysqli_query($conn, $strSQL);
           data = JSON.parse(response);
           console.log(data[0]);
           document.getElementById("id").innerText = data[0].cust_id;
+          document.getElementById("roomId").innerText = data[0].room_id;
           document.getElementById("date").innerText = data[0].con_checkin;
           document.getElementById("cust_status").innerText = (data[0].cust_status === 'live') ? 'อาศัยอยู่' : 'ย้ายออก';
 
@@ -457,7 +461,6 @@ $custQuery = mysqli_query($conn, $strSQL);
         btn.classList.add('btn-edit');
       }
     }
-
   </script>
 
 </body>

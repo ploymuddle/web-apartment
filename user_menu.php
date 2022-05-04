@@ -4,7 +4,10 @@
 	<meta http-equiv="X-Compatible" content="ie=edge">
 	<title> <?php //echo $page; ?> </title>
 
+	<link rel="stylesheet" href="css/style-body.css">
+    <link rel="stylesheet" href="css/style-customer-menu.css">
 	<link rel="stylesheet" href="css/style-customer.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/1c68c00305.js" crossorigin="anonymous"></script>
@@ -25,11 +28,6 @@
         <i id="logo" class="fas fa-users"></i>
 
         <div class="header-name">
-            <?php //echo $objResult["cust_username"]; 
-            ?>
-            <h2><?php //echo $objResult["cust_name"]; 
-                ?> <?php //echo $objResult["cust_surname"]; 
-                                                            ?></h2> <!-- ต้องดึงมาจาก ฐานข้อมูล -->
             <h3>Room</h3>
             <h5 class=""><?php echo $objCust['cust_username'] ?></h5> <!-- ต้องดึงมาจาก ฐานข้อมูล -->
         </div>

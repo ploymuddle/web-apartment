@@ -21,7 +21,7 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 	<div class="job">
 		<h1 class="title">จัดการห้องพัก</h1>
 		<div class="box">
-			<div class="d-flex content-right">
+			<div class="box-btn-add">
 				<button class="btn btn-add" type="submit" onclick="document.location.href='admin_addroom.php'"> เพิ่มห้องพัก</button>
 			</div>
 
@@ -34,10 +34,10 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 			?>
 
 				<div class="show-box grid-6">
-					<img src="<?php echo $roomType["type_picture"]; ?>" alt="room">
-					<p class="text1"><?php echo $roomType["type_room"]; ?></p>
-					<p class="text2">รายการห้องว่าง</p>
-					<p class="text3"><a><?php echo $count["countN"]; ?></a>&nbsp;<y>/</y>&nbsp;<a><?php echo $count["countTotal"]; ?></a></p>
+					<img id="room" src="<?php echo $roomType["type_picture"]; ?>" alt="room">
+					<p class="text-main"><?php echo $roomType["type_room"]; ?></p>
+					<p class="text">รายการห้องว่าง</p>
+					<p class="text"><a><?php echo $count["countN"]; ?></a>&nbsp;<y>/</y>&nbsp;<a><?php echo $count["countTotal"]; ?></a></p>
 
 					<button href="#" class="btn btn-show" onclick="showData('<?php echo $roomType['type_room']; ?>')">แสดง</button>
 					<button href="#" class="btn btn-update" onclick="editData('<?php echo $roomType['type_room']; ?>')">แก้ไขข้อมูล</button>
@@ -59,12 +59,12 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 
 			<hr>
 
-			<div class="d-flex content-space-around">
+			<div class="room-text-row">
 				<p>ประเภท : <a id="type"> - </a></p>
 				<p>ราคา : <a id="rental"> - </a></p>
 			</div>
 
-			<div class="d-flex content-space-around">
+			<div class="room-text-row">
 				<p class="text-detail">รายละเอียด : <a id="data"> - </a></p>
 			</div>
 
@@ -82,7 +82,7 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 				<tbody id="divResult">
 				</tbody>
 			</table>
-			<div class="d-flex content-center">
+			<div class="box-btn-center">
 				<button class="btn" type="submit" onclick="document.location.href='admin_room.php'">ปิด</button>
 			</div>
 
@@ -101,34 +101,34 @@ $roomTypeQuery = mysqli_query($conn, $roomTypeSQL);
 			<h3>แก้ไขข้อมูลประเภทห้องพัก</h3>
 			<br>
 			<form method="POST" action="updateDataType.php" enctype="multipart/form-data">
-			<div class="grid-col">
+			<div class="room-box">
 				
 				<div class="">
-					<div class="grid col-30">
+					<div class="room-box-text">
 						<label for="roomType">ประเภทห้องพัก :</label>
 						<input id="roomType" name="roomType" placeholder="ประเภทห้องพัก" readonly="readonly" required>
 					</div>
-					<div class="grid col-30">
+					<div class="room-box-text">
 						<label for="roomData"></label>
 						<textarea id="roomData" name="roomData" rows="4" cols="50" placeholder="ข้อมูลห้องพัก" required></textarea>
 					</div>
-					<div class="grid col-30">
+					<div class="room-box-text">
 						<label for="roomRental">ราคาค่าเช่า :</label>
 						<input type="text" id="roomRental" name="roomRental" placeholder="0.00" required>
 					</div>
 				</div>
-				<div class="d-flex content-center f-column">
-					<div class="grid">
-					<img id="pic" alt="room">
+				<div class="room-box-img">
+					<div>
+						<img id="pic" alt="room">
 					</div>
-					<div class="grid col-20">
+					<div class="room-input-img">
 						<label for="pic">รูปภาพ :</label>
-						<input type="file" id="pic" name="pic" class="bg-white" required>
+						<input type="file" id="pic" name="pic" class="bg-white" accept="image/png, image/jpeg">
 					</div>
 				</div>
 			</div>
 
-			<div class="d-flex content-center my-20">
+			<div class="box-btn-center my-20">
 				<button class="btn" type="button" onclick="document.location.href='admin_room.php'">ยกเลิก</button>
 				<button class="btn" type="submit" onclick="document.location.href='admin_room.php'">บันทึก</button>
 			</div>
