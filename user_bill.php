@@ -121,7 +121,7 @@ $objCust = mysqli_fetch_array($objQuery);
 				<div class="modal-bill-content">
 					<div class="img-bill-slip">
 						<img id="picSilp" style="width:200px;height:100%;">
-						<input type="file" id="img" name="img" accept="image/*">
+						<input type="file" id="img" name="img" accept="image/*" required>
 						<label for="img" id="textImg">กรุณาแนบหลักฐานการชำระเงิน</label>
 					</div>
 
